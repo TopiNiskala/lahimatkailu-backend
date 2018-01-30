@@ -1,23 +1,19 @@
 import express, { Router } from 'express';
-import { index } from './controllers/jotkut';
+import { index } from './controllers/kohteet';
 import { add } from './controllers/add';
 import mongoose from 'mongoose';
-import Joku from './models/joku';
+import Kohde from './models/kohde';
 
 const router = Router();
 
-router.route('/jotkut.json')
-  .get(index);
+router.route('/kohteet.json').get(index);
   
 router.get('/new', function(req, res) {
     res.render('new', { title: 'Add' });
 });
 
-/* POST to Add User Service */
 router.post('/add', function(req, res) {
 
-
-    // Get our form values. These rely on the "name" attributes
     var type = req.body.type;
     var name = req.body.name;
     var city = req.body.city;
@@ -32,9 +28,6 @@ router.post('/add', function(req, res) {
     var start = req.body.start;
     var end = req.body.end;
 
-
-
-    // Submit to the DB
     const newData = [
         {
             "name": name,
@@ -58,18 +51,16 @@ router.post('/add', function(req, res) {
         }
     ]
     
-    mongoose.connect('mongodb://localhost/jotkut');
+    mongoose.connect('mongodb://localhost/kohteet');
 
     newData.map(data => {
-        const joku = new Joku(data);
-        joku.save(function (err, doc) {
+        const kohde = new Kohde(data);
+        kohde.save(function (err, doc) {
             if (err) {
-                // If it failed, return error
                 res.send("There was a problem adding the information to the database.");
             }
             else {
-                // And forward to success page
-                res.redirect("jotkut.json");
+                res.redirect("kohteet.json");
             }
         });
     });

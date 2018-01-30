@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import Joku from './models/joku';
+import Kohde from './models/kohde';
 
-const jotkut = [
+const kohteet = [
 	{
 		"id": 1,
 		"type": "Service",
@@ -445,9 +445,9 @@ const jotkut = [
 ];
 
 
-mongoose.connect('mongodb://localhost/jotkut');
+mongoose.connect('mongodb://localhost/kohteet');
 
-jotkut.map(data => {
-  const joku = new Joku(data);
-  joku.save();
+kohteet.map(data => {
+  const kohde = new Kohde(data);
+  kohde.save();
 });

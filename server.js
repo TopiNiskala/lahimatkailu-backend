@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import router from './router';
 var path = require('path');
 
-mongoose.connect('mongodb://localhost/jotkut');
+mongoose.connect('mongodb://localhost/kohteet');
 
 const app = express();
 
@@ -16,7 +16,6 @@ app.use(morgan('combined'));
 app.use('/v1', router);
 
 
-// app.set('views', path.join(dirname, 'views'));
 app.set('view engine', 'jade');
 
 const server = app.listen(3000, () => {

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-var jokuSchema = new Schema({
+var kohdeSchema = new Schema({
   type: String,
   name: String,
   address: [{
@@ -12,7 +12,7 @@ var jokuSchema = new Schema({
   picture: String,
   location: [{
       latitude: String,
-      longtitude: String
+      longitude: String
   }],
   info: String,
   directions: String,
@@ -22,4 +22,4 @@ var jokuSchema = new Schema({
   }],
 });
 
-export default mongoose.model('joku', jokuSchema);
+export default mongoose.model('kohde', kohdeSchema);
