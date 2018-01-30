@@ -2,6 +2,7 @@
 Haaga-Helia ohjelmistoprojekti 2 kurssin projektin backend
 
 ## Alussa ajettavat komennot
+MongoDB:n pitää olla käynnissä.
 ```
 npm install
 npm run populate
