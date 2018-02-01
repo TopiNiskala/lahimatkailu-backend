@@ -9,7 +9,7 @@ const router = Router();
 router.route('/kohteet.json').get(index);
   
 router.get('/new', function(req, res) {
-    res.render('new', { title: 'Add' });
+    res.render('new', { title: 'Lisää kohde' });
 });
 
 router.post('/add', function(req, res) {
@@ -25,30 +25,68 @@ router.post('/add', function(req, res) {
     var longitude = req.body.longitude;
     var info = req.body.info;
     var directions = req.body.directions;
-    var start = req.body.start;
-    var end = req.body.end;
+    var monStart = req.body.monStart;
+    var monEnd = req.body.monEnd;
+    var tueStart = req.body.tueStart;
+    var tueEnd = req.body.tueEnd;
+    var wedStart = req.body.wedStart;
+    var wedEnd = req.body.wedEnd;
+    var thuStart = req.body.thuStart;
+    var thuEnd = req.body.thuEnd;
+    var friStart = req.body.friStart;
+    var friEnd = req.body.friEnd;
+    var satStart = req.body.satStart;
+    var satEnd = req.body.satEnd;
+    var sunStart = req.body.sunStart;
+    var sunEnd = req.body.sunEnd;
 
     const newData = [
         {
             "type": type,
             "name": name,
-            "address": [{
+            "address": {
                 "city": city,
                 "postalCode": postalCode,
                 "street": street,
                 "phoneNumber": phoneNumber
-            }],
+            },
             "picture": picture,
-            "location": [{
+            "location": {
                 "latitude": latitude,
                 "longitude": longitude
-            }],
+            },
             "info": info,
             "directions": directions,
-            "openingHours": [{
-                "start": start,
-                "end": end
-            }]
+            "openingHours": {
+                "mon": {
+                    "start": monStart,
+                    "end": monEnd
+                },
+                "tue": {
+                    "start": tueStart,
+                    "end": tueEnd
+                },
+                "wed": {
+                    "start": wedStart,
+                    "end": wedEnd
+                },
+                "thu": {
+                    "start": thuStart,
+                    "end": thuEnd
+                },
+                "fri": {
+                    "start": friStart,
+                    "end": friEnd
+                },
+                "sat": {
+                    "start": satStart,
+                    "end": satEnd
+                },
+                "sun": {
+                    "start": sunStart,
+                    "end": sunEnd
+                }
+            }
         }
     ]
     
