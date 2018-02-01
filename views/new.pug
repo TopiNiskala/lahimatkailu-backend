@@ -1,0 +1,37 @@
+include ../node_modules/pug-bootstrap/_bootstrap.pug
+doctype html
+html(lang='en')
+    head
+        title= title
+    body
+        .container
+            h1= title
+            form#formAddUser(name="add",method="post",action="/v1/add")
+                input.form-control(required="", type="text", placeholder="name", name="name")
+                br
+                input.form-control(required="", type="text", placeholder="type", name="type")
+                br
+                input.form-control(required="", type="text", placeholder="city", name="city")
+                br
+                input.form-control(required="", type="text", placeholder="postalCode", name="postalCode")
+                br
+                input.form-control(required="", type="text", placeholder="street", name="street")
+                br
+                input.form-control(type="text", placeholder="phoneNumber", name="phoneNumber")
+                br
+                input.form-control(type="text", placeholder="picture", name="picture")
+                br
+                input.form-control(required="", type="text", placeholder="latitude", name="latitude")
+                br
+                input.form-control(required="", type="text", placeholder="longitude", name="longitude")
+                br
+                textarea.form-control(type="text", placeholder="info", name="info")
+                br
+                textarea.form-control(type="text", placeholder="directions", name="directions")
+                br
+                input.form-control(required="", type="text", placeholder="opening hours start", name="start")
+                br
+                input.form-control(required="", type="text", placeholder="opening hours end", name="end")
+                br
+                button.form-control(type="submit") submit
+                br
