@@ -22,7 +22,7 @@ router.post('/add', function(req, res) {
     var phoneNumber = req.body.phoneNumber;
     var picture = req.body.picture;
     var latitude = req.body.latitude;
-    var longtitude = req.body.longtitude;
+    var longitude = req.body.longitude;
     var info = req.body.info;
     var directions = req.body.directions;
     var start = req.body.start;
@@ -41,7 +41,7 @@ router.post('/add', function(req, res) {
             "picture": picture,
             "location": [{
                 "latitude": latitude,
-                "longtitude": longtitude
+                "longitude": longitude
             }],
             "info": info,
             "directions": directions,
