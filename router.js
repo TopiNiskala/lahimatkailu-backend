@@ -30,6 +30,7 @@ router.post('/add', function(req, res) {
 
     const newData = [
         {
+            "type": type,
             "name": name,
             "address": [{
                 "city": city,
