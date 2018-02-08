@@ -3,49 +3,23 @@ import mongoose, { Schema } from 'mongoose';
 var kohdeSchema = new Schema({
   type: String,
   name: String,
-  address: {
+  address: [{
       city: String,
       postalCode: String,
       street: String,
       phoneNumber: String
-  },
+  }],
   picture: String,
-  location: {
-      latitude: Number,
-      longitude: Number
-  },
+  location: [{
+      latitude: String,
+      longitude: String
+  }],
   info: String,
-  icon: String,
-  openingHours: {
-    mon: {
+  directions: String,
+  openingHours: [{
       start: String,
       end: String
-    },
-    tue: {
-      start: String,
-      end: String
-    },
-    wed: {
-      start: String,
-      end: String
-    },
-    thu: {
-      start: String,
-      end: String
-    },
-    fri: {
-      start: String,
-      end: String
-    },
-    sat: {
-      start: String,
-      end: String
-    },
-    sun: {
-      start: String,
-      end: String
-    }
-  },
+  }],
 });
 
 export default mongoose.model('kohde', kohdeSchema);

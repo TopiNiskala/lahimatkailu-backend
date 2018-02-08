@@ -6,10 +6,10 @@ import Kohde from './models/kohde';
 
 const router = Router();
 
-router.route('/kohteet.json').get(index);
+router.route('/kohteet').get(index);
   
 router.get('/new', function(req, res) {
-    res.render('new', { title: 'Lisää kohde' });
+    res.render('new', { title: 'Add' });
 });
 
 router.post('/add', function(req, res) {
@@ -22,71 +22,32 @@ router.post('/add', function(req, res) {
     var phoneNumber = req.body.phoneNumber;
     var picture = req.body.picture;
     var latitude = req.body.latitude;
-    var longitude = req.body.longitude;
+    var longtitude = req.body.longtitude;
     var info = req.body.info;
     var directions = req.body.directions;
-    var monStart = req.body.monStart;
-    var monEnd = req.body.monEnd;
-    var tueStart = req.body.tueStart;
-    var tueEnd = req.body.tueEnd;
-    var wedStart = req.body.wedStart;
-    var wedEnd = req.body.wedEnd;
-    var thuStart = req.body.thuStart;
-    var thuEnd = req.body.thuEnd;
-    var friStart = req.body.friStart;
-    var friEnd = req.body.friEnd;
-    var satStart = req.body.satStart;
-    var satEnd = req.body.satEnd;
-    var sunStart = req.body.sunStart;
-    var sunEnd = req.body.sunEnd;
+    var start = req.body.start;
+    var end = req.body.end;
 
     const newData = [
         {
-            "type": type,
             "name": name,
-            "address": {
+            "address": [{
                 "city": city,
                 "postalCode": postalCode,
                 "street": street,
                 "phoneNumber": phoneNumber
-            },
+            }],
             "picture": picture,
-            "location": {
+            "location": [{
                 "latitude": latitude,
-                "longitude": longitude
-            },
+                "longtitude": longtitude
+            }],
             "info": info,
             "directions": directions,
-            "openingHours": {
-                "mon": {
-                    "start": monStart,
-                    "end": monEnd
-                },
-                "tue": {
-                    "start": tueStart,
-                    "end": tueEnd
-                },
-                "wed": {
-                    "start": wedStart,
-                    "end": wedEnd
-                },
-                "thu": {
-                    "start": thuStart,
-                    "end": thuEnd
-                },
-                "fri": {
-                    "start": friStart,
-                    "end": friEnd
-                },
-                "sat": {
-                    "start": satStart,
-                    "end": satEnd
-                },
-                "sun": {
-                    "start": sunStart,
-                    "end": sunEnd
-                }
-            }
+            "openingHours": [{
+                "start": start,
+                "end": end
+            }]
         }
     ]
     
@@ -99,12 +60,59 @@ router.post('/add', function(req, res) {
                 res.send("There was a problem adding the information to the database.");
             }
             else {
-                res.redirect("kohteet.json");
+                res.redirect("kohteet");
+            }
+        });
+    });
+});
+
+
+
+
+//DELETE
+router.delete('/delete', function(req, res) {
+
+    mongoose.connect('mongodb://localhost/kohteet');
+
+  
+    
+        const kohde = new Kohde(data);
+        kohde.delete(function (err, doc) {
+        
+        
+        kohde.delete('kohde', function(req, res) {
+            kohde.findByIdAndRemove()
+                     
+            if (err) {
+                res.send("There was a problem deleting the information to the database.");
+            }
+            else {
+                res.redirect("kohteet/:id)");
             }
         });
     });
 
-});
+    });
+
+
+
+
+/*
+
+
+//Delete
+router.delete(function(req, res) {
+        kohde.remove({
+            _id: req.params.kohde_id
+        }, function(err, kohteet) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
+*/
+
 
 
 export default router;
