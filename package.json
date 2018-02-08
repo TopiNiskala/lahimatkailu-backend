@@ -1,12 +1,13 @@
 {
   "name": "geopark",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/babel-cli/bin/babel.js ./ --source-maps --out-dir dist",
-    "start": "node node_modules/nodemon/bin/nodemon.js -- node_modules/babel-cli/bin/babel-node.js server.js",
-    "populate": "node_modules/babel-cli/bin/babel-node.js populate.js"
+    "start": "node_modules/nodemon/bin/nodemon.js -- node_modules/babel-cli/bin/babel-node.js server.js",
+    "populate": "node node_modules/babel-cli/bin/babel-node.js populate.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,15 +26,7 @@
     "mongoose": "^5.0.1",
     "monk": "~6.0.5",
     "morgan": "^1.9.0",
-    "jade": "~1.11.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TopiNiskala/geoprojekti.git"
-  },
-  "bugs": {
-    "url": "https://github.com/TopiNiskala/geoprojekti/issues"
-  },
-  "homepage": "https://github.com/TopiNiskala/geoprojekti#readme",
-  "description": ""
+    "pug": "~2.0.0-rc.4",
+    "pug-bootstrap": "~0.0.15"
+  }
 }

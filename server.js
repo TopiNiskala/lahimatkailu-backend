@@ -16,7 +16,7 @@ app.use(morgan('combined'));
 app.use('/v1', router);
 
 
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 const server = app.listen(3000, () => {
   const { address, port } = server.address();
