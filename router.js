@@ -12,6 +12,56 @@ router.get('/new', function(req, res) {
     res.render('new', { title: 'Lisää kohde' });
 });
 
+router.get('/modify/:id', function(req, res) {
+    var id = req.params.id;
+    
+    Kohde.findById(id, (err, kohde) => {
+        var type = kohde.type;
+        var service, food, sight;
+        
+        if (type == "Food") {
+            food = true;
+        } else if (type == "Service") {
+            service = true;
+        } else {
+            sight = true;
+        }
+
+        
+        res.render('new', { 
+            id: id, 
+            nimi: kohde.name, 
+            city: kohde.address.city, 
+            postalCode: kohde.address.postalCode, 
+            street: kohde.address.street, 
+            phoneNumber: kohde.address.phoneNumber,
+            picture: kohde.picture[0],
+            latitude: kohde.location.latitude,
+            longitude: kohde.location.longitude,
+            info: kohde.info,
+            directions: kohde.directions,
+            monStart: kohde.openingHours.mon.start,
+            monEnd: kohde.openingHours.mon.end,
+            tueStart: kohde.openingHours.tue.start,
+            tueEnd: kohde.openingHours.tue.end,
+            wedStart: kohde.openingHours.wed.start,
+            wedEnd: kohde.openingHours.wed.end,
+            thuStart: kohde.openingHours.thu.start,
+            thuEnd: kohde.openingHours.thu.end,
+            friStart: kohde.openingHours.fri.start,
+            friEnd: kohde.openingHours.fri.end,
+            satStart: kohde.openingHours.sat.start,
+            satEnd: kohde.openingHours.sat.end,
+            sunStart: kohde.openingHours.sun.start,
+            sunEnd: kohde.openingHours.sun.end,
+            food: food,
+            service: service,
+            sight: sight,
+            title: 'Muuta kohdetta' });
+    });
+
+});
+
 router.post('/add', function(req, res) {
 
     var type = req.body.type;
@@ -24,7 +74,6 @@ router.post('/add', function(req, res) {
     var latitude = req.body.latitude;
     var longitude = req.body.longitude;
     var info = req.body.info;
-    var directions = req.body.directions;
     var monStart = req.body.monStart;
     var monEnd = req.body.monEnd;
     var tueStart = req.body.tueStart;
@@ -39,7 +88,14 @@ router.post('/add', function(req, res) {
     var satEnd = req.body.satEnd;
     var sunStart = req.body.sunStart;
     var sunEnd = req.body.sunEnd;
-
+    
+    if(req.body.id) {
+        var objectId = req.body.id;
+    } else {
+        var ObjectID = require('mongodb').ObjectID;
+        var objectId = new ObjectID();
+    }
+    
     const newData = [
         {
             "type": type,
@@ -50,13 +106,12 @@ router.post('/add', function(req, res) {
                 "street": street,
                 "phoneNumber": phoneNumber
             },
-            "picture": picture,
+            "picture": [ picture ],
             "location": {
                 "latitude": latitude,
                 "longitude": longitude
             },
             "info": info,
-            "directions": directions,
             "openingHours": {
                 "mon": {
                     "start": monStart,
@@ -94,7 +149,9 @@ router.post('/add', function(req, res) {
 
     newData.map(data => {
         const kohde = new Kohde(data);
-        kohde.save(function (err, doc) {
+        var query = { _id: objectId };
+        
+        Kohde.findOneAndUpdate(query, kohde, {upsert:true}, function (err, doc) {
             if (err) {
                 res.send("There was a problem adding the information to the database.");
             }

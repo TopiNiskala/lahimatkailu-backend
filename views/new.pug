@@ -7,63 +7,62 @@ html(lang='fi')
         .container
             h2= title
             form#formAddUser(style="width:500px", name="add",method="post",action="/v1/add")
+                input.form-control(type="hidden", name="id" value= id)
                 h4 Perustiedot
-                input.form-control(required="", type="text", placeholder="Nimi", name="name")
+                input.form-control(required="", type="text", placeholder="Nimi", name="name" value= nimi)
                 select.form-control(required="" name="type")
                     option(selected="" disabled="" value="Tyyppi") Tyyppi
-                    option(value="Food") Ruoka
-                    option(value="Service") Palvelu
-                    option(value="Sight") Nähtävyys
+                    option(selected= food value="Food") Ruoka
+                    option(selected= service value="Service") Palvelu
+                    option(selected= sight value="Sight") Nähtävyys
                 h4 Sijainti
-                input.form-control(required="", type="text", placeholder="Osoite", name="street")
-                input.form-control(required="", type="text", placeholder="Postinumero", name="postalCode")
-                input.form-control(required="", type="text", placeholder="Kaupunki", name="city")
-                input.form-control(type="tel", placeholder="Puhelinnumero", name="phoneNumber")
+                input.form-control(required="", type="text", placeholder="Osoite", name="street" value= street)
+                input.form-control(required="", type="text", placeholder="Postinumero", name="postalCode" value= postalCode)
+                input.form-control(required="", type="text", placeholder="Kaupunki", name="city" value= city)
+                input.form-control(type="tel", placeholder="Puhelinnumero", name="phoneNumber" value= phoneNumber)
                 h4 Koordinaatit
-                input.form-control(required="", type="text", placeholder="Leveysaste (latitude)", name="latitude")
-                input.form-control(required="", type="text", placeholder="Pituusaste (longitude)", name="longitude")
+                input.form-control(required="", type="text", placeholder="Leveysaste (latitude)", name="latitude" value= latitude)
+                input.form-control(required="", type="text", placeholder="Pituusaste (longitude)", name="longitude" value= longitude)
                 h4 Kuva
-                input.form-control(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture")
+                input.form-control(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture)
                 h4 Muuta tietoa
-                textarea.form-control(style="resize:vertical", type="text", placeholder="Yleistä tietoa kohteesta", name="info")
-                h4 Ikoni
-                input.form-control(type="text", placeholder="", name="icon")
+                textarea.form-control(style="resize:vertical", type="text", placeholder="Yleistä tietoa kohteesta", name="info")=info
                 h4 Aukioloajat
                 label Maanantai
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="monStart")
+                    input.form-control(type="text", placeholder="10:00", name="monStart" value= monStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="monEnd")
+                    input.form-control(type="text", placeholder="20:00", name="monEnd" value= monEnd)
                 label Tiistai
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="tueStart")
+                    input.form-control(type="text", placeholder="10:00", name="tueStart" value= tueStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="tueEnd")
+                    input.form-control(type="text", placeholder="20:00", name="tueEnd" value= tueEnd)
                 label Keskiviikko
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="wedStart")
+                    input.form-control(type="text", placeholder="10:00", name="wedStart" value= wedStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="wedEnd")
+                    input.form-control(type="text", placeholder="20:00", name="wedEnd" value= wedEnd)
                 label Torstai
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="thuStart")
+                    input.form-control(type="text", placeholder="10:00", name="thuStart" value= thuStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="thuEnd")
+                    input.form-control(type="text", placeholder="20:00", name="thuEnd" value= thuEnd)
                 label Perjantai
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="friStart")
+                    input.form-control(type="text", placeholder="10:00", name="friStart" value= friStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="friEnd")
+                    input.form-control(type="text", placeholder="20:00", name="friEnd" value= friEnd)
                 label Lauantai
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="satStart")
+                    input.form-control(type="text", placeholder="10:00", name="satStart" value= satStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="satEnd")
+                    input.form-control(type="text", placeholder="20:00", name="satEnd" value= satEnd)
                 label Sunnuntai
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="sunStart")
+                    input.form-control(type="text", placeholder="10:00", name="sunStart" value= sunStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="sunEnd")
+                    input.form-control(type="text", placeholder="20:00", name="sunEnd" value= sunEnd)
                 br
                 button.form-control.btn.btn-success(type="submit") Lähetä
                 br

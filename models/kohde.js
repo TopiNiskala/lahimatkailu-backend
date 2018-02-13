@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 var kohdeSchema = new Schema({
+  _id: String,
   type: String,
   name: String,
   address: {
@@ -9,13 +10,12 @@ var kohdeSchema = new Schema({
       street: String,
       phoneNumber: String
   },
-  picture: String,
+  picture: [ String ],
   location: {
       latitude: Number,
       longitude: Number
   },
   info: String,
-  icon: String,
   openingHours: {
     mon: {
       start: String,
