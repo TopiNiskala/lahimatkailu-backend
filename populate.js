@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 
+//This files data can be added to database by running populate.js on server console.
 const kohteet = [
 	{
 		"id": 1,
@@ -444,10 +445,13 @@ const kohteet = [
 	}
 ];
 
-
+//Connect to mongo DB
 mongoose.connect('mongodb://localhost/kohteet');
 
+//Checks all movies
 kohteet.map(data => {
+	// Initializes kohde with data
   const kohde = new Kohde(data);
+  // Saves kohde to our database
   kohde.save();
 });
