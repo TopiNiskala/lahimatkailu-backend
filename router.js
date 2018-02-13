@@ -3,11 +3,13 @@ import { index } from './controllers/kohteet';
 import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 
+//Initialize router
 const router = Router();
 
+// Handle /kohteet.json route with index action from kohteet controller
 router.route('/kohteet.json').get(index);
 
-  
+// Directs the user using /new to  file new.pug where you can add a new place in database.
 router.get('/new', function(req, res) {
     res.render('new', { title: 'Lisää kohde' });
 });
@@ -62,6 +64,7 @@ router.get('/modify/:id', function(req, res) {
 
 });
 
+//Posts filled form (new 'kohde') to database
 router.post('/add', function(req, res) {
 
     var type = req.body.type;
