@@ -1,12 +1,12 @@
 import express, { Router } from 'express';
 import { index } from './controllers/kohteet';
-import { add } from './controllers/add';
 import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 
 const router = Router();
 
 router.route('/kohteet.json').get(index);
+
   
 router.get('/new', function(req, res) {
     res.render('new', { title: 'Lisää kohde' });

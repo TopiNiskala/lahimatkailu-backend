@@ -1,6 +1,6 @@
 include ../node_modules/pug-bootstrap/_bootstrap.pug
 doctype html
-html(lang='en')
+html(lang='fi')
     head
         title= title
     body
@@ -11,9 +11,9 @@ html(lang='en')
                 input.form-control(required="", type="text", placeholder="Nimi", name="name")
                 select.form-control(required="" name="type")
                     option(selected="" disabled="" value="Tyyppi") Tyyppi
-                    option(value="Food") Food
-                    option(value="Service") Service
-                    option(value="Sight") Sight
+                    option(value="Food") Ruoka
+                    option(value="Service") Palvelu
+                    option(value="Sight") Nähtävyys
                 h4 Sijainti
                 input.form-control(required="", type="text", placeholder="Osoite", name="street")
                 input.form-control(required="", type="text", placeholder="Postinumero", name="postalCode")
@@ -65,5 +65,6 @@ html(lang='en')
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="sunEnd")
                 br
-                button.form-control(type="submit") Lähetä
+                button.form-control.btn.btn-success(type="submit") Lähetä
+                br
                 br
