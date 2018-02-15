@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import { index } from './controllers/kohteet';
 import mongoose from 'mongoose';
 import Kohde from './models/kohde';
+import kohde from './models/kohde';
 
 //Initialize router
 const router = Router();
@@ -15,7 +16,11 @@ router.get('/new', function(req, res) {
 });
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
 router.get('/list', function(req, res) {
-    res.render('list', { title: 'Muokkaus- ja poistosivu' });
+// organizes objects into alphabetical order.
+    var places = Kohde.find({id:true}).sort({'name': -1});
+// Transforms javascript object into json
+var placeslist = JSON.stringify(places);
+    res.render('list', { places: places, title: 'Muokkaus- ja poistosivu' });
 });     
 
 //Delete
