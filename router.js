@@ -14,6 +14,15 @@ router.get('/new', function(req, res) {
     res.render('new', { title: 'Lisää kohde' });
 });
 
+//Delete
+router.delete('/delete/:id', function (req, res){
+ Kohde.findByIdAndRemove(req.params.id, function(err, response){
+    if(err) res.json({message: "error deleting record id"});
+    else res.json({message: "Target has been deleted"}); 
+ });   
+});
+   
+//MODIFY
 router.get('/modify/:id', function(req, res) {
     var id = req.params.id;
     
@@ -154,17 +163,20 @@ router.post('/add', function(req, res) {
         const kohde = new Kohde(data);
         var query = { _id: objectId };
         
+  
+        
         Kohde.findOneAndUpdate(query, kohde, {upsert:true}, function (err, doc) {
             if (err) {
                 res.send("There was a problem adding the information to the database.");
             }
             else {
                 res.redirect("kohteet.json");
-            }
+        
+            }  
+        
         });
+        
     });
-
 });
-
 
 export default router;
