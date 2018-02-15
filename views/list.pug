@@ -6,10 +6,10 @@ head
 body
     h1 List of all places
     br
-each val in list
-    li
-        = val
+each val in places
+    li 
+        = val 
         a(href="modify/{id}")
             button(type="button") MODIFY
         a(href="delete/{id}")
-            button(type="button") DELETE
+            button(type="button" style="background-color:red; color:black; font-weight:bold") DELETE
