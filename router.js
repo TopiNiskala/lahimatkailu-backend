@@ -13,6 +13,10 @@ router.route('/kohteet.json').get(index);
 router.get('/new', function(req, res) {
     res.render('new', { title: 'Lisää kohde' });
 });
+// Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
+router.get('/list', function(req, res) {
+    res.render('list', { title: 'Muokkaus- ja poistosivu' });
+});     
 
 //Delete
 router.delete('/delete/:id', function (req, res){
