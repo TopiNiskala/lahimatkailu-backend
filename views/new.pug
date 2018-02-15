@@ -26,16 +26,17 @@ html(lang="fi")
                 h4 Kuvat
                 div#pictures
                     div.picture.input-group
-                        input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture[i])
+                        input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture")
                         span.input-group-btn
                             button.btn.btn-success.btn-add(title="Lisää uusi")
                                 span.glyphicon.glyphicon-plus
-                    each pictureInput, i in picture
-                        div.picture.input-group
-                            input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture[i])
-                            span.input-group-btn
-                                button.btn.btn-danger.btn-remove
-                                    span.glyphicon.glyphicon-minus
+                    if picture != undefined
+                        each pictureInput, i in picture
+                            div.picture.input-group
+                                input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture[i])
+                                span.input-group-btn
+                                    button.btn.btn-danger.btn-remove
+                                        span.glyphicon.glyphicon-minus
                 h4 Muuta tietoa
                 textarea.form-control(style="resize:vertical", type="text", placeholder="Yleistä tietoa kohteesta", name="info")=info
                 h4 Aukioloajat
