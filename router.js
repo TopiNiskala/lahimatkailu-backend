@@ -46,7 +46,7 @@ router.get('/modify/:id', function(req, res) {
             postalCode: kohde.address.postalCode, 
             street: kohde.address.street, 
             phoneNumber: kohde.address.phoneNumber,
-            picture: kohde.picture[0],
+            picture: kohde.picture,
             latitude: kohde.location.latitude,
             longitude: kohde.location.longitude,
             info: kohde.info,
@@ -83,6 +83,7 @@ router.post('/add', function(req, res) {
     var street = req.body.street;
     var phoneNumber = req.body.phoneNumber;
     var picture = req.body.picture;
+    picture = picture.filter(n => n)
     var latitude = req.body.latitude;
     var longitude = req.body.longitude;
     var info = req.body.info;
@@ -118,7 +119,7 @@ router.post('/add', function(req, res) {
                 "street": street,
                 "phoneNumber": phoneNumber
             },
-            "picture": [ picture ],
+            "picture": picture,
             "location": {
                 "latitude": latitude,
                 "longitude": longitude

@@ -15,9 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Logger outputting all requests in to the console
 app.use(morgan('combined'));
-//Use v1 as prefix for your API endpoints
+
+// Use v1 as prefix for your API endpoints
 app.use('/v1', router);
 
+// Serve javascript files from js subdirectory
+app.use("/js", express.static(__dirname + "/js"));
 
 app.set('view engine', 'pug');
 // Launches server on port 3000

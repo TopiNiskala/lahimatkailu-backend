@@ -1,12 +1,12 @@
 include ../node_modules/pug-bootstrap/_bootstrap.pug
 doctype html
-html(lang='fi')
+html(lang="fi")
     head
         title= title
     body
         .container
             h2= title
-            form#formAddUser(style="width:500px", name="add",method="post",action="/v1/add")
+            form#formAddDestination(style="width:500px", name="add",method="post",action="/v1/add")
                 input.form-control(type="hidden", name="id" value= id)
                 h4 Perustiedot
                 input.form-control(required="", type="text", placeholder="Nimi", name="name" value= nimi)
@@ -23,8 +23,19 @@ html(lang='fi')
                 h4 Koordinaatit
                 input.form-control(required="", type="text", placeholder="Leveysaste (latitude)", name="latitude" value= latitude)
                 input.form-control(required="", type="text", placeholder="Pituusaste (longitude)", name="longitude" value= longitude)
-                h4 Kuva
-                input.form-control(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture)
+                h4 Kuvat
+                div#pictures
+                    div.picture.input-group
+                        input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture[i])
+                        span.input-group-btn
+                            button.btn.btn-success.btn-add(title="Lisää uusi")
+                                span.glyphicon.glyphicon-plus
+                    each pictureInput, i in picture
+                        div.picture.input-group
+                            input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture[i])
+                            span.input-group-btn
+                                button.btn.btn-danger.btn-remove
+                                    span.glyphicon.glyphicon-minus
                 h4 Muuta tietoa
                 textarea.form-control(style="resize:vertical", type="text", placeholder="Yleistä tietoa kohteesta", name="info")=info
                 h4 Aukioloajat
@@ -67,3 +78,4 @@ html(lang='fi')
                 button.form-control.btn.btn-success(type="submit") Lähetä
                 br
                 br
+        script(src="/js/interface.js")
