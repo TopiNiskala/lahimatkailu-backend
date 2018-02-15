@@ -1,4 +1,19 @@
 $(function() {
+    
+    var type = $("#typeName").text();
+    if(type) {
+        $("#type").val(type).change();
+    } else {
+        $("#type").val("Tyyppi").change();
+    }
+    
+    var city = $("#cityName").text();
+    if(city) {
+        $("#city").val(city).change();
+    } else {
+        $("#city").val("Paikkakunta").change();
+    }
+    
     $(document).on('click', '.btn-add', function(e) {
         e.preventDefault();
         

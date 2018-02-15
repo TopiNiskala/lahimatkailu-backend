@@ -31,48 +31,54 @@ router.get('/modify/:id', function(req, res) {
     var id = req.params.id;
     
     Kohde.findById(id, (err, kohde) => {
-        var type = kohde.type;
-        var service, food, sight;
-        
-        if (type == "Food") {
-            food = true;
-        } else if (type == "Service") {
-            service = true;
+        if (err || !kohde) {
+            res.send("There was a problem reading the information from the database.");
         } else {
-            sight = true;
-        }
+            var type = kohde.type;
+            var service, food, sight;
+            
+            if (type == "Food") {
+                food = true;
+            } else if (type == "Service") {
+                service = true;
+            } else {
+                sight = true;
+            }
 
-        
-        res.render('new', { 
-            id: id, 
-            nimi: kohde.name, 
-            city: kohde.address.city, 
-            postalCode: kohde.address.postalCode, 
-            street: kohde.address.street, 
-            phoneNumber: kohde.address.phoneNumber,
-            picture: kohde.picture,
-            latitude: kohde.location.latitude,
-            longitude: kohde.location.longitude,
-            info: kohde.info,
-            directions: kohde.directions,
-            monStart: kohde.openingHours.mon.start,
-            monEnd: kohde.openingHours.mon.end,
-            tueStart: kohde.openingHours.tue.start,
-            tueEnd: kohde.openingHours.tue.end,
-            wedStart: kohde.openingHours.wed.start,
-            wedEnd: kohde.openingHours.wed.end,
-            thuStart: kohde.openingHours.thu.start,
-            thuEnd: kohde.openingHours.thu.end,
-            friStart: kohde.openingHours.fri.start,
-            friEnd: kohde.openingHours.fri.end,
-            satStart: kohde.openingHours.sat.start,
-            satEnd: kohde.openingHours.sat.end,
-            sunStart: kohde.openingHours.sun.start,
-            sunEnd: kohde.openingHours.sun.end,
-            food: food,
-            service: service,
-            sight: sight,
-            title: 'Muuta kohdetta' });
+            
+            res.render('new', { 
+                id: id, 
+                nimi: kohde.name, 
+                city: kohde.address.city, 
+                postalCode: kohde.address.postalCode, 
+                street: kohde.address.street, 
+                phoneNumber: kohde.address.phoneNumber,
+                picture: kohde.picture,
+                latitude: kohde.location.latitude,
+                longitude: kohde.location.longitude,
+                info: kohde.info,
+                directions: kohde.directions,
+                monStart: kohde.openingHours.mon.start,
+                monEnd: kohde.openingHours.mon.end,
+                tueStart: kohde.openingHours.tue.start,
+                tueEnd: kohde.openingHours.tue.end,
+                wedStart: kohde.openingHours.wed.start,
+                wedEnd: kohde.openingHours.wed.end,
+                thuStart: kohde.openingHours.thu.start,
+                thuEnd: kohde.openingHours.thu.end,
+                friStart: kohde.openingHours.fri.start,
+                friEnd: kohde.openingHours.fri.end,
+                satStart: kohde.openingHours.sat.start,
+                satEnd: kohde.openingHours.sat.end,
+                sunStart: kohde.openingHours.sun.start,
+                sunEnd: kohde.openingHours.sun.end,
+                type: kohde.type,
+                food: food,
+                service: service,
+                sight: sight,
+                title: 'Muuta kohdetta'
+            });
+        }
     });
 
 });
@@ -176,7 +182,6 @@ router.post('/add', function(req, res) {
             }
             else {
                 res.redirect("kohteet.json");
-        
             }  
         
         });
