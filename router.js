@@ -98,7 +98,8 @@ router.post('/add', function(req, res) {
     var street = req.body.street;
     var phoneNumber = req.body.phoneNumber;
     var picture = req.body.picture;
-    picture = picture.filter(n => n)
+    if(typeof(picture) != "string")
+        picture = picture.filter(n => n)
     var latitude = req.body.latitude;
     var longitude = req.body.longitude;
     var info = req.body.info;
