@@ -1,9 +1,14 @@
 # geoprojekti
 Haaga-Helia ohjelmistoprojekti 2 kurssin projektin backend
 
-## Alussa ajettavat komennot
+## Ennen käyttöä
+Aja seuraava komento:
 ```
 npm install
+```
+Hanki Google Maps Geocoding API -avain [täältä](https://developers.google.com/maps/documentation/geocoding/start#get-a-key) ja muuta config.js-tiedostosta tyhjä avain omaksesi:
+```
+config.googleMapsApiKey = "[avain]"
 ```
 
 ## Käyttö
