@@ -4,6 +4,12 @@ import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 import kohde from './models/kohde';
 
+var config = require('./config');
+var googleMapsClient = require('@google/maps').createClient({
+  key: config.googleMapsApiKey,
+  Promise: Promise
+});
+
 //Initialize router
 const router = Router();
 
@@ -125,74 +131,95 @@ router.post('/add', function(req, res) {
         var objectId = new ObjectID();
     }
     
-    const newData = [
-        {
-            "type": type,
-            "name": name,
-            "address": {
-                "city": city,
-                "postalCode": postalCode,
-                "street": street,
-                "phoneNumber": phoneNumber
-            },
-            "picture": picture,
-            "location": {
-                "latitude": latitude,
-                "longitude": longitude
-            },
-            "info": info,
-            "openingHours": {
-                "mon": {
-                    "start": monStart,
-                    "end": monEnd
+    // If latitude or longitude is empty, get them from Google Maps API
+    if(latitude == "" || longitude == "") {
+        googleMapsClient.geocode({
+            address: street + ' ' + postalCode + ' ' + city
+            })
+            .asPromise()
+            .then(response => {
+                latitude = parseFloat(response.json.results[0].geometry.location.lat)
+                longitude = parseFloat(response.json.results[0].geometry.location.lng)
+                addData();
+            })
+            .catch(err => {
+                console.log(err)
+                addData();
+            })
+    } else {
+        addData();
+    }
+    
+    function addData() {
+        const newData = [
+            {
+                "type": type,
+                "name": name,
+                "address": {
+                    "city": city,
+                    "postalCode": postalCode,
+                    "street": street,
+                    "phoneNumber": phoneNumber
                 },
-                "tue": {
-                    "start": tueStart,
-                    "end": tueEnd
+                "picture": picture,
+                "location": {
+                    "latitude": latitude,
+                    "longitude": longitude
                 },
-                "wed": {
-                    "start": wedStart,
-                    "end": wedEnd
-                },
-                "thu": {
-                    "start": thuStart,
-                    "end": thuEnd
-                },
-                "fri": {
-                    "start": friStart,
-                    "end": friEnd
-                },
-                "sat": {
-                    "start": satStart,
-                    "end": satEnd
-                },
-                "sun": {
-                    "start": sunStart,
-                    "end": sunEnd
+                "info": info,
+                "openingHours": {
+                    "mon": {
+                        "start": monStart,
+                        "end": monEnd
+                    },
+                    "tue": {
+                        "start": tueStart,
+                        "end": tueEnd
+                    },
+                    "wed": {
+                        "start": wedStart,
+                        "end": wedEnd
+                    },
+                    "thu": {
+                        "start": thuStart,
+                        "end": thuEnd
+                    },
+                    "fri": {
+                        "start": friStart,
+                        "end": friEnd
+                    },
+                    "sat": {
+                        "start": satStart,
+                        "end": satEnd
+                    },
+                    "sun": {
+                        "start": sunStart,
+                        "end": sunEnd
+                    }
                 }
             }
-        }
-    ]
-    
-    mongoose.connect('mongodb://localhost/kohteet');
+        ]
+        
+        mongoose.connect('mongodb://localhost/kohteet');
 
-    newData.map(data => {
-        const kohde = new Kohde(data);
-        var query = { _id: objectId };
-        
-  
-        
-        Kohde.findOneAndUpdate(query, kohde, {upsert:true}, function (err, doc) {
-            if (err) {
-                res.send("There was a problem adding the information to the database.");
-            }
-            else {
-                res.redirect("kohteet.json");
-            }  
-        
+        newData.map(data => {
+            const kohde = new Kohde(data);
+            var query = { _id: objectId };
+            
+    
+            
+            Kohde.findOneAndUpdate(query, kohde, {upsert:true}, function (err, doc) {
+                if (err) {
+                    res.send("There was a problem adding the information to the database.");
+                }
+                else {
+                    res.redirect("kohteet.json");
+                }  
+            
+            });
+            
         });
-        
-    });
+    }
 });
 
 export default router;
