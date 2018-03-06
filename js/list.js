@@ -7,7 +7,7 @@ $.getJSON( "kohteet.json", function( data ) {
                     "<a href=\"modify/" + d._id + "\">Modify</a>" + "   " + "<a href=\"delete/" + d._id + "\">DELETE</a>" +
                     "</li>" );
     });
-$( "<ul/>", {
+$( "</ul>", {
 html: items.join( "" )
 }).appendTo( "body" );
 });

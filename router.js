@@ -28,10 +28,18 @@ router.get('/list', function(req, res) {
 //Delete
 router.delete('/delete/:id', function (req, res){
  Kohde.findByIdAndRemove(req.params.id, function(err, response){
-    if(err) res.json({message: "error deleting record id"});
-    else res.json({message: "Target has been deleted"}); 
+    if(err) { res.json({message: "error deleting record id"}); }
+    else { res.json({message: "Target has been deleted"}); }
  });   
 });
+
+router.get('/delete/:id', function(req, res) {
+     var id = req.params.id;
+    res.render('delete', { 
+        id: id,
+        title: 'DESTROY' });
+    
+});     
    
 //MODIFY
 router.get('/modify/:id', function(req, res) {
