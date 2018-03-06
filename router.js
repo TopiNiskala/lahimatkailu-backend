@@ -22,10 +22,6 @@ router.get('/new', function(req, res) {
 });
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
 router.get('/list', function(req, res) {
-// organizes objects into alphabetical order.
-    var places = Kohde.find({id:true}).sort({'name': -1});
-// Transforms javascript object into json
-var placeslist = JSON.stringify(places);
     res.render('list', { places: places, title: 'Muokkaus- ja poistosivu' });
 });     
 
