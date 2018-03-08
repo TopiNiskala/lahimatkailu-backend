@@ -1,7 +1,47 @@
 doctype html
-html
-  head
-    meta(charset="utf-8")
-    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
-  body
-    script(src="/js/list.js")
+html(lang="en")
+    head
+        title= title
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+        link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.16/datatables.min.css")
+        script(type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.16/datatables.min.js")
+    body
+        .modal#deleteModal(tabindex="-1" role="dialog")
+            .modal-dialog(role="document")
+                .modal-content
+                    .modal-header
+                        h5.modal-title Delete
+                            button.close(type="button" data-dismiss="modal" aria-label="Close")
+                                span(aria-hidden="true") ×
+                    .modal-body
+                        p Are you sure you want to delete
+                            span.destinationName
+                    .modal-footer
+                        button.btn.btn-danger.deleteConfirm(type="button") Delete
+                        button.btn.btn-secondary(type="button" data-dismiss="modal") Cancel
+                        
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    a.navbar-brand(href="#") Lähimatkailu
+                ul.nav.navbar-nav
+                    li.nav-item.active
+                        a.nav-link(href="/v1/list") List
+                    li.nav-item
+                        a.nav-link(href="/v1/new") Add
+
+        .container(style="margin-top:-15px; margin-bottom:50px")
+            h2= title
+            table.table.table-striped.table-bordered
+                thead
+                    tr
+                        th #
+                        th Name
+                        th Address
+                        th City
+                        th Modify
+                        th Delete
+        script(src="/js/list.js")
+        script(src="/js/delete.js")

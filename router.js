@@ -18,12 +18,13 @@ router.route('/kohteet.json').get(index);
 
 // Directs the user using /new to  file new.pug where you can add a new place in database.
 router.get('/new', function(req, res) {
-    res.render('new', { title: 'Lisää kohde' });
+    res.render('new', { title: 'Add a new destination' });
 });
+
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
 router.get('/list', function(req, res) {
-    res.render('list', { title: 'Listasivu' });
-});     
+    res.render('list', { title: 'List' });
+});
 
 //Delete
 router.delete('/delete/:id', function (req, res){
@@ -91,11 +92,51 @@ router.get('/modify/:id', function(req, res) {
                 food: food,
                 service: service,
                 sight: sight,
-                title: 'Muuta kohdetta'
+                title: 'Modify destination'
             });
         }
     });
+});
 
+// View
+router.get('/view/:id', function(req, res) {
+    var id = req.params.id;
+    
+    Kohde.findById(id, (err, kohde) => {
+        if (err || !kohde) {
+            res.send("There was a problem reading the information from the database.");
+        } else {            
+            res.render('view', { 
+                id: id, 
+                name: kohde.name, 
+                city: kohde.address.city, 
+                postalCode: kohde.address.postalCode, 
+                street: kohde.address.street, 
+                phoneNumber: kohde.address.phoneNumber,
+                picture: kohde.picture,
+                latitude: kohde.location.latitude,
+                longitude: kohde.location.longitude,
+                info: kohde.info,
+                directions: kohde.directions,
+                monStart: kohde.openingHours.mon.start,
+                monEnd: kohde.openingHours.mon.end,
+                tueStart: kohde.openingHours.tue.start,
+                tueEnd: kohde.openingHours.tue.end,
+                wedStart: kohde.openingHours.wed.start,
+                wedEnd: kohde.openingHours.wed.end,
+                thuStart: kohde.openingHours.thu.start,
+                thuEnd: kohde.openingHours.thu.end,
+                friStart: kohde.openingHours.fri.start,
+                friEnd: kohde.openingHours.fri.end,
+                satStart: kohde.openingHours.sat.start,
+                satEnd: kohde.openingHours.sat.end,
+                sunStart: kohde.openingHours.sun.start,
+                sunEnd: kohde.openingHours.sun.end,
+                type: kohde.type,
+                title: kohde.name
+            });
+        }
+    });
 });
 
 //Posts filled form (new 'kohde') to database
@@ -217,7 +258,7 @@ router.post('/add', function(req, res) {
                     res.send("There was a problem adding the information to the database.");
                 }
                 else {
-                    res.redirect("kohteet.json");
+                    res.redirect("view/" + objectId);
                 }  
             
             });

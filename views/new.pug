@@ -1,29 +1,43 @@
-include ../node_modules/pug-bootstrap/_bootstrap.pug
 doctype html
-html(lang="fi")
+html(lang="en")
     head
         title= title
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+        link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.16/datatables.min.css")
+        script(type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.16/datatables.min.js")
     body
-        .container
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    a.navbar-brand(href="#") Lähimatkailu
+                ul.nav.navbar-nav
+                    li.nav-item
+                        a.nav-link(href="/v1/list") List
+                    li.nav-item.active
+                        a.nav-link(href="/v1/new") Add
+
+        .container(style="max-width:600px; margin-top:-15px; margin-bottom:50px")
             noscript
                 h1 Salli JavaScript
             h2= title
-            form#formAddDestination(style="width:500px", name="add",method="post",action="/v1/add")
+            form#formAddDestination(name="add",method="post",action="/v1/add")
                 input.form-control(type="hidden", name="id" value= id)
-                h4 Perustiedot
+                h4 General information
                 div#typeName(style="display:none")=type
                 div#cityName(style="display:none")=city
-                input.form-control(required="", type="text", placeholder="Nimi", name="name" value= nimi)
+                input.form-control(required="", type="text", placeholder="Name", name="name" value= nimi)
                 select.form-control#type(required="" name="type")
-                    option(selected="" disabled="" value="Tyyppi") Tyyppi
-                    option(value="Ruoka") Ruoka
-                    option(service value="Palvelu") Palvelu
-                    option(sight value="Nähtävyys") Nähtävyys
-                h4 Sijainti
-                input.form-control(required="", type="text", placeholder="Osoite", name="street" value= street)
-                input.form-control(style="display:inline; width:50%", required="", type="text", placeholder="Postinumero", name="postalCode" value= postalCode)
+                    option(selected="" disabled="" value="Tyyppi") Type
+                    option(value="Ruoka") Food
+                    option(service value="Palvelu") Service
+                    option(sight value="Nähtävyys") Sight
+                h4 Location
+                input.form-control(required="", type="text", placeholder="Street address", name="street" value= street)
+                input.form-control(style="display:inline; width:50%", required="", type="text", placeholder="Postal code", name="postalCode" value= postalCode)
                 select#city.form-control(style="display:inline; width:50%", required="", name="city" value= city)
-                    option(selected="" disabled="" value="Paikkakunta") Paikkakunta
+                    option(selected="" disabled="" value="City") City
                     option(value="Akaa") Akaa
                     option(value="Alajärvi") Alajärvi
                     option(value="Alavieska") Alavieska
@@ -338,63 +352,63 @@ html(lang="fi")
                     option(value="Ähtäri") Ähtäri
                     option(value="Äänekoski") Äänekoski
                 input.form-control(type="tel", placeholder="Puhelinnumero", name="phoneNumber" value= phoneNumber)
-                h4 Koordinaatit (jätä tyhjäksi automaattista hakua varten)
-                input.form-control(type="text", placeholder="Leveysaste (latitude)", name="latitude" value= latitude)
-                input.form-control(type="text", placeholder="Pituusaste (longitude)", name="longitude" value= longitude)
-                h4 Kuvat
+                h4 Coordinates (leave empty for autocomplete)
+                input.form-control(type="text", placeholder="Latitude", name="latitude" value= latitude)
+                input.form-control(type="text", placeholder="Longitude", name="longitude" value= longitude)
+                h4 Pictures
                 div#pictures
                     div.picture.input-group
-                        input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture")
+                        input.form-control.picture(type="text", placeholder="http://example.com/pic.jpg", name="picture")
                         span.input-group-btn
-                            button.btn.btn-success.btn-add(title="Lisää uusi")
+                            button.btn.btn-success.btn-add
                                 span.glyphicon.glyphicon-plus
                     if picture != undefined
                         each pictureInput, i in picture
                             div.picture.input-group
-                                input.form-control.picture(type="text", placeholder="http://esimerkki.com/kuva.jpg", name="picture" value= picture[i])
+                                input.form-control.picture(type="text", placeholder="http://example.com/pic.jpg", name="picture" value= picture[i])
                                 span.input-group-btn
                                     button.btn.btn-danger.btn-remove
                                         span.glyphicon.glyphicon-minus
-                h4 Muuta tietoa
-                textarea.form-control(style="resize:vertical", type="text", placeholder="Yleistä tietoa kohteesta", name="info")=info
-                h4 Aukioloajat
-                label Maanantai
+                h4 Other information
+                textarea.form-control(style="resize:vertical", type="text", placeholder="Other information about the destination", name="info")=info
+                h4 Open hours
+                label Monday
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="monStart" value= monStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="monEnd" value= monEnd)
-                label Tiistai
+                label Tuesday
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="tueStart" value= tueStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="tueEnd" value= tueEnd)
-                label Keskiviikko
+                label Wednesday
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="wedStart" value= wedStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="wedEnd" value= wedEnd)
-                label Torstai
+                label Thursday
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="thuStart" value= thuStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="thuEnd" value= thuEnd)
-                label Perjantai
+                label Friday
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="friStart" value= friStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="friEnd" value= friEnd)
-                label Lauantai
+                label Saturday
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="satStart" value= satStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="satEnd" value= satEnd)
-                label Sunnuntai
+                label Sunday
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="sunStart" value= sunStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="sunEnd" value= sunEnd)
                 br
-                button.form-control.btn.btn-success(type="submit") Tallenna
+                button.form-control.btn.btn-success(type="submit") Submit
                 br
                 br
-        script(src="/js/interface.js")
+        script(src="/js/add.js")
