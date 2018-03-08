@@ -6,9 +6,14 @@ Aja seuraava komento:
 ```
 npm install
 ```
-Hanki Google Maps Geocoding API -avain [täältä](https://developers.google.com/maps/documentation/geocoding/start#get-a-key) ja muuta config.js-tiedostosta tyhjä avain omaksesi:
+Hanki Google Maps Geocoding API -avain [täältä](https://developers.google.com/maps/documentation/geocoding/start#get-a-key) ja tee config.js-tiedo:
 ```
-config.googleMapsApiKey = "[avain]"
+var config = {};
+
+config.googleMapsApiKey = "[AVAIN]"
+
+module.exports = config;
+
 ```
 
 ## Käyttö
