@@ -16,6 +16,7 @@ const router = Router();
 // Handle /kohteet.json route with index action from kohteet controller
 router.route('/kohteet.json').get(index);
 
+
 // Directs the user using /new to  file new.pug where you can add a new place in database.
 router.get('/new', function(req, res) {
     res.render('new', { title: 'Lisää kohde' });
