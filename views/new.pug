@@ -1,22 +1,8 @@
 doctype html
 html(lang="en")
-    head
-        title= title
-        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-        link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.16/datatables.min.css")
-        script(type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.16/datatables.min.js")
+    include includes/head.pug
     body
-        nav.navbar.navbar-default
-            .container-fluid
-                .navbar-header
-                    a.navbar-brand(href="#") Lähimatkailu
-                ul.nav.navbar-nav
-                    li.nav-item
-                        a.nav-link(href="/v1/list") List
-                    li.nav-item.active
-                        a.nav-link(href="/v1/new") Add
+        include includes/nav.pug
 
         .container(style="max-width:600px; margin-top:-15px; margin-bottom:50px")
             noscript

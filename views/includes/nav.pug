@@ -1,0 +1,13 @@
+nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    a.navbar-brand(href="#") Lähimatkailu
+                ul.nav.navbar-nav
+                    - var items = { list: 'List', new: 'Add' }
+                    for item, path in items
+                        if current == path
+                            li.nav-item.active
+                                a.nav-link(href="/v1/" + path)=item
+                        else
+                            li.nav-item
+                                a.nav-link(href="/v1/" + path)=item

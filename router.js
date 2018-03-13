@@ -18,12 +18,12 @@ router.route('/kohteet.json').get(index);
 
 // Directs the user using /new to  file new.pug where you can add a new place in database.
 router.get('/new', function(req, res) {
-    res.render('new', { title: 'Add a new destination' });
+    res.render('new', { title: 'Add a new destination', current: 'new' });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
 router.get('/list', function(req, res) {
-    res.render('list', { title: 'List' });
+    res.render('list', { title: 'List', current: 'list' });
 });
 
 //Delete
