@@ -14,8 +14,30 @@ var googleMapsClient = require('@google/maps').createClient({
 const router = Router();
 
 // Handle /kohteet.json route with index action from kohteet controller
-router.route('/kohteet.json').get(index);
+//router.route('/kohteet.json').get(index);
 
+router.get('/kohteet.json', function(req, res, next) {
+	var location = req.query.location;
+	var lat;
+	var long;
+	var dist;
+	if (location === undefined || location.lat === undefined || location.long === undefined || location.dist === undefined) {		
+		lat = 60.2013725;
+		long = 24.9340407;
+		dist = 10000;
+	} else {
+		lat = parseFloat(location.lat);
+		long = parseFloat(location.long);
+		dist = parseFloat(location.dist);
+	}
+  		//Finds all places and return json response
+  		Kohde.find({ "location.latitude": { $gt: (lat - dist), $lt: (lat + dist) }, "location.longitude": { $gt: (long - dist), $lt: (long + dist) }}).lean().exec((err, kohteet) => res.json(
+    		// Iterates through each 'kohde'
+    			{ kohteet: kohteet.map(kohde => ({
+      				...kohde,
+    			}))}
+ 		)); 	
+});
 
 // Directs the user using /new to  file new.pug where you can add a new place in database.
 router.get('/new', function(req, res) {
