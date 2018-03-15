@@ -40,68 +40,67 @@ html(lang="en")
                 a.button.btn-sm.btn-danger.glyphicon.glyphicon-trash.delete(style="float:right" role="button" href="#" name=name id=id)
                 a.button.btn-sm.btn-primary.glyphicon.glyphicon-edit(style="float:right; margin-right:10px" role="button" href="/v1/modify/" + id)
             table.table.table-striped.table-bordered
-                thead
+                tr
+                    th Type 
+                    td(colspan=2)= type
+                tr
+                    th Street address
+                    td(colspan=2)= street
+                tr
+                    th Postal code
+                    td(colspan=2)= postalCode
+                tr
+                    th City
+                    td(colspan=2)= city
+                tr
+                    th Phone number
+                    td(colspan=2)= phoneNumber
+                tr
+                    th Latitude
+                    td(colspan=2)= latitude
+                tr
+                    th Longitude
+                    td(colspan=2)= longitude
+                if picture != undefined
                     tr
-                        th Type 
-                        td(colspan=2)= type
-                    tr
-                        th Street address
-                        td(colspan=2)= street
-                    tr
-                        th Postal code
-                        td(colspan=2)= postalCode
-                    tr
-                        th City
-                        td(colspan=2)= city
-                    tr
-                        th Phone number
-                        td(colspan=2)= phoneNumber
-                    tr
-                        th Latitude
-                        td(colspan=2)= latitude
-                    tr
-                        th Longitude
-                        td(colspan=2)= longitude
-                    if picture != undefined
+                        th(colspan=3) Pictures
+                    each url, i in picture
                         tr
-                            th(colspan=3) Pictures
-                        each url, i in picture
-                            tr
-                                td(colspan=3)=url
-                    tr
-                        th(colspan=3) Info
-                    tr
-                        td(colspan=3)= info
-                    tr
-                        th Open hours
-                        th Starts
-                        th Ends
-                    tr
-                        th Monday
-                        td= monStart
-                        td= monEnd
-                    tr
-                        th Tuesday
-                        td= tueStart
-                        td= tueEnd
-                    tr
-                        th Wednesday
-                        td= wedStart
-                        td= wedEnd
-                    tr
-                        th Thursday
-                        td= thuStart
-                        td= thuEnd
-                    tr
-                        th Friday
-                        td= friStart
-                        td= friEnd
-                    tr
-                        th Saturday
-                        td= satStart
-                        td= satEnd
-                    tr
-                        th Sunday
-                        td= sunStart
-                        td= sunEnd
+                            td(colspan=3)=url
+                tr
+                    th(colspan=3) Info
+                tr
+                    td(colspan=3)= info
+                tr
+                    th Open hours
+                    th Starts
+                    th Ends
+                tr
+                    th Monday
+                    td= monStart
+                    td= monEnd
+                tr
+                    th Tuesday
+                    td= tueStart
+                    td= tueEnd
+                tr
+                    th Wednesday
+                    td= wedStart
+                    td= wedEnd
+                tr
+                    th Thursday
+                    td= thuStart
+                    td= thuEnd
+                tr
+                    th Friday
+                    td= friStart
+                    td= friEnd
+                tr
+                    th Saturday
+                    td= satStart
+                    td= satEnd
+                tr
+                    th Sunday
+                    td= sunStart
+                    td= sunEnd
         script(src="/js/delete.js")
