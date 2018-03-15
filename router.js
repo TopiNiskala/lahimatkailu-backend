@@ -3,6 +3,7 @@ import { index } from './controllers/kohteet';
 import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 import kohde from './models/kohde';
+import KohdeRemoved from './models/kohde_removed';
 
 var config = require('./config');
 var googleMapsClient = require('@google/maps').createClient({
@@ -51,10 +52,19 @@ router.get('/list', function(req, res) {
 
 //Delete
 router.delete('/delete/:id', function (req, res){
- Kohde.findByIdAndRemove(req.params.id, function(err, response){
-    if(err) { res.json({message: "error deleting record id"}); }
-    else { res.json({message: "Target has been deleted"}); }
- });   
+    Kohde.findOne({ _id: req.params.id }, function(err, response) {
+        
+        // Copy target to a backup collection
+        let swap = new (KohdeRemoved)(response)
+        swap.isNew = true
+        swap.save();
+        // Remove original
+        response.remove()
+        
+        if(err) { res.json({message: "error deleting record id"}); }
+        else { res.json({message: "Target has been deleted"}); }
+    
+    });   
 });
 
 router.get('/delete/:id', function(req, res) {
