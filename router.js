@@ -9,7 +9,6 @@ var googleMapsClient = require('@google/maps').createClient({
   key: config.googleMapsApiKey,
   Promise: Promise
 });
-
 //Initialize router
 const router = Router();
 
@@ -21,7 +20,8 @@ router.get('/kohteet.json', function(req, res, next) {
 	var lat;
 	var long;
 	var dist;
-	if (location === undefined || location.lat === undefined || location.long === undefined || location.dist === undefined) {		
+	var z1 = /^[0-9]*$/;
+	if (location === undefined || location.lat === undefined || location.long === undefined || location.dist === undefined || !z1.test(location.lat) || !z1.test(location.long) || !z1.test(dist)) {		
 		lat = 60.2013725;
 		long = 24.9340407;
 		dist = 10000;
