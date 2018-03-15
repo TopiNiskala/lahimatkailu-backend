@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+    head
+        title Lähimatkailu
+
+    include includes/head.pug
+
+    body
+        include includes/nav.pug
+
+        #container
+            .container(style="margin-top:-15px; margin-bottom:50px")
+                h2= title
+
+                img(src="/img/icon.png")
+
+
+                h3 Lähimatkailu sovellus
+
+                p Lähimatkailu on sovellus lähimatkailua, lähiliikuntaa ja lähiluontokokemuksia harrastaville. Sovelluksen avulla voi etsiä kartalta tai hakusanahaulla luontokohteita ja niiden lähettyvillä olevia palveluita ja ruokailumahdollisuuksia. Saat helposti selville sekä tietoa kohteista, että reitin kohteeseen. Lisäksi voit saada ilmoituksia, kun olet lähellä luontokohdetta.
+
+                h3 Kohteiden lisäminen
+                p Tällä sivulla voi lisätä, poista ja muokata Lähimatkailu-sovelluksen kohteita
+
+                h3 Lähimatkailu application
+                p Local Tourism is an application related to tourism,local sports and the nearby nature experiences for enthusiasts. The application lets you search the map, or search term for the natural attractions and the nearby points of services and dining options. You can easily see, as well as knowledge of the route to the destination. In addition, you can get notifications when you are close to nature items.
+
+                h3 Adding places
+                p In this site you can add, remove and edit the places that appear in the Lähimatkailu application
+
+                img(src="/img/picture.png")
+
+                h4 Kohteet JSON-muodossa:
+                a(href="/v1/kohteet.json", title="kohteet") Kohteet JSON
