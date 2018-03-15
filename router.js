@@ -14,6 +14,13 @@ var googleMapsClient = require('@google/maps').createClient({
 //Initialize router
 const router = Router();
 
+// Start page ------------------------------------------------
+
+router.get(['/', '/index'], function(req, res) {
+    res.render('index', { title: 'Lähimatkailu', current: 'index' });
+});
+//-------------------------------------------------------------
+
 // Handle /kohteet.json route with index action from kohteet controller
 //router.route('/kohteet.json').get(index);
 

@@ -22,6 +22,9 @@ app.use('/v1', router);
 // Serve javascript files from js subdirectory
 app.use("/js", express.static(__dirname + "/js"));
 
+// Serve images from img subdirectory
+app.use("/img", express.static(__dirname + "/img"));
+
 app.set('view engine', 'pug');
 // Launches server on port 3000
 const server = app.listen(3000, () => {
