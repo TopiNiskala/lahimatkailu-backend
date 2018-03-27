@@ -7,6 +7,7 @@ var path = require('path');
 
 //This file connects our server to mongoDB and uses the router we have created
 mongoose.connect('mongodb://localhost/kohteet');
+mongoose.connect('mongodb://localhost/users');
 // Initialize http server
 const app = express();
 

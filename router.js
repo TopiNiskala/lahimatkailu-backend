@@ -68,30 +68,33 @@ router.get('/login', function(req, res) {
 //login
 router.post('/login', function(req, res) {
 
+    mongoose.connect('mongodb://localhost/users');
+
     var username = req.body.username;
-    //kokeile muuttaa JSON javaan sopivaksi
-    //var jsonObject = JSON.parse(username);
     var password = req.body.password;
-    //console.log(username + password);
-    user.findOne({"username": "username", "password": "password"}, function(err, user) {
-        
+
+    //console.log("käyttäjä: " +  username + " salasana: " + password);
+    user.findOne({"username": username, "password": password}, function(err, user) {
         if(err) {
-           // console.log(err);
+            console.log("CRITICAL ERROR!");
             return res.status(500).send();
         }
 
         if(!user) {
+            console.log("CANNOT FIND THAT GUY! TRY AGAIN!");
             return res.status(404).send();
         }
-
+        //Tallentaa käyttäjän sessioon
+        //req.session.user = user;
+        //req.sessioncookie.user = user;
+        //ohjaa etusivulle jos kirjautuminen onnistui
+        res.redirect('/v1/index');
         return res.status(200).send();
-        //res.redirect('/list');
-        res.render('list', { title: 'List', current: 'list' });
+
     })
 });
 
 //session
-
 router.get('/dashboard', function(req, res) {
     if(!req.session.user) {
         return res.status(401).send();
