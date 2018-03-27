@@ -20,12 +20,21 @@
   },
   "dependencies": {
     "@google/maps": "^0.4.5",
+    "bcrypt-nodejs": "latest",
     "body-parser": "^1.18.2",
+    "connect-flash": "~0.1.1",
     "cookie-parser": "~1.4.3",
     "express": "^4.16.2",
+    "express-session": "^1.15.5",
+    "method-override": "~2.3.6",
     "moment": "^2.20.1",
     "mongoose": "^5.0.1",
     "morgan": "^1.9.0",
+    "passport": "~0.3.2",
+    "passport-facebook": "~2.1.1",
+    "passport-google-oauth": "~1.0.0",
+    "passport-local": "~1.0.0",
+    "passport-twitter": "~1.0.4",
     "pug": "~2.0.0-rc.4"
   }
 }

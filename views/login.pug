@@ -34,16 +34,16 @@ html(lang='en')
       padding: 16px;
       }
   body
-    h1 Insert username and password!
+    h1 Login to backend!
     
-    form(action='', method='post')
+    form(name="login", method="POST", action="/login")
       div
         label
           | Username : 
-          input(type='text', name='username', placeholder='enter username')
+          input(type='text', name='username', placeholder="enter username")
       div
         label
           | Password: 
-          input(type='password', name='password', placeholder='enter password')
+          input(type='password', name='password', placeholder="enter password")
       div
         button(type='submit') Login

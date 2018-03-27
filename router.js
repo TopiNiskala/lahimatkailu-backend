@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 import kohde from './models/kohde';
 import KohdeRemoved from './models/kohde_removed';
+import user from './models/user';
+
 
 var config = require('./config');
 var googleMapsClient = require('@google/maps').createClient({
@@ -47,6 +49,7 @@ router.get('/kohteet.json', function(req, res, next) {
  		)); 	
 });
 
+
 // Directs the user using /new to  file new.pug where you can add a new place in database.
 router.get('/new', function(req, res) {
     res.render('new', { title: 'Add a new destination', current: 'new' });
@@ -56,6 +59,47 @@ router.get('/new', function(req, res) {
 router.get('/list', function(req, res) {
     res.render('list', { title: 'List', current: 'list' });
 });
+
+//directs to login page
+router.get('/login', function(req, res) {
+
+    res.render('login', {title: 'Login', current: 'login' });
+});
+//login
+router.post('/login', function(req, res) {
+
+    var username = req.body.username;
+    //kokeile muuttaa JSON javaan sopivaksi
+    //var jsonObject = JSON.parse(username);
+    var password = req.body.password;
+    //console.log(username + password);
+    user.findOne({"username": "username", "password": "password"}, function(err, user) {
+        
+        if(err) {
+           // console.log(err);
+            return res.status(500).send();
+        }
+
+        if(!user) {
+            return res.status(404).send();
+        }
+
+        return res.status(200).send();
+        //res.redirect('/list');
+        res.render('list', { title: 'List', current: 'list' });
+    })
+});
+
+//session
+
+router.get('/dashboard', function(req, res) {
+    if(!req.session.user) {
+        return res.status(401).send();
+    }
+
+    return res.status(200).send("Welcome to super-secret API");
+})
+
 
 //Delete
 router.delete('/delete/:id', function (req, res){
