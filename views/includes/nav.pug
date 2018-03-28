@@ -3,7 +3,7 @@ nav.navbar.navbar-default
                 .navbar-header
                     a.navbar-brand(href="/v1/index") Lähimatkailu
                 ul.nav.navbar-nav
-                    - var items = { list: 'List', new: 'Add' }
+                    - const items = { list: 'List', new: 'Add' }
                     for item, path in items
                         if current == path
                             li.nav-item.active
