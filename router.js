@@ -42,8 +42,8 @@ router.get('/kohteet.json', (req, res, next) => {
     let lat;
     let long;
     let dist;
-    let z1 = /^[0-9]*$/;
-	if (location === undefined || location.lat === undefined || location.long === undefined || location.dist === undefined || !z1.test(location.lat) || !z1.test(location.long) || !z1.test(dist)) {		
+    let regex = /\d+\.?\d*/;
+	if (location === undefined || location.lat === undefined || location.long === undefined || location.dist === undefined || !location.lat.match(regex) || !location.long.match(regex) || !location.dist.match(regex)) {		
 		lat = 60.2013725;
 		long = 24.9340407;
 		dist = 10000;
