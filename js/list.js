@@ -35,7 +35,19 @@ var table = $('.table').DataTable({
       }, 
       { data: "address.street" },
       { data: "address.city" },
-      { data: "type" },
+      { data: null,
+        "render": function(data, type, full, meta) {
+            var type = full.type;
+            if(type === "Nähtävyys") {
+                type = "Sight";
+            } else if(type === "Palvelu") {
+                type = "Service"
+            } else {
+                type = "Food"
+            }
+            return type
+        }
+      },      
       { sortable: false,
         data: null,
         className: "text-center",

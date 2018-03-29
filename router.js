@@ -159,7 +159,18 @@ router.get('/view/:id', (req, res) => {
     Kohde.findById(id, (err, kohde) => {
         if (err || !kohde) {
             res.send("There was a problem reading the information from the database.");
-        } else {            
+        } else {
+            
+            let type = kohde.type;
+            
+            if(type === "Nähtävyys") {
+                type = "Sight";
+            } else if(type === "Palvelu") {
+                type = "Service";
+            } else {
+                type = "Food";
+            }
+            
             res.render('view', { 
                 id: id, 
                 name: kohde.name, 
@@ -186,7 +197,7 @@ router.get('/view/:id', (req, res) => {
                 satEnd: kohde.openingHours.sat.end,
                 sunStart: kohde.openingHours.sun.start,
                 sunEnd: kohde.openingHours.sun.end,
-                type: kohde.type,
+                type: type,
                 title: kohde.name
             });
         }
