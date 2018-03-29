@@ -29,7 +29,7 @@ const router = Router();
 
 // Start page ------------------------------------------------
 
-router.get(['/', '/index'], function(req, res) {
+router.get(['/', '/index'], (req, res) => {
     res.render('index', { title: 'Lähimatkailu', current: 'index' });
 });
 //-------------------------------------------------------------
@@ -62,18 +62,18 @@ router.get('/kohteet.json', (req, res, next) => {
 });
 
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
-router.get('/new', function(req, res) {
+router.get('/new', (req, res) => {
     res.render('new', { title: 'Add a new destination', current: 'new' });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
-router.get('/list', function(req, res) {
+router.get('/list', (req, res) => {
     res.render('list', { title: 'List', current: 'list' });
 });
 
 //Delete
-router.delete('/delete/:id', function (req, res){
-    Kohde.findOne({ _id: req.params.id }, function(err, response) {
+router.delete('/delete/:id', (req, res) =>{
+    Kohde.findOne({ _id: req.params.id }, (err, response) => {
         
         // Copy target to a backup collection
         let swap = new (KohdeRemoved)(response);
@@ -88,7 +88,7 @@ router.delete('/delete/:id', function (req, res){
     });   
 });
 
-router.get('/delete/:id', function(req, res) {
+router.get('/delete/:id', (req, res) => {
      let id = req.params.id;
     res.render('delete', { 
         id: id,
@@ -97,7 +97,7 @@ router.get('/delete/:id', function(req, res) {
 });     
    
 //MODIFY
-router.get('/modify/:id', function(req, res) {
+router.get('/modify/:id', (req, res) => {
     let id = req.params.id;
     
     Kohde.findById(id, (err, kohde) => {
@@ -153,7 +153,7 @@ router.get('/modify/:id', function(req, res) {
 });
 
 // View
-router.get('/view/:id', function(req, res) {
+router.get('/view/:id', (req, res) => {
     let id = req.params.id;
     
     Kohde.findById(id, (err, kohde) => {
@@ -194,7 +194,7 @@ router.get('/view/:id', function(req, res) {
 });
 
 //Posts filled form (new 'kohde') to database
-router.post('/add', function(req, res) {
+router.post('/add', (req, res) => {
 
     let type = req.body.type;
     let name = req.body.name;

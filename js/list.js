@@ -35,6 +35,7 @@ var table = $('.table').DataTable({
       }, 
       { data: "address.street" },
       { data: "address.city" },
+      { data: "type" },
       { sortable: false,
         data: null,
         className: "text-center",
