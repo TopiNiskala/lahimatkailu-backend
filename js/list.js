@@ -24,19 +24,20 @@ var table = $('.table').DataTable({
         searchable: false,
         data: null,
         className: "text-center",
-        "render": function(data, type, full, meta) {
+        render: function(data, type, full, meta) {
             return (meta.row+1)
         }
       },
-      { data: null,
-        "render": function(data, type, full, meta) {
+      {
+        data: null,
+        render: function(data, type, full, meta) {
             return "<a href=\"view/" + full._id + "\">" + full.name + "</a>"
         }
       }, 
       { data: "address.street" },
       { data: "address.city" },
       { data: null,
-        "render": function(data, type, full, meta) {
+        render: function(data, type, full, meta) {
             var type = full.type;
             if(type === "Nähtävyys") {
                 type = "Sight";
@@ -51,14 +52,14 @@ var table = $('.table').DataTable({
       { sortable: false,
         data: null,
         className: "text-center",
-        "render": function(data, type, full, meta) {
+        render: function(data, type, full, meta) {
             return "<a role=\"button\" class=\"button btn-sm btn-primary glyphicon glyphicon-edit\" href=\"modify/" + full._id + "\"></a>"
         }
       },
       { sortable: false,
         data: null,
         className: "text-center",
-        "render": function(data, type, full, meta) {
+        render: function(data, type, full, meta) {
             return "<a id=\""+ full._id + "\" name=\""+ full.name + "\" role=\"button\" class=\"delete button btn-sm btn-danger glyphicon glyphicon-trash\" href=\"#\"></a>"
         }
       }
