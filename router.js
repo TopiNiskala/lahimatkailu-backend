@@ -63,7 +63,7 @@ router.get('/kohteet.json', (req, res, next) => {
 
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
 router.get('/new', (req, res) => {
-    res.render('new', { title: 'Add a new destination', current: 'new' });
+    res.render('new', { title: 'Add a new destination', current: 'new', symbols: [] });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
@@ -256,6 +256,8 @@ router.post('/add', (req, res) => {
             })
             .catch(err => {
                 console.log(err);
+                latitude = 1;
+                longitude = 1;
                 addData();
             })
     } else {

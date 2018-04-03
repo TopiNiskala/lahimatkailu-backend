@@ -67,7 +67,7 @@ var table = $(".table").DataTable({
     ]
 })
 
-$(".btn").css({"border" : "1px solid #265d8a"});
+$(".typeFilterContent .btn").css({"border" : "1px solid #265d8a"});
 
 var $typeFilter = $(".typeFilterContent").html();
 $( ".typeFilterContent" ).hide()

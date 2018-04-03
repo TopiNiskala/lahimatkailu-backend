@@ -356,26 +356,32 @@ html(lang="en")
                                     button.btn.btn-danger.btn-remove
                                         span.glyphicon.glyphicon-minus
                 h4 Symbols
-                -if (symbols.includes('accessibility'))
-                   input(type='checkbox', name='symbols', value='accessibility', checked='')
-                -else
-                   input(type='checkbox', name='symbols', value='accessibility')
-                span Accessibility
-                -if (symbols.includes('parking'))
-                   input(type='checkbox', name='symbols', value='parking', checked='')
-                -else
-                   input(type='checkbox', name='symbols', value='parking')
-                span Parking
-                -if (symbols.includes('pets'))
-                   input(type='checkbox', name='symbols', value='pets', checked='')
-                -else
-                   input(type='checkbox', name='symbols', value='pets')
-                span Pets allowed
-                -if (symbols.includes('24h'))
-                   input(type='checkbox', name='symbols', value='24h', checked='')
-                -else
-                   input(type='checkbox', name='symbols', value='24h')
-                span Open 24h
+
+                .row
+                    .col-xs-6.col-sm-3
+                        label Accessibility 
+                            -if (symbols.includes('accessibility'))
+                                input(type='checkbox', name='symbols', value='accessibility', checked='')
+                            -else
+                                input(type='checkbox', name='symbols', value='accessibility')
+                    .col-xs-6.col-sm-3
+                        label Parking 
+                            -if (symbols.includes('parking'))
+                                input(type='checkbox', name='symbols', value='parking', checked='')
+                            -else
+                                input(type='checkbox', name='symbols', value='parking')
+                    .col-xs-6.col-sm-3
+                        label Pets allowed 
+                            -if (symbols.includes('pets'))
+                                input(type='checkbox', name='symbols', value='pets', checked='')
+                            -else
+                                input(type='checkbox', name='symbols', value='pets')
+                    .col-xs-6.col-sm-3
+                        label Open 24h 
+                            -if (symbols.includes('24h'))
+                                input(type='checkbox', name='symbols', value='24h', checked='')
+                            -else
+                                input(type='checkbox', name='symbols', value='24h')
                 h4 Other information
                 textarea.form-control(style="resize:vertical", type="text", placeholder="Other information about the destination", name="info")=info
                 h4 Open hours

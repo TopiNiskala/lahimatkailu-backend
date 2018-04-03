@@ -26,67 +26,86 @@ html(lang="en")
             table.table.table-striped.table-bordered(style="table-layout: fixed")
                 tr
                     th Type 
-                    td(colspan=2)= type
+                    td(colspan=3)= type
                 tr
                     th Street address
-                    td(colspan=2)= street
+                    td(colspan=3)= street
                 tr
                     th Postal code
-                    td(colspan=2)= postalCode
+                    td(colspan=3)= postalCode
                 tr
                     th City
-                    td(colspan=2)= city
+                    td(colspan=3)= city
                 tr
                     th Phone number
-                    td(colspan=2)= phoneNumber
+                    td(colspan=3)= phoneNumber
                 tr
                     th Latitude
-                    td(colspan=2)= latitude
+                    td(colspan=3)= latitude
                 tr
                     th Longitude
-                    td(colspan=2)= longitude
+                    td(colspan=3)= longitude
                 if picture != undefined
                     tr
-                        th(colspan=3) Pictures
+                        th(colspan=4) Pictures
                     each url, i in picture
                         tr
-                            td(colspan=3)
+                            td(colspan=4)
                                 div(style="max-width:600px; overflow-x:auto;")= url
                 tr
-                    th(colspan=3) Info
+                    th(colspan=4) Symbols
                 tr
-                    td(colspan=3)
+                    -if (symbols.includes('accessibility'))
+                        td(style="background:#8cbc77; color:#fff") Accessibility
+                    -else
+                        td(style="background:#be5757; color:#fff") Accessibility
+                    -if (symbols.includes('parking'))
+                        td(style="background:#8cbc77; color:#fff") Parking
+                    -else
+                        td(style="background:#be5757; color:#fff") Parking
+                    -if (symbols.includes('pets'))
+                        td(style="background:#8cbc77; color:#fff") Pets allowed
+                    -else
+                        td(style="background:#be5757; color:#fff") Pets allowed
+                    -if (symbols.includes('24h'))
+                        td(style="background:#8cbc77; color:#fff") Open 24h
+                    -else
+                        td(style="background:#be5757; color:#fff") Open 24h
+                tr
+                    th(colspan=4) Info
+                tr
+                    td(colspan=4)
                         div(style="max-width:600px; overflow-x:auto;")= info
                 tr
-                    th Open hours
+                    th(colspan=2) Open hours
                     th Starts
                     th Ends
                 tr
-                    th Monday
+                    th(colspan=2) Monday
                     td= monStart
                     td= monEnd
                 tr
-                    th Tuesday
+                    th(colspan=2) Tuesday
                     td= tueStart
                     td= tueEnd
                 tr
-                    th Wednesday
+                    th(colspan=2) Wednesday
                     td= wedStart
                     td= wedEnd
                 tr
-                    th Thursday
+                    th(colspan=2) Thursday
                     td= thuStart
                     td= thuEnd
                 tr
-                    th Friday
+                    th(colspan=2) Friday
                     td= friStart
                     td= friEnd
                 tr
-                    th Saturday
+                    th(colspan=2) Saturday
                     td= satStart
                     td= satEnd
                 tr
-                    th Sunday
+                    th(colspan=2) Sunday
                     td= sunStart
                     td= sunEnd
         script(src="/js/delete.js")
