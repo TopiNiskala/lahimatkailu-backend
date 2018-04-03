@@ -15,6 +15,7 @@ var kohdeRemovedSchema = new Schema({
       latitude: Number,
       longitude: Number
   },
+  symbols: [ String ],
   info: String,
   openingHours: {
     mon: {
