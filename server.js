@@ -11,7 +11,13 @@ mongoose.connect('mongodb://localhost/kohteet');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false, limit: '15mb' }), function (error, req, res, next) {
+    if (error instanceof Error) {
+        return res.send('500', { error: error });
+    } else {
+        next();
+    }
+});
 
 // Logger outputting all requests in to the console
 app.use(morgan('combined'));
