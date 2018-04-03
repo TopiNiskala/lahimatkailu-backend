@@ -14,10 +14,11 @@ function fetchInfo() {
 }
 
 // make datatable with json
-var table = $('.table').DataTable({
+var table = $(".table").DataTable({
+    dom: "<\"row\"<\"col-sm-4\"l><\"col-sm-4\"<\"typeFilter\">><\"col-sm-4\"f>><\"row\"<\"col-sm-12\"tr>><\"row\"<\"col-sm-5\"i><\"col-sm-7\"p>>",
     ajax: {
-        url: 'kohteet.json',
-        dataSrc: 'kohteet'
+        url: "kohteet.json",
+        dataSrc: "kohteet"
     },
     columns: [
       { 
@@ -65,3 +66,47 @@ var table = $('.table').DataTable({
       }
     ]
 })
+
+$(".btn").css({"border" : "1px solid #265d8a"});
+
+var $typeFilter = $(".typeFilterContent").html();
+$( ".typeFilterContent" ).hide()
+$(".typeFilter").html($typeFilter);
+
+function filterType() {
+    if ($(".typeFilter .btn-primary").length < 1) {
+        resetFilters();
+    } else {
+        $(".typeFilter .all").removeClass("btn-primary");
+        $(".resetFilters").prop("checked", false);
+    }
+    
+    var types = $("input:checkbox[name=\"type\"]:checked").map(function() {
+        return "^" + this.value + "\$";
+    }).get().join("|");
+
+    table.columns(4).search(types, true).draw();
+    
+}
+
+function resetFilters() {
+    $(".resetFilters").prop("checked", true); 
+    $(".filter").prop("checked", false); 
+    $(".typeFilter a").removeClass("btn-primary");
+    $(".typeFilter .all").addClass("btn-primary");
+    table.search("").columns().search("").draw();
+}
+
+$(".typeFilter").on("click", "a", function() {
+    var parent = $(this).parent();
+    var that = this;
+    var checkbox = $("input", parent).attr("id");
+    
+    if ($("#" + checkbox + ":checked").length < 1) {
+        $(that).addClass("btn-primary")
+    } else {
+        $(that).removeClass("btn-primary")
+    }
+});
+
+resetFilters();

@@ -20,6 +20,22 @@ html(lang="en")
 
         .container(style="margin-top:-15px; margin-bottom:50px")
             h2= title
+            
+            div.typeFilterContent
+                | Filter by type: 
+                label.checkbox-inline(for="all")
+                    a.all.btn.btn-primary.btn-sm(style="margin-left:-20px") All
+                    input#all.checkbox-inline.resetFilters(style="display:none;" checked="" onchange="resetFilters()", type="checkbox", name="type", value="Sight|Food|Service")
+                label.checkbox-inline(for="sight")
+                    a.btn.btn-sm(style="margin-left:-20px") Sight
+                    input#sight.checkbox-inline.filter(style="display:none" onchange="filterType()", type="checkbox", name="type", value="Sight")
+                label.checkbox-inline(for="food")
+                    a.btn.btn-sm(style="margin-left:-20px") Food
+                    input#food.checkbox-inline.filter(style="display:none" onchange="filterType()", type="checkbox", name="type", value="Food")
+                label.checkbox-inline(for="service") 
+                    a.btn.btn-sm(style="margin-left:-20px") Service
+                    input#service.checkbox-inline.filter(style="display:none" onchange="filterType()", type="checkbox", name="type", value="Service")
+
             table.table.table-striped.table-bordered
                 thead
                     tr
