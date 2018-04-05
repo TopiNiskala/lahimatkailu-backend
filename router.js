@@ -4,7 +4,7 @@ import index from './controllers/kohteet';
 import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 import KohdeRemoved from './models/kohde_removed';
-
+import local from 'passport-local';
 import config from './config';
 // var config = require('./config');
 
@@ -26,6 +26,55 @@ let googleMapsClient = createClient({
 
 //Initialize router
 const router = Router();
+
+//LOGIN!!!!
+
+
+//Passport Strategy
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+//Login POST
+router.post('/login',
+  passport.authenticate('local', {
+    successRedirect:'/',
+    failureRedirect: '/login' }));
+
+
+
+//Login Get
+router.get('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/index/' + user.username);
+    });
+  })(req, res, next);
+});
+
+
+
+
+
+
+
+
 
 // Start page ------------------------------------------------
 
