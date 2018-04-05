@@ -38,5 +38,12 @@
 	"Service": "Palvelu",
 	"Address": "Osoite",
 	"City": "Kaupunki",
-	"Modify": "Muokkaa"
+	"Modify": "Muokkaa",
+	"leave empty for autocomplete": "jätä tyhjäksi automaattista täyttöä varten",
+	"Symbols": "Symbolit",
+	"Accessibility": "Esteettömyys",
+	"Parking": "Pysäköintimahdollisuus",
+	"Pets allowed": "Lemmikit sallittu",
+	"Open 24h": "Avoinna 24h",
+	"Coordinates (leave empty for autocomplete)": "Coordinates (leave empty for autocomplete)"
 }

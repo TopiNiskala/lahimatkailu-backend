@@ -10,18 +10,18 @@ html(lang="en")
             h2= title
             form#formAddDestination(name="add",method="post",action="/v1/add")
                 input.form-control(type="hidden", name="id" value= id)
-                h4 General information
+                h4 #{ __('General information')}
                 div#typeName(style="display:none")=type
                 div#cityName(style="display:none")=city
-                input.form-control(required="", type="text", placeholder="Name", name="name" value= nimi)
+                input.form-control(required="", type="text", placeholder=__('Name'), name="name" value= nimi)
                 select.form-control#type(required="" name="type")
-                    option(selected="" disabled="" value="Type") Type
-                    option(value="Ruoka") Food
-                    option(service value="Palvelu") Service
-                    option(sight value="Nähtävyys") Sight
-                h4 Location
-                input.form-control(required="", type="text", placeholder="Street address", name="street" value= street)
-                input.form-control(style="display:inline; width:50%", required="", type="text", placeholder="Postal code", name="postalCode" value= postalCode)
+                    option(selected="" disabled="" value="Type") #{ __('Type')}
+                    option(value="Ruoka") #{ __('Type')}
+                    option(service value="Palvelu") #{ __('Service')}
+                    option(sight value="Nähtävyys") #{ __('Sight')}
+                h4 #{ __('Location')}
+                input.form-control(required="", type="text", placeholder=__('Street address'), name="street" value= street)
+                input.form-control(style="display:inline; width:50%", required="", type="text", placeholder=__('Postal code'), name="postalCode" value= postalCode)
                 select#city.form-control(style="display:inline; width:50%", required="", name="city" value= city)
                     option(selected="" disabled="" value="City") City
                     option(value="Akaa") Akaa
@@ -337,11 +337,11 @@ html(lang="en")
                     option(value="Ypäjä") Ypäjä
                     option(value="Ähtäri") Ähtäri
                     option(value="Äänekoski") Äänekoski
-                input.form-control(type="tel", placeholder="Puhelinnumero", name="phoneNumber" value= phoneNumber)
-                h4 Coordinates (leave empty for autocomplete)
-                input.form-control(type="text", placeholder="Latitude", name="latitude" value= latitude)
-                input.form-control(type="text", placeholder="Longitude", name="longitude" value= longitude)
-                h4 Pictures
+                input.form-control(type="tel", placeholder=__('Phone number'), name="phoneNumber" value= phoneNumber)
+                h4 #{ __('Coordinates')} (#{ __('leave empty for autocomplete')})
+                input.form-control(type="text", placeholder=__('Latitude'), name="latitude" value= latitude)
+                input.form-control(type="text", placeholder=__('Longitude'), name="longitude" value= longitude)
+                h4 #{ __('Pictures')}
                 div#pictures
                     div.picture.input-group
                         input.form-control.picture(type="text", placeholder="http://example.com/pic.jpg", name="picture")
@@ -355,73 +355,73 @@ html(lang="en")
                                 span.input-group-btn
                                     button.btn.btn-danger.btn-remove
                                         span.glyphicon.glyphicon-minus
-                h4 Symbols
+                h4 #{ __('Symbols')}
 
                 .row
                     .col-xs-6.col-sm-3
-                        label Accessibility 
+                        label #{ __('Accessibility')} 
                             -if (symbols.includes('accessibility'))
                                 input(type='checkbox', name='symbols', value='accessibility', checked='')
                             -else
                                 input(type='checkbox', name='symbols', value='accessibility')
                     .col-xs-6.col-sm-3
-                        label Parking 
+                        label #{ __('Parking')} 
                             -if (symbols.includes('parking'))
                                 input(type='checkbox', name='symbols', value='parking', checked='')
                             -else
                                 input(type='checkbox', name='symbols', value='parking')
                     .col-xs-6.col-sm-3
-                        label Pets allowed 
+                        label #{ __('Pets allowed')} 
                             -if (symbols.includes('pets'))
                                 input(type='checkbox', name='symbols', value='pets', checked='')
                             -else
                                 input(type='checkbox', name='symbols', value='pets')
                     .col-xs-6.col-sm-3
-                        label Open 24h 
+                        label #{ __('Open 24h')} 
                             -if (symbols.includes('24h'))
                                 input(type='checkbox', name='symbols', value='24h', checked='')
                             -else
                                 input(type='checkbox', name='symbols', value='24h')
-                h4 Other information
-                textarea.form-control(style="resize:vertical", type="text", placeholder="Other information about the destination", name="info")=info
-                h4 Open hours
-                label Monday
+                h4 #{ __('Other information')}
+                textarea.form-control(style="resize:vertical", type="text", placeholder=__('Other information about the destination'), name="info")=info
+                h4 #{ __('Open hours')}
+                label #{ __('Monday')}
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="monStart" value= monStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="monEnd" value= monEnd)
-                label Tuesday
+                label #{ __('Tuesday')}
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="tueStart" value= tueStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="tueEnd" value= tueEnd)
-                label Wednesday
+                label #{ __('Wednesday')}
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="wedStart" value= wedStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="wedEnd" value= wedEnd)
-                label Thursday
+                label #{ __('Thursday')}
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="thuStart" value= thuStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="thuEnd" value= thuEnd)
-                label Friday
+                label #{ __('Friday')}
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="friStart" value= friStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="friEnd" value= friEnd)
-                label Saturday
+                label #{ __('Saturday')}
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="satStart" value= satStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="satEnd" value= satEnd)
-                label Sunday
+                label #{ __('Sunday')}
                 div.input-group
                     input.form-control(type="text", placeholder="10:00", name="sunStart" value= sunStart)
                     span.input-group-addon -
                     input.form-control(type="text", placeholder="20:00", name="sunEnd" value= sunEnd)
                 br
-                button.form-control.btn.btn-success(type="submit") Submit
+                button.form-control.btn.btn-success(type="submit") #{ __('Submit')}
                 br
                 br
         script(src="/js/add.js")
