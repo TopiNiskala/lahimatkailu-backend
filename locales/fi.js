@@ -44,6 +44,5 @@
 	"Accessibility": "Esteettömyys",
 	"Parking": "Pysäköintimahdollisuus",
 	"Pets allowed": "Lemmikit sallittu",
-	"Open 24h": "Avoinna 24h",
-	"Coordinates (leave empty for autocomplete)": "Coordinates (leave empty for autocomplete)"
+	"Open 24h": "Avoinna 24h"
 }

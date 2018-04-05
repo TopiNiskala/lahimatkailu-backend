@@ -44,6 +44,5 @@
 	"Accessibility": "Accessibility",
 	"Parking": "Parking",
 	"Pets allowed": "Pets allowed",
-	"Open 24h": "Open 24h",
-	"leave empty for autocomplete": "leave empty for autocomplete"
+	"Open 24h": "Open 24h"
 }
