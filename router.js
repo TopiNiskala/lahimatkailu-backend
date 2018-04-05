@@ -96,7 +96,12 @@ router.get('/new', (req, res) => {
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
 router.get('/list', (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
-    res.render('list', { title: req.i18n.__('List'), current: 'list', nav: nav });
+    let locale = req.i18n.getLocale();
+    let filterAll = req.i18n.__('Sight') + "|" + req.i18n.__('Food') + "|" + req.i18n.__('Service');
+    let filterSight = req.i18n.__('Sight');
+    let filterFood = req.i18n.__('Food');
+    let filterService = req.i18n.__('Service');
+    res.render('list', { title: req.i18n.__('List'), current: 'list', nav: nav, locale: locale, filterAll: filterAll, filterSight: filterSight, filterFood: filterFood, filterService: filterService });
 });
 
 //Delete

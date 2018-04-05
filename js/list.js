@@ -13,9 +13,37 @@ function fetchInfo() {
     });
 }
 
+var $typeFilter = $(".typeFilterContent").html();
+$(".typeFilterContent").hide();
+
+var locale = $("#locale").attr("name");
+if(locale === "fi") {
+    languageUrl = "//cdn.datatables.net/plug-ins/1.10.13/i18n/Finnish.json";
+} else if(locale === "sv") {
+    languageUrl = "//cdn.datatables.net/plug-ins/1.10.13/i18n/Swedish.json";
+} else if(locale === "ru") {
+    languageUrl = "//cdn.datatables.net/plug-ins/1.10.13/i18n/Russian.json";
+} else {
+    languageUrl = "//cdn.datatables.net/plug-ins/1.10.13/i18n/English.json";
+}
+
+var sight = $("#locale .sight").text();
+var food = $("#locale .food").text();
+var service = $("#locale .service").text();
+
+
+
 // make datatable with json
 var table = $(".table").DataTable({
+    preDrawCallback: function( settings ) { 
+        var $typeFilter = $(".typeFilterContent").html();
+        $(".typeFilterContent").hide();
+        $(".typeFilter").html($typeFilter); 
+    },
     dom: "<\"row\"<\"col-sm-3\"l><\"col-sm-6\"<\"typeFilter\">><\"col-sm-3\"f>><\"row\"<\"col-sm-12\"tr>><\"row\"<\"col-sm-5\"i><\"col-sm-7\"p>>",
+    language: {
+        url: languageUrl
+    },
     ajax: {
         url: "kohteet.json",
         dataSrc: "kohteet"
@@ -41,11 +69,11 @@ var table = $(".table").DataTable({
         render: function(data, type, full, meta) {
             var type = full.type;
             if(type === "Nähtävyys") {
-                type = "Sight";
+                type = sight;
             } else if(type === "Palvelu") {
-                type = "Service"
+                type = service;
             } else {
-                type = "Food"
+                type = food;
             }
             return type
         }
@@ -69,15 +97,22 @@ var table = $(".table").DataTable({
 
 $(".typeFilterContent .btn").css({"border" : "1px solid #265d8a"});
 
-var $typeFilter = $(".typeFilterContent").html();
-$( ".typeFilterContent" ).hide()
-$(".typeFilter").html($typeFilter);
-
-function filterType() {
-    if ($(".typeFilter .btn-primary").length < 1) {
+function filterType(item) {
+    
+    var parent = $(item).parent();
+    var that = $("a", parent);
+    var checkbox = $(item).attr("id");
+    
+    if ($("#" + checkbox + ":checked").length > 0) {
+        $(that).addClass("btn-primary");
+    } else {
+        $(that).removeClass("btn-primary");
+    }
+    
+    if ($(".typeFilter .btn-primary").length === 1 && $(".btn-primary", parent).length === 0) {
         resetFilters();
     } else {
-        $(".typeFilter .all").removeClass("btn-primary");
+        $(".all").removeClass("btn-primary");
         $(".resetFilters").prop("checked", false);
     }
     
@@ -92,21 +127,7 @@ function filterType() {
 function resetFilters() {
     $(".resetFilters").prop("checked", true); 
     $(".filter").prop("checked", false); 
-    $(".typeFilter a").removeClass("btn-primary");
-    $(".typeFilter .all").addClass("btn-primary");
+    $(".type").removeClass("btn-primary");
+    $(".all").addClass("btn-primary");
     table.search("").columns().search("").draw();
 }
-
-$(".typeFilter").on("click", "a", function() {
-    var parent = $(this).parent();
-    var that = this;
-    var checkbox = $("input", parent).attr("id");
-    
-    if ($("#" + checkbox + ":checked").length < 1) {
-        $(that).addClass("btn-primary")
-    } else {
-        $(that).removeClass("btn-primary")
-    }
-});
-
-resetFilters();
