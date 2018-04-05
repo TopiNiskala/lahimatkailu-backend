@@ -39,5 +39,4 @@
 	"Address": "Osoite",
 	"City": "Kaupunki",
 	"Modify": "Muokkaa",
-	"Delete": "Poista"
 }
