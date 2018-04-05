@@ -32,16 +32,16 @@ html(lang="en")
                 | #{ __('Filter by type:')} 
                 label.checkbox-inline(for="all")
                     a.all.btn.btn-primary.btn-sm(style="margin-left:-20px") #{ __('All')}
-                    input#all.checkbox-inline.resetFilters(style="display:none;" checked="" onchange="resetFilters()", type="checkbox", name="type", value=filterAll)
+                    input#all.checkbox-inline.resetFilters(style="display:none;" checked="" onchange="resetFilters()", type="checkbox", name="type", value=__('Food') + "|" + __('Service') + "|" + __('Sight'))
                 label.checkbox-inline(for="sight")
                     a.type.btn.btn-sm(style="margin-left:-20px") #{ __('Sight')}
-                    input#sight.checkbox-inline.filter(style="display:none" onchange="filterType(this)", type="checkbox", name="type", value=filterSight)
+                    input#sight.checkbox-inline.filter(style="display:none" onchange="filterType(this)", type="checkbox", name="type", value=__('Sight'))
                 label.checkbox-inline(for="food")
                     a.type.btn.btn-sm(style="margin-left:-20px") #{ __('Food')}
-                    input#food.checkbox-inline.filter(style="display:none" onchange="filterType(this)", type="checkbox", name="type", value=filterFood)
+                    input#food.checkbox-inline.filter(style="display:none" onchange="filterType(this)", type="checkbox", name="type", value=__('Food'))
                 label.checkbox-inline(for="service") 
                     a.type.btn.btn-sm(style="margin-left:-20px") #{ __('Service')}
-                    input#service.checkbox-inline.filter(style="display:none" onchange="filterType(this)", type="checkbox", name="type", value=filterService)
+                    input#service.checkbox-inline.filter(style="display:none" onchange="filterType(this)", type="checkbox", name="type", value=__('Service'))
 
             table.table.table-striped.table-bordered
                 thead
