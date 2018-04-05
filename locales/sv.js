@@ -44,6 +44,5 @@
 	"Accessibility": "Åtkomlighet",
 	"Parking": "Parkering",
 	"Pets allowed": "Husdjur tillåtet",
-	"Open 24h": "Öppna 24h",
-	"Coordinates (leave empty for autocomplete)": "Coordinates (leave empty for autocomplete)"
+	"Open 24h": "Öppna 24h"
 }

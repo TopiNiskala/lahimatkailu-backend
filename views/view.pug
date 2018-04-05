@@ -11,11 +11,11 @@ html(lang="en")
                             button.close(type="button" data-dismiss="modal" aria-label="Close")
                                 span(aria-hidden="true") ×
                     .modal-body
-                        p Are you sure you want to delete
+                        p #{ __('Are you sure you want to delete')}
                             span.destinationName
                     .modal-footer
-                        button.btn.btn-danger.deleteConfirm.redirect(type="button") Delete
-                        button.btn.btn-secondary(type="button" data-dismiss="modal") Cancel
+                        button.btn.btn-danger.deleteConfirm.redirect(type="button") #{ __('Delete')}
+                        button.btn.btn-secondary(type="button" data-dismiss="modal") #{ __('Cancel')}
 
         .container(style="max-width:600px; margin-top:-15px; margin-bottom:50px")
             noscript
@@ -25,87 +25,87 @@ html(lang="en")
                 a.button.btn-sm.btn-primary.glyphicon.glyphicon-edit(style="float:right; margin-right:10px" role="button" href="/v1/modify/" + id)
             table.table.table-striped.table-bordered(style="table-layout: fixed")
                 tr
-                    th Type 
+                    th #{ __('Type')} 
                     td(colspan=3)= type
                 tr
-                    th Street address
+                    th #{ __('Street address')}
                     td(colspan=3)= street
                 tr
-                    th Postal code
+                    th #{ __('Postal code')}
                     td(colspan=3)= postalCode
                 tr
-                    th City
+                    th #{ __('City')}
                     td(colspan=3)= city
                 tr
-                    th Phone number
+                    th #{ __('Phone number')}
                     td(colspan=3)= phoneNumber
                 tr
-                    th Latitude
+                    th #{ __('Latitude')}
                     td(colspan=3)= latitude
                 tr
-                    th Longitude
+                    th #{ __('Longitude')}
                     td(colspan=3)= longitude
                 if picture != undefined
                     tr
-                        th(colspan=4) Pictures
+                        th(colspan=4) #{ __('Pictures')}
                     each url, i in picture
                         tr
                             td(colspan=4)
                                 div(style="max-width:600px; overflow-x:auto;")= url
                 tr
-                    th(colspan=4) Symbols
+                    th(colspan=4) #{ __('Symbols')}
                 tr
                     -if (symbols.includes('accessibility'))
-                        td(style="background:#8cbc77; color:#fff") Accessibility
+                        td(style="background:#8cbc77; color:#fff") #{ __('Accessibility')}
                     -else
-                        td(style="background:#be5757; color:#fff") Accessibility
+                        td(style="background:#be5757; color:#fff") #{ __('Accessibility')}
                     -if (symbols.includes('parking'))
-                        td(style="background:#8cbc77; color:#fff") Parking
+                        td(style="background:#8cbc77; color:#fff") #{ __('Parking')}
                     -else
-                        td(style="background:#be5757; color:#fff") Parking
+                        td(style="background:#be5757; color:#fff") #{ __('Parking')}
                     -if (symbols.includes('pets'))
-                        td(style="background:#8cbc77; color:#fff") Pets allowed
+                        td(style="background:#8cbc77; color:#fff") #{ __('Pets allowed')}
                     -else
-                        td(style="background:#be5757; color:#fff") Pets allowed
+                        td(style="background:#be5757; color:#fff") #{ __('Pets allowed')}
                     -if (symbols.includes('24h'))
-                        td(style="background:#8cbc77; color:#fff") Open 24h
+                        td(style="background:#8cbc77; color:#fff") #{ __('Open 24h')}
                     -else
-                        td(style="background:#be5757; color:#fff") Open 24h
+                        td(style="background:#be5757; color:#fff") #{ __('Open 24h')}
                 tr
-                    th(colspan=4) Info
+                    th(colspan=4) #{ __('Info')}
                 tr
                     td(colspan=4)
                         div(style="max-width:600px; overflow-x:auto;")= info
                 tr
-                    th(colspan=2) Open hours
-                    th Starts
-                    th Ends
+                    th(colspan=2) #{ __('Open hours')}
+                    th #{ __('Starts')}
+                    th #{ __('Ends')}
                 tr
-                    th(colspan=2) Monday
+                    th(colspan=2) #{ __('Monday')}
                     td= monStart
                     td= monEnd
                 tr
-                    th(colspan=2) Tuesday
+                    th(colspan=2) #{ __('Tuesday')}
                     td= tueStart
                     td= tueEnd
                 tr
-                    th(colspan=2) Wednesday
+                    th(colspan=2) #{ __('Wednesday')}
                     td= wedStart
                     td= wedEnd
                 tr
-                    th(colspan=2) Thursday
+                    th(colspan=2) #{ __('Thursday')}
                     td= thuStart
                     td= thuEnd
                 tr
-                    th(colspan=2) Friday
+                    th(colspan=2) #{ __('Friday')}
                     td= friStart
                     td= friEnd
                 tr
-                    th(colspan=2) Saturday
+                    th(colspan=2) #{ __('Saturday')}
                     td= satStart
                     td= satEnd
                 tr
-                    th(colspan=2) Sunday
+                    th(colspan=2) #{ __('Sunday')}
                     td= sunStart
                     td= sunEnd
         script(src="/js/delete.js")
