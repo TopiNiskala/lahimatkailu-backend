@@ -11,3 +11,14 @@ nav.navbar.navbar-default.navbar-static-top
                 else
                     li.nav-item
                         a.nav-link(href="/v1/" + path)=item
+        ul.nav.navbar-nav.navbar-right
+            li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown') #{ __('Language')} 
+                    b.caret
+                ul.dropdown-menu
+                    li
+                        a(href='/v1/lang/en?return=' + current) English
+                    li
+                        a(href='/v1/lang/fi?return=' + current) suomi
+                    li
+                        a(href='/v1/lang/sv?return=' + current) svenska

@@ -4,7 +4,7 @@ html(lang="en")
     body
         include includes/nav.pug
 
-        .modal#deleteModal(tabindex="-1" role="dialog")
+        .modal.fade-scale#deleteModal(tabindex="-1" role="dialog")
             .modal-dialog(role="document")
                 .modal-content
                     .modal-header
@@ -19,7 +19,7 @@ html(lang="en")
                         button.btn.btn-secondary(type="button" data-dismiss="modal") Cancel
 
         .container(style="margin-top:-15px; margin-bottom:50px")
-            h2= title
+            h2 #{ __('List')}
             
             div.typeFilterContent
                 | Filter by type: 

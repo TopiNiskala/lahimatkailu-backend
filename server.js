@@ -1,14 +1,31 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import router from './router';
 var path = require('path');
+import i18n from 'i18n-2';
 
 //This file connects our server to mongoDB and uses the router we have created
 mongoose.connect('mongodb://localhost/kohteet');
 // Initialize http server
 const app = express();
+
+app.use(cookieParser());
+
+i18n.expressBind(app, {
+    locales: ['en', 'fi', 'sv'],
+    cookieName: 'locale',
+    defaultLocale: 'en',
+    devMode: true
+});
+
+app.use(function(req, res, next) {
+    req.i18n.setLocaleFromCookie();
+    next();
+});
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false, limit: '15mb' }), function (error, req, res, next) {

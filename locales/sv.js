@@ -1,0 +1,4 @@
+{
+	"Language": "Språk",
+	"List": "Lista"
+}

@@ -61,6 +61,31 @@ router.get('/kohteet.json', (req, res, next) => {
  		)); 	
 });
 
+router.get('/lang/:ln', (req, res) => {
+    let returnUrl;
+    
+    if(!req.query.return) {
+        returnUrl = "index";
+    } else {
+        returnUrl = req.query.return;
+    }
+    
+    if(returnUrl === "list") {
+        returnUrl = "../list";
+    } else if(returnUrl === "new") {
+        returnUrl = "../new";
+    } else if(/^view/.test(returnUrl) ){
+        returnUrl = "../" + returnUrl;
+    } else if(/^modify/.test(returnUrl) ){
+        returnUrl = "../" + returnUrl;
+    } else {
+        returnUrl= "../"
+    }
+    
+    res.cookie("locale", req.params.ln);
+    res.redirect(returnUrl);
+});
+
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
 router.get('/new', (req, res) => {
     res.render('new', { title: 'Add a new destination', current: 'new', symbols: [] });
@@ -99,6 +124,7 @@ router.get('/delete/:id', (req, res) => {
 //MODIFY
 router.get('/modify/:id', (req, res) => {
     let id = req.params.id;
+    let current = "modify/" + id;
     
     Kohde.findById(id, (err, kohde) => {
         if (err || !kohde) {
@@ -118,6 +144,7 @@ router.get('/modify/:id', (req, res) => {
             
             res.render('new', { 
                 id: id, 
+                current: current,
                 nimi: kohde.name, 
                 city: kohde.address.city, 
                 postalCode: kohde.address.postalCode, 
@@ -156,6 +183,7 @@ router.get('/modify/:id', (req, res) => {
 // View
 router.get('/view/:id', (req, res) => {
     let id = req.params.id;
+    let current = "view/" + id;
     
     Kohde.findById(id, (err, kohde) => {
         if (err || !kohde) {
@@ -174,6 +202,7 @@ router.get('/view/:id', (req, res) => {
             
             res.render('view', { 
                 id: id, 
+                current: current,
                 name: kohde.name, 
                 city: kohde.address.city, 
                 postalCode: kohde.address.postalCode, 
