@@ -39,5 +39,4 @@
         "Address": "Address",
         "City": "City",
         "Modify": "Modify",
-        "Delete": "Delete"
 }
