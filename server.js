@@ -15,7 +15,7 @@ const app = express();
 app.use(cookieParser());
 
 i18n.expressBind(app, {
-    locales: ['en', 'fi', 'sv'],
+    locales: ['en', 'fi', 'sv', 'ru'],
     cookieName: 'locale',
     defaultLocale: 'en',
     devMode: true
