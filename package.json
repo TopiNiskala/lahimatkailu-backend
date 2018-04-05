@@ -1,5 +1,5 @@
 {
-  "name": "geopark",
+  "name": "lahimatkailu",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "start": "node node_modules/nodemon/bin/nodemon.js -- node_modules/babel-cli/bin/babel-node.js server.js",
     "populate": "node node_modules/babel-cli/bin/babel-node.js populate.js"
   },
-  "author": "",
+  "author": "Haaga-Helia Oy",
   "license": "ISC",
   "devDependencies": {
     "babel": "^6.23.0",
