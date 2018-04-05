@@ -15,7 +15,7 @@ function fetchInfo() {
 
 // make datatable with json
 var table = $(".table").DataTable({
-    dom: "<\"row\"<\"col-sm-4\"l><\"col-sm-4\"<\"typeFilter\">><\"col-sm-4\"f>><\"row\"<\"col-sm-12\"tr>><\"row\"<\"col-sm-5\"i><\"col-sm-7\"p>>",
+    dom: "<\"row\"<\"col-sm-3\"l><\"col-sm-6\"<\"typeFilter\">><\"col-sm-3\"f>><\"row\"<\"col-sm-12\"tr>><\"row\"<\"col-sm-5\"i><\"col-sm-7\"p>>",
     ajax: {
         url: "kohteet.json",
         dataSrc: "kohteet"

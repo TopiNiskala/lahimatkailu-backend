@@ -36,7 +36,9 @@
         "Sight": "Sight",
         "Food": "Food",
         "Service": "Service",
+        "Name": "Name",
         "Address": "Address",
         "City": "City",
-        "Modify": "Modify",
+        "Type": "Type",
+        "Modify": "Modify"
 }

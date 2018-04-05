@@ -38,5 +38,5 @@
 	"Service": "Palvelu",
 	"Address": "Osoite",
 	"City": "Kaupunki",
-	"Modify": "Muokkaa",
+	"Modify": "Muokkaa"
 }

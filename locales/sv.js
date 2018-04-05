@@ -38,5 +38,5 @@
         "Service": "Uppassning",
         "Address": "Adress",
         "City": "Stad",
-        "Modify": "Modifiera",
+        "Modify": "Modifiera"
 }
