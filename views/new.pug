@@ -4,7 +4,7 @@ html(lang="en")
     body
         include includes/nav.pug
 
-        .container(style="max-width:600px; margin-top:-15px; margin-bottom:50px")
+        .container(style="max-width:650px; margin-top:-15px; margin-bottom:50px")
             noscript
                 h1 Salli JavaScript
             h2= title
@@ -357,31 +357,31 @@ html(lang="en")
                                         span.glyphicon.glyphicon-minus
                 h4 #{ __('Symbols')}
 
-                .row
-                    .col-xs-6.col-sm-3
-                        label #{ __('Accessibility')} 
-                            -if (symbols.includes('accessibility'))
-                                input(type='checkbox', name='symbols', value='accessibility', checked='')
-                            -else
-                                input(type='checkbox', name='symbols', value='accessibility')
-                    .col-xs-6.col-sm-3
-                        label #{ __('Parking')} 
-                            -if (symbols.includes('parking'))
-                                input(type='checkbox', name='symbols', value='parking', checked='')
-                            -else
-                                input(type='checkbox', name='symbols', value='parking')
-                    .col-xs-6.col-sm-3
-                        label #{ __('Pets allowed')} 
-                            -if (symbols.includes('pets'))
-                                input(type='checkbox', name='symbols', value='pets', checked='')
-                            -else
-                                input(type='checkbox', name='symbols', value='pets')
-                    .col-xs-6.col-sm-3
-                        label #{ __('Open 24h')} 
-                            -if (symbols.includes('24h'))
-                                input(type='checkbox', name='symbols', value='24h', checked='')
-                            -else
-                                input(type='checkbox', name='symbols', value='24h')
+                div.input-group(style="text-align:center; margin:0 auto; padding-bottom:10px;")
+                    label.checkbox-inline
+                        -if (symbols.includes('accessibility'))
+                            input(type='checkbox', name='symbols', value='accessibility', checked='')
+                        -else
+                            input(type='checkbox', name='symbols', value='accessibility')
+                        | #{ __('Accessibility')} 
+                    label.checkbox-inline
+                        -if (symbols.includes('parking'))
+                            input(type='checkbox', name='symbols', value='parking', checked='')
+                        -else
+                            input(type='checkbox', name='symbols', value='parking')
+                        | #{ __('Parking')}
+                    label.checkbox-inline
+                        -if (symbols.includes('pets'))
+                            input(type='checkbox', name='symbols', value='pets', checked='')
+                        -else
+                            input(type='checkbox', name='symbols', value='pets')
+                        | #{ __('Pets allowed')}
+                    label.checkbox-inline
+                        -if (symbols.includes('24h'))
+                            input(type='checkbox', name='symbols', value='24h', checked='')
+                        -else
+                            input(type='checkbox', name='symbols', value='24h')
+                        | #{ __('Open 24h')}
                 h4 #{ __('Other information')}
                 textarea.form-control(style="resize:vertical", type="text", placeholder=__('Other information about the destination'), name="info")=info
                 h4 #{ __('Open hours')}
