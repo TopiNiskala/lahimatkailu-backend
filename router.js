@@ -30,7 +30,8 @@ const router = Router();
 // Start page ------------------------------------------------
 
 router.get(['/', '/index'], (req, res) => {
-    res.render('index', { title: 'Lähimatkailu', current: 'index' });
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    res.render('index', { title: 'Lähimatkailu', current: 'index', nav: nav });
 });
 //-------------------------------------------------------------
 
@@ -88,12 +89,14 @@ router.get('/lang/:ln', (req, res) => {
 
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
 router.get('/new', (req, res) => {
-    res.render('new', { title: 'Add a new destination', current: 'new', symbols: [] });
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    res.render('new', { title: req.i18n.__('Add a new destination'), current: 'new', symbols: [], nav: nav });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
 router.get('/list', (req, res) => {
-    res.render('list', { title: 'List', current: 'list' });
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    res.render('list', { title: req.i18n.__('List'), current: 'list', nav: nav });
 });
 
 //Delete
@@ -123,6 +126,8 @@ router.get('/delete/:id', (req, res) => {
    
 //MODIFY
 router.get('/modify/:id', (req, res) => {
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+
     let id = req.params.id;
     let current = "modify/" + id;
     
@@ -143,6 +148,7 @@ router.get('/modify/:id', (req, res) => {
 
             
             res.render('new', { 
+                nav: nav,
                 id: id, 
                 current: current,
                 nimi: kohde.name, 
@@ -174,7 +180,7 @@ router.get('/modify/:id', (req, res) => {
                 food: food,
                 service: service,
                 sight: sight,
-                title: 'Modify destination'
+                title: req.i18n.__('Modify')
             });
         }
     });
@@ -182,6 +188,8 @@ router.get('/modify/:id', (req, res) => {
 
 // View
 router.get('/view/:id', (req, res) => {
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+
     let id = req.params.id;
     let current = "view/" + id;
     
@@ -201,6 +209,7 @@ router.get('/view/:id', (req, res) => {
             }
             
             res.render('view', { 
+                nav: nav,
                 id: id, 
                 current: current,
                 name: kohde.name, 
