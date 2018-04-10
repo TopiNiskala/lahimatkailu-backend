@@ -55,22 +55,34 @@ html(lang="en")
                 tr
                     th(colspan=4) #{ __('Symbols')}
                 tr
-                    -if (symbols.includes('accessibility'))
+                    -if (symbols.includes('wheelchair'))
                         td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Accessibility')}
                     -else
                         td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Accessibility')}
-                    -if (symbols.includes('parking'))
+                    -if (symbols.includes('car'))
                         td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Parking')}
                     -else
                         td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Parking')}
-                    -if (symbols.includes('pets'))
+                    -if (symbols.includes('paw'))
                         td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Pets allowed')}
                     -else
                         td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Pets allowed')}
-                    -if (symbols.includes('24h'))
+                    -if (symbols.includes('clock-o'))
                         td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Open 24h')}
                     -else
                         td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Open 24h')}
+                    -if (symbols.includes('subway'))
+                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Public transport')}
+                    -else
+                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Public transport')}
+                    -if (symbols.includes('hotel'))
+                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Camping')}
+                    -else
+                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Camping')}
+                    -if (symbols.includes('wifi'))
+                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Wifi access')}
+                    -else
+                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Wifi access')}
                 tr
                     th(colspan=4) #{ __('Info')}
                 tr

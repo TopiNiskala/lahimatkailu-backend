@@ -359,29 +359,47 @@ html(lang="en")
 
                 div.input-group(style="text-align:center; margin:0 auto; padding-bottom:10px;")
                     label.checkbox-inline
-                        -if (symbols.includes('accessibility'))
-                            input(type='checkbox', name='symbols', value='accessibility', checked='')
+                        -if (symbols.includes('wheelchair'))
+                            input(type='checkbox', name='symbols', value='wheelchair', checked='')
                         -else
-                            input(type='checkbox', name='symbols', value='accessibility')
+                            input(type='checkbox', name='symbols', value='wheelchair')
                         | #{ __('Accessibility')} 
                     label.checkbox-inline
-                        -if (symbols.includes('parking'))
-                            input(type='checkbox', name='symbols', value='parking', checked='')
+                        -if (symbols.includes('car'))
+                            input(type='checkbox', name='symbols', value='car', checked='')
                         -else
-                            input(type='checkbox', name='symbols', value='parking')
+                            input(type='checkbox', name='symbols', value='car')
                         | #{ __('Parking')}
                     label.checkbox-inline
-                        -if (symbols.includes('pets'))
-                            input(type='checkbox', name='symbols', value='pets', checked='')
+                        -if (symbols.includes('paw'))
+                            input(type='checkbox', name='symbols', value='paw', checked='')
                         -else
-                            input(type='checkbox', name='symbols', value='pets')
+                            input(type='checkbox', name='symbols', value='paw')
                         | #{ __('Pets allowed')}
                     label.checkbox-inline
-                        -if (symbols.includes('24h'))
-                            input(type='checkbox', name='symbols', value='24h', checked='')
+                        -if (symbols.includes('clock-o'))
+                            input(type='checkbox', name='symbols', value='clock-o', checked='')
                         -else
-                            input(type='checkbox', name='symbols', value='24h')
+                            input(type='checkbox', name='symbols', value='clock-o')
                         | #{ __('Open 24h')}
+                    label.checkbox-inline
+                        -if (symbols.includes('subway'))
+                            input(type='checkbox', name='symbols', value='subway', checked='')
+                        -else
+                            input(type='checkbox', name='symbols', value='subway')
+                        | #{ __('Public transport')}
+                    label.checkbox-inline
+                        -if (symbols.includes('hotel'))
+                            input(type='checkbox', name='symbols', value='hotel', checked='')
+                        -else
+                            input(type='checkbox', name='symbols', value='hotel')
+                        | #{ __('Camping')}
+                    label.checkbox-inline
+                        -if (symbols.includes('wifi'))
+                            input(type='checkbox', name='symbols', value='wifi', checked='')
+                        -else
+                            input(type='checkbox', name='symbols', value='wifi')
+                        | #{ __('Wifi access')}
                 h4 #{ __('Other information')}
                 textarea.form-control(style="resize:vertical", type="text", placeholder=__('Other information about the destination'), name="info")=info
                 h4 #{ __('Open hours')}

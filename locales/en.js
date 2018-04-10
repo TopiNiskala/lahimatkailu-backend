@@ -41,8 +41,15 @@
 	"Modify": "Modify",
 	"leave empty for autocomplete": "leave empty for autocomplete",
 	"Symbols": "Symbols",
-	"Accessibility": "Accessibility",
+	"Accessibility": "Wheelchair access",
 	"Parking": "Parking",
 	"Pets allowed": "Pets allowed",
-	"Open 24h": "Open 24h"
+	"Open 24h": "Open 24h",
+	"img(src=picture)": "img(src=picture)",
+	"list": "list",
+	"picture": "/img/en.png",
+	"language": "language",
+        "Camping": "Camping",
+        "Wifi access": "Wifi access",
+        "Public transport": "Public transport"
 }

@@ -44,5 +44,9 @@
 	"Accessibility": "Esteettömyys",
 	"Parking": "Pysäköintimahdollisuus",
 	"Pets allowed": "Lemmikit sallittu",
-	"Open 24h": "Avoinna 24h"
+	"Open 24h": "Avoinna 24h",
+	"picture": "/img/fi.png",
+	"Public transport": "Julkinen liikenne",
+	"Camping": "Yöpymismahdollisuus",
+	"Wifi access": "Wifi-yhteys"
 }

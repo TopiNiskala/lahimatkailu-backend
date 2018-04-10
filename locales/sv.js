@@ -44,5 +44,9 @@
 	"Accessibility": "Åtkomlighet",
 	"Parking": "Parkering",
 	"Pets allowed": "Husdjur tillåtet",
-	"Open 24h": "Öppna 24h"
+	"Open 24h": "Öppna 24h",
+	"picture": "/img/sv.png",
+	"Public transport": "Kollektivtrafik",
+	"Camping": "Camping",
+	"Wifi access": "Wifi kontakt"
 }
