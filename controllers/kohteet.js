@@ -1,5 +1,5 @@
 import Kohde from '../models/kohde';
-import moment from 'moment';
+// import moment from 'moment';
 
 //This file returns JSON file including all 'kohde' stored in.
 const index = (req, res, next) => {

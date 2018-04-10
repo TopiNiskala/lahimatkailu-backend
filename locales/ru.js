@@ -46,7 +46,7 @@
 	"Pets allowed": "Можно с животными",
 	"Open 24h": "Открыто 24ч",
 	"picture": "/img/ru.png",
-	"Public transport": "Public transport",
-	"Camping": "Camping",
-	"Wifi access": "Wifi access"
+	"Public transport": "Общественный транспорт",
+	"Camping": "Возможность переночевать",
+	"Wifi access": "WiFi интернет"
 }
