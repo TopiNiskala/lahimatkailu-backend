@@ -28,7 +28,7 @@
 	"Ends": "Закрывается",
 	"Info": "Информация",
 	"Add": "Добавить",
-	"Are you sure you want to delete": "Увереннычто хотите удалить",
+	"Are you sure you want to delete": "Уверенны что хотите удалить",
 	"Filter by type:": "Сортировать по типу:",
 	"Delete": "Удалить",
 	"Cancel": "Отменить",
