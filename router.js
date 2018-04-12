@@ -7,6 +7,7 @@ import KohdeRemoved from './models/kohde_removed';
 import local from 'passport-local';
 import config from './config';
 // var config = require('./config');
+import passport from 'passport';
 
 import {createClient} from '@google/maps';
 
@@ -27,61 +28,65 @@ let googleMapsClient = createClient({
 //Initialize router
 const router = Router();
 
-//LOGIN!!!!
-
-
-//Passport Strategy
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
-//Login POST
-router.post('/login',
-  passport.authenticate('local', {
-    successRedirect:'/',
-    failureRedirect: '/login' }));
-
-
-
-//Login Get
-router.get('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.redirect('/index/' + user.username);
-    });
-  })(req, res, next);
-});
-
-
-
-
-
-
-
-
-
 // Start page ------------------------------------------------
 
 router.get(['/', '/index'], (req, res) => {
     res.render('index', { title: 'Lähimatkailu', current: 'index' });
 });
 //-------------------------------------------------------------
+
+///LOGIN{{{{{{}}}}}}
+
+//--------------------------------
+
+
+//Login POST
+router.post('/login',
+  passport.authenticate('local', {
+    successRedirect:'/index',
+    failureRedirect: '/login' }));
+
+/*
+//Login POST 2
+router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res));
+*/
+
+//Login get 3
+router.get( '/login', (req, res) => {
+    res.render('login', { title: 'Kirjaudu Sisään', current: 'login' });
+});
+
+/*
+//Login Get
+router.get('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/index/' + req.user.username);
+    });
+  })(req, res, next);
+});
+
+*/
+
+
+/*
+//Login GET 2
+router.get('/login', function(req, res, next, done) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err);}
+    if (!user) return done(null, false, { message: 'Kirjaudu sisään!' });
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/index/' + user.username);
+    });
+  })(req, res, next);
+});
+*/
+
+//----------------------------------
+
 
 // Handle /kohteet.json route with index action from kohteet controller
 //router.route('/kohteet.json').get(index);
@@ -379,5 +384,7 @@ router.post('/add', (req, res) => {
         });
     }
 });
+    
+    
 
 export default router;
