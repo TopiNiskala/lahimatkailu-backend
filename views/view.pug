@@ -25,6 +25,12 @@ html(lang="en")
                 a.button.btn-sm.btn-primary.glyphicon.glyphicon-edit(style="float:right; margin-right:10px" role="button" href="/v1/modify/" + id)
             table.table.table-striped.table-bordered(style="table-layout: fixed")
                 tr
+                    if type == "Sight"
+                        - type =  __('Sight')
+                    else if type == "Food"
+                        - type =  __('Food')
+                    else
+                        - type =  __('Service')
                     th #{ __('Type')} 
                     td(colspan=3)= type
                 tr
