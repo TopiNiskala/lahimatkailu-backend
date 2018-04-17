@@ -8,6 +8,7 @@ import local from 'passport-local';
 import config from './config';
 // var config = require('./config');
 import passport from 'passport';
+import user from './models/user';
 
 import {createClient} from '@google/maps';
 
@@ -40,21 +41,17 @@ router.get(['/', '/index'], (req, res) => {
 //--------------------------------
 
 
-//Login POST
-router.post('/login',
-  passport.authenticate('local', {
-    successRedirect:'/index',
-    failureRedirect: '/login' }));
+
+//Login POST 2
+router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' })//(req, res)
+           );
 
 /*
-//Login POST 2
-router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res));
-*/
-
 //Login get 3
 router.get( '/login', (req, res) => {
     res.render('login', { title: 'Kirjaudu Sisään', current: 'login' });
 });
+*/
 
 /*
 //Login Get
@@ -67,23 +64,25 @@ router.get('/login', function(req, res, next) {
     });
   })(req, res, next);
 });
-
 */
 
 
-/*
+
+
 //Login GET 2
 router.get('/login', function(req, res, next, done) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err);}
+    if (err) { return next(err);
+              console.log(typeof next);}
     if (!user) return done(null, false, { message: 'Kirjaudu sisään!' });
     req.logIn(user, function(err) {
+        console.log(user);
       if (err) { return next(err); }
       return res.redirect('/index/' + user.username);
     });
   })(req, res, next);
 });
-*/
+
 
 //----------------------------------
 
