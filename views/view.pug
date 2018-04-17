@@ -37,14 +37,24 @@ html(lang="en")
                     th #{ __('City')}
                     td(colspan=3)= city
                 tr
-                    th #{ __('Phone number')}
-                    td(colspan=3)= phoneNumber
-                tr
                     th #{ __('Latitude')}
                     td(colspan=3)= latitude
                 tr
                     th #{ __('Longitude')}
                     td(colspan=3)= longitude
+                tr
+                    th #{ __('Phone number')}
+                    td(colspan=3)= phoneNumber
+                tr
+                    th #{ __('Homepage')}
+                    td(colspan=3)= homepage
+                if some != undefined
+                    tr
+                        th(colspan=4) #{ __('Social media channels')}
+                    each url, i in some
+                        tr
+                            td(colspan=4)
+                                div(style="max-width:600px; overflow-x:auto;")= url
                 if picture != undefined
                     tr
                         th(colspan=4) #{ __('Pictures')}

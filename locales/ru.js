@@ -49,7 +49,9 @@
 	"Public transport": "Общественный транспорт",
 	"Camping": "Возможность переночевать",
 	"Wifi access": "WiFi интернет",
-    "Format": "формат",
-    "Required": "обязательный",
-    "Contact information": "Контактная информация"
+	"Format": "формат",
+	"Required": "обязательный",
+	"Contact information": "Контактная информация",
+	"Homepage": "домашняя страница",
+        "Social media channels": "Каналы социальных сетей"
 }

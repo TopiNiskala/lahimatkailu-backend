@@ -54,5 +54,7 @@
 	"Public transport": "Public transport",
 	"Format": "Format",
 	"Required": "Required",
-	"Contact information": "Contact information"
+	"Contact information": "Contact information",
+        "Homepage": "Homepage",
+        "Social media channels": "Social media channels"
 }

@@ -1,5 +1,5 @@
 $(function() {
-    
+    var parent, item;
     var type = $("#typeName").text();
     if(type) {
         $("#type").val(type).change();
@@ -13,20 +13,33 @@ $(function() {
     } else {
         $("#city").val("Paikkakunta").change();
     }
-    
+   
     $(document).on('click', '.btn-add', function(e) {
         e.preventDefault();
-        
-        currentInput = $(this).parents('.picture:first'),
-        newInput = $(currentInput.clone()).prependTo("#pictures:first");
+        if ($(this).closest("#some").length) {
+           parent = "#some";
+           item = ".some";
+        } else {
+           parent = "#pictures";
+           item = ".picture";
+        }
+        currentInput = $(this).parents(item + ':first'),
+        newInput = $(currentInput.clone()).prependTo(parent + ":first");
 
-        $('#pictures').find('input:first').val('');
+        $(parent).find('input:first').val('');
         currentInput.find('.btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
             .html('<span class="glyphicon glyphicon-minus"></span>');
     }).on('click', '.btn-remove', function(e) {
-        $(this).parents('.picture:first').remove();
+        if ($(this).closest("#some").length) {
+           parent = "#some";
+           item = ".some";
+        } else {
+           parent = "#pictures";
+           item = ".picture";
+        }
+        $(this).parents(item + ':first').remove();
 
         e.preventDefault();
         return false;

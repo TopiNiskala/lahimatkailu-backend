@@ -160,6 +160,8 @@ router.get('/modify/:id', (req, res) => {
                 picture: kohde.picture,
                 latitude: kohde.location.latitude,
                 longitude: kohde.location.longitude,
+                homepage: kohde.homepage,
+                some: kohde.some,
                 symbols: kohde.symbols,
                 info: kohde.info,
                 directions: kohde.directions,
@@ -221,6 +223,8 @@ router.get('/view/:id', (req, res) => {
                 picture: kohde.picture,
                 latitude: kohde.location.latitude,
                 longitude: kohde.location.longitude,
+                homepage: kohde.homepage,
+                some: kohde.some,
                 symbols: kohde.symbols,
                 info: kohde.info,
                 directions: kohde.directions,
@@ -259,6 +263,10 @@ router.post('/add', (req, res) => {
         picture = picture.filter(n => n);
     let latitude = req.body.latitude;
     let longitude = req.body.longitude;
+    let homepage = req.body.homepage;
+    let some = req.body.some;
+    if(typeof(some) !== "string")
+        some = some.filter(n => n);
     let symbols = req.body.symbols;
     let info = req.body.info;
     let monStart = req.body.monStart;
@@ -319,6 +327,8 @@ router.post('/add', (req, res) => {
                     "latitude": latitude,
                     "longitude": longitude
                 },
+                "homepage": homepage,
+                "some": some,
                 "symbols": symbols,
                 "info": info,
                 "openingHours": {

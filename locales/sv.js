@@ -49,7 +49,9 @@
 	"Public transport": "Kollektivtrafik",
 	"Camping": "Camping",
 	"Wifi access": "Wifi kontakt",
-    "Format": "Format",
+	"Format": "Format",
 	"Required": "Obligatoriskt",
-    "Contact information": "Kontakt information"
+	"Contact information": "Kontakt information",
+        "Homepage": "Huvudsida",
+        "Social media channels": "Social medier kanaler"
 }

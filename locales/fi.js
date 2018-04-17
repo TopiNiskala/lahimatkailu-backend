@@ -49,7 +49,9 @@
 	"Public transport": "Julkinen liikenne",
 	"Camping": "Yöpymismahdollisuus",
 	"Wifi access": "Wifi-yhteys",
-    "Format": "Muoto",
+	"Format": "Muoto",
 	"Required": "Pakollinen",
-    "Contact information": "Yhteystiedot"
+	"Contact information": "Yhteystiedot",
+	"Homepage": "Kotisivu",
+	"Social media channels": "Sosiaalisen median kanavat"
 }

@@ -343,6 +343,21 @@ html(lang="en")
                 input.form-control(type="text", placeholder=__('Longitude'), name="longitude" value= longitude)
                 h4 #{ __('Contact information')}
                 input.form-control(type="tel", placeholder=__('Phone number'), name="phoneNumber" value= phoneNumber)
+                input.form-control(type="url", placeholder=__('Homepage'), name="homepage")
+                h5 #{ __('Social media channels')}
+                div#some
+                    div.some.input-group
+                        input.form-control.some(type="url", placeholder="http://www.facebook.com/example", optional="", name="some")
+                        span.input-group-btn
+                            button.btn.btn-success.btn-add
+                                span.glyphicon.glyphicon-plus
+                    if some != undefined
+                        each someInput, i in some
+                            div.some.input-group
+                                input.form-control.some(type="url", placeholder="http://www.facebook.com/example", optional="", name="some" value= some[i])
+                                span.input-group-btn
+                                    button.btn.btn-danger.btn-remove
+                                        span.glyphicon.glyphicon-minus
                 h4 #{ __('Pictures')}
                 div#pictures
                     div.picture.input-group
