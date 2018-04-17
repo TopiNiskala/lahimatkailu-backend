@@ -48,5 +48,8 @@
 	"picture": "/img/sv.png",
 	"Public transport": "Kollektivtrafik",
 	"Camping": "Camping",
-	"Wifi access": "Wifi kontakt"
+	"Wifi access": "Wifi kontakt",
+    "Format": "Format",
+	"Required": "Obligatoriskt",
+    "Contact information": "Kontakt information"
 }

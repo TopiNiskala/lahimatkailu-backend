@@ -8,9 +8,10 @@ html(lang="en")
             noscript
                 h1 Salli JavaScript
             h2= title
+            p(style="color:red") * = #{ __('Required')}
             form#formAddDestination(name="add",method="post",action="/v1/add")
                 input.form-control(type="hidden", name="id" value= id)
-                h4 #{ __('General information')}
+                h4 * #{ __('General information')}
                 div#typeName(style="display:none")=type
                 div#cityName(style="display:none")=city
                 input.form-control(required="", type="text", placeholder=__('Name'), name="name" value= nimi)
@@ -19,7 +20,7 @@ html(lang="en")
                     option(value="Ruoka") #{ __('Food')}
                     option(service value="Palvelu") #{ __('Service')}
                     option(sight value="Nähtävyys") #{ __('Sight')}
-                h4 #{ __('Location')}
+                h4 * #{ __('Location')}
                 input.form-control(required="", type="text", placeholder=__('Street address'), name="street" value= street)
                 input.form-control(style="display:inline; width:50%", required="", type="text", placeholder=__('Postal code'), name="postalCode" value= postalCode)
                 select#city.form-control(style="display:inline; width:50%", required="", name="city" value= city)
@@ -337,21 +338,22 @@ html(lang="en")
                     option(value="Ypäjä") Ypäjä
                     option(value="Ähtäri") Ähtäri
                     option(value="Äänekoski") Äänekoski
-                input.form-control(type="tel", placeholder=__('Phone number'), name="phoneNumber" value= phoneNumber)
                 h4 #{ __('Coordinates')} (#{ __('leave empty for autocomplete')})
                 input.form-control(type="text", placeholder=__('Latitude'), name="latitude" value= latitude)
                 input.form-control(type="text", placeholder=__('Longitude'), name="longitude" value= longitude)
+                h4 #{ __('Contact information')}
+                input.form-control(type="tel", placeholder=__('Phone number'), name="phoneNumber" value= phoneNumber)
                 h4 #{ __('Pictures')}
                 div#pictures
                     div.picture.input-group
-                        input.form-control.picture(type="text", placeholder="http://example.com/pic.jpg", name="picture")
+                        input.form-control.picture(type="url", pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\\b/([^()][-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.jpeg)" placeholder="http://example.com/pic.jpg", optional="", name="picture")
                         span.input-group-btn
                             button.btn.btn-success.btn-add
                                 span.glyphicon.glyphicon-plus
                     if picture != undefined
                         each pictureInput, i in picture
                             div.picture.input-group
-                                input.form-control.picture(type="text", placeholder="http://example.com/pic.jpg", name="picture" value= picture[i])
+                                input.form-control.picture(type="url", pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\\b/([^()][-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.jpeg)" placeholder="http://example.com/pic.jpg", optional="", name="picture" value= picture[i])
                                 span.input-group-btn
                                     button.btn.btn-danger.btn-remove
                                         span.glyphicon.glyphicon-minus
@@ -403,41 +405,44 @@ html(lang="en")
                 h4 #{ __('Other information')}
                 textarea.form-control(style="resize:vertical", type="text", placeholder=__('Other information about the destination'), name="info")=info
                 h4 #{ __('Open hours')}
+                p 
+                    b #{ __('Format')}: 
+                    | 00:00 - 24:00
                 label #{ __('Monday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="monStart" value= monStart)
+                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", name="monStart", value= monStart, optional="")
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="monEnd" value= monEnd)
+                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="monEnd", value= monEnd)
                 label #{ __('Tuesday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="tueStart" value= tueStart)
+                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="tueStart" value= tueStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="tueEnd" value= tueEnd)
+                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="tueEnd" value= tueEnd)
                 label #{ __('Wednesday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="wedStart" value= wedStart)
+                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="wedStart" value= wedStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="wedEnd" value= wedEnd)
+                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="wedEnd" value= wedEnd)
                 label #{ __('Thursday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="thuStart" value= thuStart)
+                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="thuStart" value= thuStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="thuEnd" value= thuEnd)
+                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="thuEnd" value= thuEnd)
                 label #{ __('Friday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="friStart" value= friStart)
+                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="friStart" value= friStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="friEnd" value= friEnd)
+                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="friEnd" value= friEnd)
                 label #{ __('Saturday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="satStart" value= satStart)
+                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="satStart" value= satStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="satEnd" value= satEnd)
+                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="satEnd" value= satEnd)
                 label #{ __('Sunday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", name="sunStart" value= sunStart)
+                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="sunStart" value= sunStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", name="sunEnd" value= sunEnd)
+                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="sunEnd" value= sunEnd)
                 br
                 button.form-control.btn.btn-success(type="submit") #{ __('Submit')}
                 br

@@ -14,7 +14,7 @@
 	"Longitude": "Pituusaste",
 	"Pictures": "Kuvat",
 	"Other information": "Muuta tietoa",
-	"Other information about the destination": "Yleistä tietoe kohteesta",
+	"Other information about the destination": "Yleistä tietoa kohteesta",
 	"Open hours": "Aukioloajat",
 	"Monday": "Maanantai",
 	"Tuesday": "Tiistai",
@@ -48,5 +48,8 @@
 	"picture": "/img/fi.png",
 	"Public transport": "Julkinen liikenne",
 	"Camping": "Yöpymismahdollisuus",
-	"Wifi access": "Wifi-yhteys"
+	"Wifi access": "Wifi-yhteys",
+    "Format": "Muoto",
+	"Required": "Pakollinen",
+    "Contact information": "Yhteystiedot"
 }

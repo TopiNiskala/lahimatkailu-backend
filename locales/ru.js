@@ -48,5 +48,8 @@
 	"picture": "/img/ru.png",
 	"Public transport": "Общественный транспорт",
 	"Camping": "Возможность переночевать",
-	"Wifi access": "WiFi интернет"
+	"Wifi access": "WiFi интернет",
+    "Format": "формат",
+    "Required": "обязательный",
+    "Contact information": "Контактная информация"
 }

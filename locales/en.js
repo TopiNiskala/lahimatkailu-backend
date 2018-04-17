@@ -49,7 +49,10 @@
 	"list": "list",
 	"picture": "/img/en.png",
 	"language": "language",
-        "Camping": "Camping",
-        "Wifi access": "Wifi access",
-        "Public transport": "Public transport"
+	"Camping": "Camping",
+	"Wifi access": "Wifi access",
+	"Public transport": "Public transport",
+	"Format": "Format",
+	"Required": "Required",
+	"Contact information": "Contact information"
 }
