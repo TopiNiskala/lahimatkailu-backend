@@ -1,14 +1,16 @@
 var mongoose = require('mongoose');
-
+mongoose.connect('mongodb://localhost/MyDatabase')
 var userSchema = mongoose.Schema({
     _id: String,
     username: String,
     password: String,
 });
 
+/*
 userSchema.methods.validPassword = function(pwd) {
     return(this.password===pwd);
 };
+
 
 userSchema.pre('save', function(next) {
     if (this.password) {
@@ -21,7 +23,8 @@ userSchema.pre('save', function(next) {
         
     };
 });
+*/
 
-var user = mongoose.model('users', userSchema);
-module.exports = 'mongodb://localhost/users';
+var user = mongoose.model('users', userSchema, user);
+//module.exports = 'mongodb://localhost/users';
 

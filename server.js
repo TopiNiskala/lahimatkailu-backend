@@ -5,21 +5,44 @@ import mongoose from 'mongoose';
 import router from './router';
 import passport from 'passport';
 import user from './models/user';
+//import session from 'express-session'
+//import LocalStrategy from 'passport-local';
 
 var path = require('path');
-var session = require("express-session");
+var session = require('express-session');
+var LocalStrategy   = require('passport-local').Strategy,
+//_______________________________________________
+    //kovakoodattu testin ajaksi
+ users = [{"id":111, "username":"amy", "password":"amyspassword"}];
 
+     //Serialize
+passport.serializeUser(function (user, done) {
+    done(null, users[0].id);
+});
+passport.deserializeUser(function (id, done) {
+    done(null, users[0]);
+});
 
+// passport local strategy for local-login, local refers to this app
+passport.use('local-login', new LocalStrategy(
+    function (username, password, done) {
+        if (username === users[0].username && password === users[0].password) {
+            return done(null, users[0]);
+        } else {
+            return done(null, false, {"message": "User not found."});
+        }
+    })
+);
+
+//_________________________________________________
 //This file connects our server to mongoDB and uses the router we have created
 mongoose.connect('mongodb://localhost/kohteet');
+mongoose.connect('mongodb://localhost/users')
 // Initialize http server
 const app = express();
 
 
-app.use(express.static("/list"));
-app.use(session({ secret: "cats",
-                resave: false,
-                saveUninitialized: false}));
+
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false, limit: '15mb' }), function (error, req, res, next) {
@@ -29,76 +52,27 @@ app.use(bodyParser.urlencoded({ extended: false, limit: '15mb' }), function (err
         next();
     }
 });
-//app.use(express.cookieParser());
-//app.use(express.bodyParser());
-//app.use(express.cookieSession());
+//__________________________________________________
+
+// initialize passposrt and and session for persistent login sessions
+app.use(session({
+    secret: "tHiSiSasEcRetStr",
+    resave: true,
+    saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+ 
+// route middleware to ensure user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+ 
+    res.sendStatus(401);
+}
 
-//-- SERIALIZATION--
-
-passport.serializeUser(function(user, done) {
-    done(null, user._id);
-});
-
-passport.deserializeUser(function(_id, done) {
-  user.findById(_id, function(err, user) {
-    done(err, user);
-  });
-});
-
-/*
-//PASSPORT 2
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-passport.deserializeUser(function(id, done) {
-    user.findOne({
-        _id: id
-    }, '-password -salt', function(err, user) {
-        done(err, user);
-    });
-});
-*/
-
-//LOGIN!!!!
+//__________________________________________________
 
 
-//Passport Strategy
-var LocalStrategy = require('passport-local').Strategy;
-
-/*
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    user.findOne({username: username}, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-*/
-
-//STRATEGY 2
-passport.use(new LocalStrategy(function(username, password, done) {
-    user.findOne({
-        username: username
-    }, function(err, user) {
-        // This is how you handle error
-        if (err) return done(err);
-        // When user is not found
-        if (!user) return done(null, false);
-        // When password is not correct
-        if (!user.authenticate(password)) return done(null, false);
-        // When all things are good, we return the user
-        return done(null, user);
-     });
-}));
 
 // Logger outputting all requests in to the console
 app.use(morgan('combined'));

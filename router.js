@@ -19,13 +19,6 @@ let googleMapsClient = createClient({
     Promise: Promise
 });
 
-// var googleMapsClient = require('@google/maps').createClient({
-//   key: config.googleMapsApiKey,
-//   Promise: Promise
-// });
-
-// mongoose.connect('mongodb://localhost/kohteet');
-
 //Initialize router
 const router = Router();
 
@@ -34,58 +27,21 @@ const router = Router();
 router.get(['/', '/index'], (req, res) => {
     res.render('index', { title: 'Lähimatkailu', current: 'index' });
 });
+
+//LOGIN
 //-------------------------------------------------------------
 
-///LOGIN{{{{{{}}}}}}
-
-//--------------------------------
-
-
-
-//Login POST 2
-router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' })//(req, res)
-           );
-
-/*
-//Login get 3
-router.get( '/login', (req, res) => {
-    res.render('login', { title: 'Kirjaudu Sisään', current: 'login' });
+router.get("/login", function (req, res) {
+    res.send("<p>Please login!</p><form method='post' action='/v1/login'><input type='text' name='username'/><input type='password' name='password'/><button type='submit' value='submit'>Submit</buttom></form>");
 });
-*/
-
-/*
-//Login Get
-router.get('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.redirect('/index/' + req.user.username);
-    });
-  })(req, res, next);
+router.post("/login", 
+    passport.authenticate("local-login", { failureRedirect: "/v1/login"}),
+    function (req, res) {
+        res.redirect("/v1/");
 });
-*/
-
-
-
-
-//Login GET 2
-router.get('/login', function(req, res, next, done) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err);
-              console.log(typeof next);}
-    if (!user) return done(null, false, { message: 'Kirjaudu sisään!' });
-    req.logIn(user, function(err) {
-        console.log(user);
-      if (err) { return next(err); }
-      return res.redirect('/index/' + user.username);
-    });
-  })(req, res, next);
-});
-
 
 //----------------------------------
-
+//LOGIN ENDS
 
 // Handle /kohteet.json route with index action from kohteet controller
 //router.route('/kohteet.json').get(index);

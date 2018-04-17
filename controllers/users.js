@@ -1,4 +1,4 @@
-/*import Kohde from '../models/user';
+import Kohde from '../models/user';
 import moment from 'moment';
 
 //This file returns JSON file including all 'user' stored in.
@@ -14,4 +14,4 @@ const index = (req, res, next) => {
 
 
 export default index;
-      */
+      
