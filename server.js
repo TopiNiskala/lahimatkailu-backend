@@ -48,6 +48,10 @@ app.use("/js", express.static(__dirname + "/assets/js"));
 // Serve images from img subdirectory
 app.use("/img", express.static(__dirname + "/assets/img"));
 
+// Serve css files from css subdirectory
+app.use("/css", express.static(__dirname + "/assets/css"));
+
+
 app.set('view engine', 'pug');
 // Launches server on port 3000
 const server = app.listen(3000, () => {

@@ -1,15 +1,15 @@
 nav.navbar.navbar-default.navbar-static-top
     .container-fluid
         .navbar-header
-            a.navbar-brand(href="/v1/index") Lähimatkailu
+            a.navbar-brand(href='/v1/index') Lähimatkailu
         ul.nav.navbar-nav
             for item, path in nav
                 if current == path
                     li.nav-item.active
-                        a.nav-link(href="/v1/" + path)=item
+                        a.nav-link(href='/v1/' + path)=item
                 else
                     li.nav-item
-                        a.nav-link(href="/v1/" + path)=item
+                        a.nav-link(href='/v1/' + path)=item
         ul.nav.navbar-nav.navbar-right
             li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown') 
@@ -18,13 +18,13 @@ nav.navbar.navbar-default.navbar-static-top
                 ul.dropdown-menu
                     li
                         a(href='/v1/lang/en?return=' + current)
-                          img(src="/img/en.png")
+                          img(src='/img/en.png')
                     li
                         a(href='/v1/lang/fi?return=' + current)
-                          img(src="/img/fi.png")
+                          img(src='/img/fi.png')
                     li 
                         a(href='/v1/lang/sv?return=' + current)
-                          img(src="/img/sv.png")
+                          img(src='/img/sv.png')
                     li 
                         a(href='/v1/lang/ru?return=' + current)
-                          img(src="/img/ru.png")
+                          img(src='/img/ru.png')
