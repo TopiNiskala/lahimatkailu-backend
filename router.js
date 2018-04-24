@@ -62,6 +62,21 @@ router.get('/kohteet.json', (req, res, next) => {
  		)); 	
 });
 
+router.get('/iconList.json', (req, res, next) => {
+    res.json(
+        { symbols: [
+            "wheelchair",
+            "car",
+            "paw",
+            "clock-o",
+            "subway",
+            "hotel",
+            "wifi",
+            ],
+        }
+    );
+});
+
 router.get('/lang/:ln', (req, res) => {
     let returnUrl;
     
