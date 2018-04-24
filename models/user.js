@@ -1,10 +1,24 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/MyDatabase')
-var userSchema = mongoose.Schema({
-    _id: String,
+import mongoose, {Schema} from 'mongoose';
+import passportLocalMongoose from 'passport-local-mongoose';
+
+
+
+
+var userSchema = new Schema({
+    
     username: String,
-    password: String,
+    password: String
 });
+
+userSchema.plugin(passportLocalMongoose);
+
+export default mongoose.model('user', userSchema);
+
+
+
+
+
+
 
 /*
 userSchema.methods.validPassword = function(pwd) {
@@ -24,7 +38,4 @@ userSchema.pre('save', function(next) {
     };
 });
 */
-
-var user = mongoose.model('users', userSchema, user);
-//module.exports = 'mongodb://localhost/users';
 

@@ -8,7 +8,7 @@ import local from 'passport-local';
 import config from './config';
 // var config = require('./config');
 import passport from 'passport';
-import user from './models/user';
+import User from './models/user';
 
 import {createClient} from '@google/maps';
 
@@ -28,20 +28,28 @@ router.get(['/', '/index'], (req, res) => {
     res.render('index', { title: 'Lähimatkailu', current: 'index' });
 });
 
-//LOGIN
-//-------------------------------------------------------------
 
 router.get("/login", function (req, res) {
-    res.send("<p>Please login!</p><form method='post' action='/v1/login'><input type='text' name='username'/><input type='password' name='password'/><button type='submit' value='submit'>Submit</buttom></form>");
-});
+    res.render('login'); })
+ 
 router.post("/login", 
-    passport.authenticate("local-login", { failureRedirect: "/v1/login"}),
+    passport.authenticate("local"),
     function (req, res) {
         res.redirect("/v1/");
 });
 
-//----------------------------------
-//LOGIN ENDS
+router.get("/register", function (req, res){
+   User.register(new User({username: "username"}),"password" );
+});
+
+router.get("/logout", function(req, res){
+   req.logout();
+    res.redirect("/v1/login");
+});
+
+
+
+
 
 // Handle /kohteet.json route with index action from kohteet controller
 //router.route('/kohteet.json').get(index);

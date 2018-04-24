@@ -4,63 +4,49 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import router from './router';
 import passport from 'passport';
-import user from './models/user';
+import User from './models/user';
+import cookieParser from 'cookie-parser';
+//import users from './controllers/users';
 //import session from 'express-session'
 //import LocalStrategy from 'passport-local';
-
+var mongo = require('mongodb');
 var path = require('path');
 var session = require('express-session');
-var LocalStrategy   = require('passport-local').Strategy,
+var LocalStrategy   = require('passport-local').Strategy;
+
+const app = express();
+
+app.use(cookieParser());
+app.use(session({
+    secret: "tHiSiSasEcRetStr",
+    resave: false,
+    saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 //_______________________________________________
     //kovakoodattu testin ajaksi
- users = [{"id":111, "username":"amy", "password":"amyspassword"}];
+// users = [{"_id":111, "username":"moi", "password":"moi"}];
 
-     //Serialize
-passport.serializeUser(function (user, done) {
-    done(null, users[0].id);
-});
-passport.deserializeUser(function (id, done) {
-    done(null, users[0]);
-});
 
-// passport local strategy for local-login, local refers to this app
-passport.use('local-login', new LocalStrategy(
-    function (username, password, done) {
-        if (username === users[0].username && password === users[0].password) {
-            return done(null, users[0]);
-        } else {
-            return done(null, false, {"message": "User not found."});
-        }
-    })
-);
 
-//_________________________________________________
-//This file connects our server to mongoDB and uses the router we have created
-mongoose.connect('mongodb://localhost/kohteet');
-mongoose.connect('mongodb://localhost/users')
-// Initialize http server
-const app = express();
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false, limit: '15mb' }), function (error, req, res, next) {
+app.use(bodyParser.urlencoded({ extended:false,
+limit: '15mb' }), function (error, req, res, next) {
     if (error instanceof Error) {
         return res.send('500', { error: error });
     } else {
         next();
     }
 });
-//__________________________________________________
-
-// initialize passposrt and and session for persistent login sessions
-app.use(session({
-    secret: "tHiSiSasEcRetStr",
-    resave: true,
-    saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
  
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
@@ -68,7 +54,17 @@ function isLoggedIn(req, res, next) {
         return next();
  
     res.sendStatus(401);
-}
+};
+//_________________________________________________
+//This file connects our server to mongoDB and uses the router we have created
+//mongoose.connect('mongodb://localhost/kohteet');
+mongoose.connect('mongodb://localhost/users');
+// Initialize http server
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('We are connected to MongoDB!'); 
+});
 
 //__________________________________________________
 
