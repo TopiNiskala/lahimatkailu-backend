@@ -1,141 +1,128 @@
 doctype html
-html(lang="en")
+html
     include includes/head.pug
     body
         include includes/nav.pug
-        .modal#deleteModal(tabindex="-1" role="dialog")
-            .modal-dialog(role="document")
-                .modal-content
-                    .modal-header
-                        h5.modal-title Delete
-                            button.close(type="button" data-dismiss="modal" aria-label="Close")
-                                span(aria-hidden="true") ×
-                    .modal-body
-                        p #{ __('Are you sure you want to delete')}
-                            span.destinationName
-                    .modal-footer
-                        button.btn.btn-danger.deleteConfirm.redirect(type="button") #{ __('Delete')}
-                        button.btn.btn-secondary(type="button" data-dismiss="modal") #{ __('Cancel')}
-
-        .container(style="max-width:650px; margin-top:-15px; margin-bottom:50px")
-            noscript
-                h1 Salli JavaScript
-            h2(style="max-width:650px; overflow:hidden;")=name
-                a.button.btn-sm.btn-danger.glyphicon.glyphicon-trash.delete(style="float:right" role="button" href="#" name=name id=id)
-                a.button.btn-sm.btn-primary.glyphicon.glyphicon-edit(style="float:right; margin-right:10px" role="button" href="/v1/modify/" + id)
-            table.table.table-striped.table-bordered(style="table-layout: fixed")
+        include includes/deletedialog.pug
+        .container(style='max-width:650px; margin-top:-15px; margin-bottom:50px')
+            h2(style='max-width:650px; overflow:hidden;')=name
+                a.button.btn-sm.btn-danger.glyphicon.glyphicon-trash.delete(style='float:right', role='button', href='#', name=name, id=id)
+                a.button.btn-sm.btn-primary.glyphicon.glyphicon-edit(style='float:right; margin-right:10px', role='button', href='/v1/modify/' + id)
+            table.table.table-striped.table-bordered(style='table-layout:fixed')
                 tr
-                    if type == "Sight"
+                    if type == 'Sight'
                         - type =  __('Sight')
-                    else if type == "Food"
+                    else if type == 'Food'
                         - type =  __('Food')
                     else
                         - type =  __('Service')
                     th #{ __('Type')} 
-                    td(colspan=3)= type
+                    td(colspan=3)=type
                 tr
                     th #{ __('Street address')}
-                    td(colspan=3)= street
+                    td(colspan=3)=street
                 tr
                     th #{ __('Postal code')}
-                    td(colspan=3)= postalCode
+                    td(colspan=3)=postalCode
                 tr
                     th #{ __('City')}
-                    td(colspan=3)= city
+                    td(colspan=3)=city
                 tr
                     th #{ __('Latitude')}
-                    td(colspan=3)= latitude
+                    td(colspan=3)=latitude
                 tr
                     th #{ __('Longitude')}
-                    td(colspan=3)= longitude
+                    td(colspan=3)=longitude
                 tr
                     th #{ __('Phone number')}
-                    td(colspan=3)= phoneNumber
+                    td(colspan=3)=phoneNumber
                 tr
                     th #{ __('Homepage')}
-                    td(colspan=3)= homepage
+                    td(colspan=3)=homepage
                 if some != undefined
                     tr
                         th(colspan=4) #{ __('Social media channels')}
                     each url, i in some
                         tr
                             td(colspan=4)
-                                div(style="max-width:600px; overflow-x:auto;")= url
+                                div(style='max-width:600px; overflow-x:auto;')=url
                 if picture != undefined
                     tr
                         th(colspan=4) #{ __('Pictures')}
                     each url, i in picture
                         tr
                             td(colspan=4)
-                                div(style="max-width:600px; overflow-x:auto;")= url
+                                div(style='max-width:600px; overflow-x:auto;')=url
                 tr
                     th(colspan=4) #{ __('Symbols')}
                 tr
-                    -if (symbols.includes('wheelchair'))
-                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Accessibility')}
-                    -else
-                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Accessibility')}
-                    -if (symbols.includes('car'))
-                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Parking')}
-                    -else
-                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Parking')}
-                    -if (symbols.includes('paw'))
-                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Pets allowed')}
-                    -else
-                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Pets allowed')}
-                    -if (symbols.includes('clock-o'))
-                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Open 24h')}
-                    -else
-                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Open 24h')}
+                    - let symbolStyleEnabled = 'background:#8cbc77; color:#fff; font-size:95%;'
+                    - let symbolStyleDisabled = 'background:#be5757; color:#fff; font-size:95%;'
+                    - if (symbols.includes('wheelchair'))
+                        td(style=symbolStyleEnabled) #{ __('Accessibility')}
+                    - else
+                        td(style=symbolStyleDisabled) #{ __('Accessibility')}
+                    - if (symbols.includes('car'))
+                        td(style=symbolStyleEnabled) #{ __('Parking')}
+                    - else
+                        td(style=symbolStyleDisabled) #{ __('Parking')}
+                    - if (symbols.includes('paw'))
+                        td(style=symbolStyleEnabled) #{ __('Pets allowed')}
+                    - else
+                        td(style=symbolStyleDisabled) #{ __('Pets allowed')}
+                    - if (symbols.includes('clock-o'))
+                        td(style=symbolStyleEnabled) #{ __('Open 24h')}
+                    - else
+                        td(style=symbolStyleDisabled) #{ __('Open 24h')}
                 tr
-                    -if (symbols.includes('subway'))
+                    - if (symbols.includes('subway'))
 
-                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Public transport')}
-                    -else
-                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Public transport')}
-                    -if (symbols.includes('hotel'))
-                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Camping')}
-                    -else
-                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Camping')}
-                    -if (symbols.includes('wifi'))
-                        td(style="background:#8cbc77; color:#fff; font-size:95%;") #{ __('Wifi access')}
-                    -else
-                        td(style="background:#be5757; color:#fff; font-size:95%;") #{ __('Wifi access')}
+                        td(style=symbolStyleEnabled) #{ __('Public transport')}
+                    - else
+                        td(style=symbolStyleDisabled) #{ __('Public transport')}
+                    - if (symbols.includes('hotel'))
+                        td(style=symbolStyleEnabled) #{ __('Camping')}
+                    - else
+                        td(style=symbolStyleDisabled) #{ __('Camping')}
+                    - if (symbols.includes('wifi'))
+                        td(style=symbolStyleEnabled) #{ __('Wifi access')}
+                    - else
+                        td(style=symbolStyleDisabled) #{ __('Wifi access')}
                 tr
                     th(colspan=4) #{ __('Info')}
                 tr
                     td(colspan=4)
-                        div(style="max-width:600px; overflow-x:auto;")= info
+                        div(style='max-width:600px; overflow-x:auto;')=info
                 tr
                     th(colspan=2) #{ __('Open hours')}
                     th #{ __('Starts')}
                     th #{ __('Ends')}
                 tr
                     th(colspan=2) #{ __('Monday')}
-                    td= monStart
-                    td= monEnd
+                    td=monStart
+                    td=monEnd
                 tr
                     th(colspan=2) #{ __('Tuesday')}
-                    td= tueStart
-                    td= tueEnd
+                    td=tueStart
+                    td=tueEnd
                 tr
                     th(colspan=2) #{ __('Wednesday')}
-                    td= wedStart
-                    td= wedEnd
+                    td=wedStart
+                    td=wedEnd
                 tr
                     th(colspan=2) #{ __('Thursday')}
-                    td= thuStart
-                    td= thuEnd
+                    td=thuStart
+                    td=thuEnd
                 tr
                     th(colspan=2) #{ __('Friday')}
-                    td= friStart
-                    td= friEnd
+                    td=friStart
+                    td=friEnd
                 tr
                     th(colspan=2) #{ __('Saturday')}
-                    td= satStart
-                    td= satEnd
+                    td=satStart
+                    td=satEnd
                 tr
                     th(colspan=2) #{ __('Sunday')}
-                    td= sunStart
-                    td= sunEnd
-        script(src="/js/delete.js")
+                    td=sunStart
+                    td=sunEnd
+        script(src='/js/delete.js')

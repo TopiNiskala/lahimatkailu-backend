@@ -1,0 +1,16 @@
+.modal#deleteModal(tabindex='-1' role='dialog')
+    .modal-dialog(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Delete
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') ×
+            .modal-body
+                p #{ __('Are you sure you want to delete')}
+                    span.destinationName
+            .modal-footer
+                if current != 'list'
+                    button.btn.btn-danger.deleteConfirm.redirect(type='button') #{ __('Delete')}
+                else
+                    button.btn.btn-danger.deleteConfirm(type='button') #{ __('Delete')}
+                button.btn.btn-secondary(type='button' data-dismiss='modal') #{ __('Cancel')} 

@@ -1,380 +1,378 @@
 doctype html
-html(lang="en")
+html
     include includes/head.pug
     body
         include includes/nav.pug
-
-        .container(style="max-width:650px; margin-top:-15px; margin-bottom:50px")
-            noscript
-                h1 Salli JavaScript
-            h2= title
-            p(style="color:red") * = #{ __('Required')}
-            form#formAddDestination(name="add",method="post",action="/v1/add")
-                input.form-control(type="hidden", name="id" value= id)
+        .container(style='max-width:650px; margin-top:-15px; margin-bottom:50px')
+            h2=title
+            p(style='color:red') * = #{ __('Required')}
+            form#formAddDestination(name='add', method='post', action='/v1/add')
+                input.form-control(type='hidden', name='id', value=id)
                 h4 * #{ __('General information')}
-                div#typeName(style="display:none")=type
-                div#cityName(style="display:none")=city
-                input.form-control(required="", type="text", placeholder=__('Name'), name="name" value= nimi)
-                select.form-control#type(required="" name="type")
-                    option(selected="" disabled="" value="Type") #{ __('Type')}
-                    option(value="Ruoka") #{ __('Food')}
-                    option(service value="Palvelu") #{ __('Service')}
-                    option(sight value="Nähtävyys") #{ __('Sight')}
+                div#typeName(style='display:none', class=__('Type'))=type
+                div#cityName(style='display:none', class=__('City'))=city
+                input.form-control(required='', type='text', placeholder=__('Name'), name='name', value=nimi)
+                select.form-control#type(required='', name='type')
+                    option(selected='', disabled='', value=__('Type')) #{ __('Type')}
+                    option(value='Ruoka') #{ __('Food')}
+                    option(service value='Palvelu') #{ __('Service')}
+                    option(sight value='Nähtävyys') #{ __('Sight')}
                 h4 * #{ __('Location')}
-                input.form-control(required="", type="text", placeholder=__('Street address'), name="street" value= street)
-                input.form-control(style="display:inline; width:50%", required="", type="text", placeholder=__('Postal code'), name="postalCode" value= postalCode)
-                select#city.form-control(style="display:inline; width:50%", required="", name="city" value= city)
-                    option(selected="" disabled="" value="City") City
-                    option(value="Akaa") Akaa
-                    option(value="Alajärvi") Alajärvi
-                    option(value="Alavieska") Alavieska
-                    option(value="Alavus") Alavus
-                    option(value="Asikkala") Asikkala
-                    option(value="Askola") Askola
-                    option(value="Aura") Aura
-                    option(value="Brändö") Brändö
-                    option(value="Eckerö") Eckerö
-                    option(value="Enonkoski") Enonkoski
-                    option(value="Enontekiö") Enontekiö
-                    option(value="Espoo") Espoo
-                    option(value="Eura") Eura
-                    option(value="Eurajoki") Eurajoki
-                    option(value="Evijärvi") Evijärvi
-                    option(value="Finström") Finström
-                    option(value="Forssa") Forssa
-                    option(value="Föglö") Föglö
-                    option(value="Geta") Geta
-                    option(value="Haapajärvi") Haapajärvi
-                    option(value="Haapavesi") Haapavesi
-                    option(value="Hailuoto") Hailuoto
-                    option(value="Halsua") Halsua
-                    option(value="Hamina") Hamina
-                    option(value="Hammarland") Hammarland
-                    option(value="Hankasalmi") Hankasalmi
-                    option(value="Hanko") Hanko
-                    option(value="Harjavalta") Harjavalta
-                    option(value="Hartola") Hartola
-                    option(value="Hattula") Hattula
-                    option(value="Hausjärvi") Hausjärvi
-                    option(value="Heinola") Heinola
-                    option(value="Heinävesi") Heinävesi
-                    option(value="Helsinki") Helsinki
-                    option(value="Hirvensalmi") Hirvensalmi
-                    option(value="Hollola") Hollola
-                    option(value="Honkajoki") Honkajoki
-                    option(value="Huittinen") Huittinen
-                    option(value="Humppila") Humppila
-                    option(value="Hyrynsalmi") Hyrynsalmi
-                    option(value="Hyvinkää") Hyvinkää
-                    option(value="Hämeenkyrö") Hämeenkyrö
-                    option(value="Hämeenlinna") Hämeenlinna
-                    option(value="Ii") Ii
-                    option(value="Iisalmi") Iisalmi
-                    option(value="Iitti") Iitti
-                    option(value="Ikaalinen") Ikaalinen
-                    option(value="Ilmajoki") Ilmajoki
-                    option(value="Ilomantsi") Ilomantsi
-                    option(value="Imatra") Imatra
-                    option(value="Inari") Inari
-                    option(value="Inkoo") Inkoo
-                    option(value="Isojoki") Isojoki
-                    option(value="Isokyrö") Isokyrö
-                    option(value="Janakkala") Janakkala
-                    option(value="Joensuu") Joensuu
-                    option(value="Jokioinen") Jokioinen
-                    option(value="Jomala") Jomala
-                    option(value="Joroinen") Joroinen
-                    option(value="Joutsa") Joutsa
-                    option(value="Juankoski") Juankoski
-                    option(value="Juuka") Juuka
-                    option(value="Juupajoki") Juupajoki
-                    option(value="Juva") Juva
-                    option(value="Jyväskylä") Jyväskylä
-                    option(value="Jämijärvi") Jämijärvi
-                    option(value="Jämsä") Jämsä
-                    option(value="Järvenpää") Järvenpää
-                    option(value="Kaarina") Kaarina
-                    option(value="Kaavi") Kaavi
-                    option(value="Kajaani") Kajaani
-                    option(value="Kalajoki") Kalajoki
-                    option(value="Kangasala") Kangasala
-                    option(value="Kangasniemi") Kangasniemi
-                    option(value="Kankaanpää") Kankaanpää
-                    option(value="Kannonkoski") Kannonkoski
-                    option(value="Kannus") Kannus
-                    option(value="Karijoki") Karijoki
-                    option(value="Karkkila") Karkkila
-                    option(value="Karstula") Karstula
-                    option(value="Karvia") Karvia
-                    option(value="Kaskinen") Kaskinen
-                    option(value="Kauhajoki") Kauhajoki
-                    option(value="Kauhava") Kauhava
-                    option(value="Kauniainen") Kauniainen
-                    option(value="Kaustinen") Kaustinen
-                    option(value="Keitele") Keitele
-                    option(value="Kemi") Kemi
-                    option(value="Kemijärvi") Kemijärvi
-                    option(value="Keminmaa") Keminmaa
-                    option(value="Kemiönsaari") Kemiönsaari
-                    option(value="Kempele") Kempele
-                    option(value="Kerava") Kerava
-                    option(value="Keuruu") Keuruu
-                    option(value="Kihniö") Kihniö
-                    option(value="Kinnula") Kinnula
-                    option(value="Kirkkonummi") Kirkkonummi
-                    option(value="Kitee") Kitee
-                    option(value="Kittilä") Kittilä
-                    option(value="Kiuruvesi") Kiuruvesi
-                    option(value="Kivijärvi") Kivijärvi
-                    option(value="Kokemäki") Kokemäki
-                    option(value="Kokkola") Kokkola
-                    option(value="Kolari") Kolari
-                    option(value="Konnevesi") Konnevesi
-                    option(value="Kontiolahti") Kontiolahti
-                    option(value="Korsnäs") Korsnäs
-                    option(value="Koski Tl") Koski Tl
-                    option(value="Kotka") Kotka
-                    option(value="Kouvola") Kouvola
-                    option(value="Kristiinankaupunki") Kristiinankaupunki
-                    option(value="Kruunupyy") Kruunupyy
-                    option(value="Kuhmo") Kuhmo
-                    option(value="Kuhmoinen") Kuhmoinen
-                    option(value="Kumlinge") Kumlinge
-                    option(value="Kuopio") Kuopio
-                    option(value="Kuortane") Kuortane
-                    option(value="Kurikka") Kurikka
-                    option(value="Kustavi") Kustavi
-                    option(value="Kuusamo") Kuusamo
-                    option(value="Kyyjärvi") Kyyjärvi
-                    option(value="Kärkölä") Kärkölä
-                    option(value="Kärsämäki") Kärsämäki
-                    option(value="Kökar") Kökar
-                    option(value="Lahti") Lahti
-                    option(value="Laihia") Laihia
-                    option(value="Laitila") Laitila
-                    option(value="Lapinjärvi") Lapinjärvi
-                    option(value="Lapinlahti") Lapinlahti
-                    option(value="Lappajärvi") Lappajärvi
-                    option(value="Lappeenranta") Lappeenranta
-                    option(value="Lapua") Lapua
-                    option(value="Laukaa") Laukaa
-                    option(value="Lemi") Lemi
-                    option(value="Lemland") Lemland
-                    option(value="Lempäälä") Lempäälä
-                    option(value="Leppävirta") Leppävirta
-                    option(value="Lestijärvi") Lestijärvi
-                    option(value="Lieksa") Lieksa
-                    option(value="Lieto") Lieto
-                    option(value="Liminka") Liminka
-                    option(value="Liperi") Liperi
-                    option(value="Lohja") Lohja
-                    option(value="Loimaa") Loimaa
-                    option(value="Loppi") Loppi
-                    option(value="Loviisa") Loviisa
-                    option(value="Luhanka") Luhanka
-                    option(value="Lumijoki") Lumijoki
-                    option(value="Lumparland") Lumparland
-                    option(value="Luoto") Luoto
-                    option(value="Luumäki") Luumäki
-                    option(value="Luvia") Luvia
-                    option(value="Maalahti") Maalahti
-                    option(value="Maarianhamina") Maarianhamina
-                    option(value="Marttila") Marttila
-                    option(value="Masku") Masku
-                    option(value="Merijärvi") Merijärvi
-                    option(value="Merikarvia") Merikarvia
-                    option(value="Miehikkälä") Miehikkälä
-                    option(value="Mikkeli") Mikkeli
-                    option(value="Muhos") Muhos
-                    option(value="Multia") Multia
-                    option(value="Muonio") Muonio
-                    option(value="Mustasaari") Mustasaari
-                    option(value="Muurame") Muurame
-                    option(value="Mynämäki") Mynämäki
-                    option(value="Myrskylä") Myrskylä
-                    option(value="Mäntsälä") Mäntsälä
-                    option(value="Mänttä-Vilppula") Mänttä-Vilppula
-                    option(value="Mäntyharju") Mäntyharju
-                    option(value="Naantali") Naantali
-                    option(value="Nakkila") Nakkila
-                    option(value="Nivala") Nivala
-                    option(value="Nokia") Nokia
-                    option(value="Nousiainen") Nousiainen
-                    option(value="Nurmes") Nurmes
-                    option(value="Nurmijärvi") Nurmijärvi
-                    option(value="Närpiö") Närpiö
-                    option(value="Orimattila") Orimattila
-                    option(value="Oripää") Oripää
-                    option(value="Orivesi") Orivesi
-                    option(value="Oulainen") Oulainen
-                    option(value="Oulu") Oulu
-                    option(value="Outokumpu") Outokumpu
-                    option(value="Padasjoki") Padasjoki
-                    option(value="Paimio") Paimio
-                    option(value="Paltamo") Paltamo
-                    option(value="Parainen") Parainen
-                    option(value="Parikkala") Parikkala
-                    option(value="Parkano") Parkano
-                    option(value="Pedersören kunta") Pedersören kunta
-                    option(value="Pelkosenniemi") Pelkosenniemi
-                    option(value="Pello") Pello
-                    option(value="Perho") Perho
-                    option(value="Pertunmaa") Pertunmaa
-                    option(value="Petäjävesi") Petäjävesi
-                    option(value="Pieksämäki") Pieksämäki
-                    option(value="Pielavesi") Pielavesi
-                    option(value="Pietarsaari") Pietarsaari
-                    option(value="Pihtipudas") Pihtipudas
-                    option(value="Pirkkala") Pirkkala
-                    option(value="Polvijärvi") Polvijärvi
-                    option(value="Pomarkku") Pomarkku
-                    option(value="Pori") Pori
-                    option(value="Pornainen") Pornainen
-                    option(value="Porvoo") Porvoo
-                    option(value="Posio") Posio
-                    option(value="Pudasjärvi") Pudasjärvi
-                    option(value="Pukkila") Pukkila
-                    option(value="Punkalaidun") Punkalaidun
-                    option(value="Puolanka") Puolanka
-                    option(value="Puumala") Puumala
-                    option(value="Pyhtää") Pyhtää
-                    option(value="Pyhäjoki") Pyhäjoki
-                    option(value="Pyhäjärvi") Pyhäjärvi
-                    option(value="Pyhäntä") Pyhäntä
-                    option(value="Pyhäranta") Pyhäranta
-                    option(value="Pälkäne") Pälkäne
-                    option(value="Pöytyä") Pöytyä
-                    option(value="Raahe") Raahe
-                    option(value="Raasepori") Raasepori
-                    option(value="Raisio") Raisio
-                    option(value="Rantasalmi") Rantasalmi
-                    option(value="Ranua") Ranua
-                    option(value="Rauma") Rauma
-                    option(value="Rautalampi") Rautalampi
-                    option(value="Rautavaara") Rautavaara
-                    option(value="Rautjärvi") Rautjärvi
-                    option(value="Reisjärvi") Reisjärvi
-                    option(value="Riihimäki") Riihimäki
-                    option(value="Ristijärvi") Ristijärvi
-                    option(value="Rovaniemi") Rovaniemi
-                    option(value="Ruokolahti") Ruokolahti
-                    option(value="Ruovesi") Ruovesi
-                    option(value="Rusko") Rusko
-                    option(value="Rääkkylä") Rääkkylä
-                    option(value="Saarijärvi") Saarijärvi
-                    option(value="Salla") Salla
-                    option(value="Salo") Salo
-                    option(value="Saltvik") Saltvik
-                    option(value="Sastamala") Sastamala
-                    option(value="Sauvo") Sauvo
-                    option(value="Savitaipale") Savitaipale
-                    option(value="Savonlinna") Savonlinna
-                    option(value="Savukoski") Savukoski
-                    option(value="Seinäjoki") Seinäjoki
-                    option(value="Sievi") Sievi
-                    option(value="Siikainen") Siikainen
-                    option(value="Siikajoki") Siikajoki
-                    option(value="Siikalatva") Siikalatva
-                    option(value="Siilinjärvi") Siilinjärvi
-                    option(value="Simo") Simo
-                    option(value="Sipoo") Sipoo
-                    option(value="Siuntio") Siuntio
-                    option(value="Sodankylä") Sodankylä
-                    option(value="Soini") Soini
-                    option(value="Somero") Somero
-                    option(value="Sonkajärvi") Sonkajärvi
-                    option(value="Sotkamo") Sotkamo
-                    option(value="Sottunga") Sottunga
-                    option(value="Sulkava") Sulkava
-                    option(value="Sund") Sund
-                    option(value="Suomussalmi") Suomussalmi
-                    option(value="Suonenjoki") Suonenjoki
-                    option(value="Sysmä") Sysmä
-                    option(value="Säkylä") Säkylä
-                    option(value="Taipalsaari") Taipalsaari
-                    option(value="Taivalkoski") Taivalkoski
-                    option(value="Taivassalo") Taivassalo
-                    option(value="Tammela") Tammela
-                    option(value="Tampere") Tampere
-                    option(value="Tervo") Tervo
-                    option(value="Tervola") Tervola
-                    option(value="Teuva") Teuva
-                    option(value="Tohmajärvi") Tohmajärvi
-                    option(value="Toholampi") Toholampi
-                    option(value="Toivakka") Toivakka
-                    option(value="Tornio") Tornio
-                    option(value="Turku") Turku
-                    option(value="Tuusniemi") Tuusniemi
-                    option(value="Tuusula") Tuusula
-                    option(value="Tyrnävä") Tyrnävä
-                    option(value="Ulvila") Ulvila
-                    option(value="Urjala") Urjala
-                    option(value="Utajärvi") Utajärvi
-                    option(value="Utsjoki") Utsjoki
-                    option(value="Uurainen") Uurainen
-                    option(value="Uusikaarlepyy") Uusikaarlepyy
-                    option(value="Uusikaupunki") Uusikaupunki
-                    option(value="Vaala") Vaala
-                    option(value="Vaasa") Vaasa
-                    option(value="Valkeakoski") Valkeakoski
-                    option(value="Valtimo") Valtimo
-                    option(value="Vantaa") Vantaa
-                    option(value="Varkaus") Varkaus
-                    option(value="Vehmaa") Vehmaa
-                    option(value="Vesanto") Vesanto
-                    option(value="Vesilahti") Vesilahti
-                    option(value="Veteli") Veteli
-                    option(value="Vieremä") Vieremä
-                    option(value="Vihti") Vihti
-                    option(value="Viitasaari") Viitasaari
-                    option(value="Vimpeli") Vimpeli
-                    option(value="Virolahti") Virolahti
-                    option(value="Virrat") Virrat
-                    option(value="Vårdö") Vårdö
-                    option(value="Vöyri") Vöyri
-                    option(value="Ylitornio") Ylitornio
-                    option(value="Ylivieska") Ylivieska
-                    option(value="Ylöjärvi") Ylöjärvi
-                    option(value="Ypäjä") Ypäjä
-                    option(value="Ähtäri") Ähtäri
-                    option(value="Äänekoski") Äänekoski
+                input.form-control(required='', type='text', placeholder=__('Street address'), name='street', value=street)
+                input.form-control(style='display:inline; width:50%', required='', type='text', placeholder=__('Postal code'), name='postalCode', value=postalCode)
+                select#city.form-control(style='display:inline; width:50%', required='', name='city', value=city)
+                    option(selected='', disabled='', value=__('City')) #{ __('City')}
+                    option(value='Akaa') Akaa
+                    option(value='Alajärvi') Alajärvi
+                    option(value='Alavieska') Alavieska
+                    option(value='Alavus') Alavus
+                    option(value='Asikkala') Asikkala
+                    option(value='Askola') Askola
+                    option(value='Aura') Aura
+                    option(value='Brändö') Brändö
+                    option(value='Eckerö') Eckerö
+                    option(value='Enonkoski') Enonkoski
+                    option(value='Enontekiö') Enontekiö
+                    option(value='Espoo') Espoo
+                    option(value='Eura') Eura
+                    option(value='Eurajoki') Eurajoki
+                    option(value='Evijärvi') Evijärvi
+                    option(value='Finström') Finström
+                    option(value='Forssa') Forssa
+                    option(value='Föglö') Föglö
+                    option(value='Geta') Geta
+                    option(value='Haapajärvi') Haapajärvi
+                    option(value='Haapavesi') Haapavesi
+                    option(value='Hailuoto') Hailuoto
+                    option(value='Halsua') Halsua
+                    option(value='Hamina') Hamina
+                    option(value='Hammarland') Hammarland
+                    option(value='Hankasalmi') Hankasalmi
+                    option(value='Hanko') Hanko
+                    option(value='Harjavalta') Harjavalta
+                    option(value='Hartola') Hartola
+                    option(value='Hattula') Hattula
+                    option(value='Hausjärvi') Hausjärvi
+                    option(value='Heinola') Heinola
+                    option(value='Heinävesi') Heinävesi
+                    option(value='Helsinki') Helsinki
+                    option(value='Hirvensalmi') Hirvensalmi
+                    option(value='Hollola') Hollola
+                    option(value='Honkajoki') Honkajoki
+                    option(value='Huittinen') Huittinen
+                    option(value='Humppila') Humppila
+                    option(value='Hyrynsalmi') Hyrynsalmi
+                    option(value='Hyvinkää') Hyvinkää
+                    option(value='Hämeenkyrö') Hämeenkyrö
+                    option(value='Hämeenlinna') Hämeenlinna
+                    option(value='Ii') Ii
+                    option(value='Iisalmi') Iisalmi
+                    option(value='Iitti') Iitti
+                    option(value='Ikaalinen') Ikaalinen
+                    option(value='Ilmajoki') Ilmajoki
+                    option(value='Ilomantsi') Ilomantsi
+                    option(value='Imatra') Imatra
+                    option(value='Inari') Inari
+                    option(value='Inkoo') Inkoo
+                    option(value='Isojoki') Isojoki
+                    option(value='Isokyrö') Isokyrö
+                    option(value='Janakkala') Janakkala
+                    option(value='Joensuu') Joensuu
+                    option(value='Jokioinen') Jokioinen
+                    option(value='Jomala') Jomala
+                    option(value='Joroinen') Joroinen
+                    option(value='Joutsa') Joutsa
+                    option(value='Juankoski') Juankoski
+                    option(value='Juuka') Juuka
+                    option(value='Juupajoki') Juupajoki
+                    option(value='Juva') Juva
+                    option(value='Jyväskylä') Jyväskylä
+                    option(value='Jämijärvi') Jämijärvi
+                    option(value='Jämsä') Jämsä
+                    option(value='Järvenpää') Järvenpää
+                    option(value='Kaarina') Kaarina
+                    option(value='Kaavi') Kaavi
+                    option(value='Kajaani') Kajaani
+                    option(value='Kalajoki') Kalajoki
+                    option(value='Kangasala') Kangasala
+                    option(value='Kangasniemi') Kangasniemi
+                    option(value='Kankaanpää') Kankaanpää
+                    option(value='Kannonkoski') Kannonkoski
+                    option(value='Kannus') Kannus
+                    option(value='Karijoki') Karijoki
+                    option(value='Karkkila') Karkkila
+                    option(value='Karstula') Karstula
+                    option(value='Karvia') Karvia
+                    option(value='Kaskinen') Kaskinen
+                    option(value='Kauhajoki') Kauhajoki
+                    option(value='Kauhava') Kauhava
+                    option(value='Kauniainen') Kauniainen
+                    option(value='Kaustinen') Kaustinen
+                    option(value='Keitele') Keitele
+                    option(value='Kemi') Kemi
+                    option(value='Kemijärvi') Kemijärvi
+                    option(value='Keminmaa') Keminmaa
+                    option(value='Kemiönsaari') Kemiönsaari
+                    option(value='Kempele') Kempele
+                    option(value='Kerava') Kerava
+                    option(value='Keuruu') Keuruu
+                    option(value='Kihniö') Kihniö
+                    option(value='Kinnula') Kinnula
+                    option(value='Kirkkonummi') Kirkkonummi
+                    option(value='Kitee') Kitee
+                    option(value='Kittilä') Kittilä
+                    option(value='Kiuruvesi') Kiuruvesi
+                    option(value='Kivijärvi') Kivijärvi
+                    option(value='Kokemäki') Kokemäki
+                    option(value='Kokkola') Kokkola
+                    option(value='Kolari') Kolari
+                    option(value='Konnevesi') Konnevesi
+                    option(value='Kontiolahti') Kontiolahti
+                    option(value='Korsnäs') Korsnäs
+                    option(value='Koski Tl') Koski Tl
+                    option(value='Kotka') Kotka
+                    option(value='Kouvola') Kouvola
+                    option(value='Kristiinankaupunki') Kristiinankaupunki
+                    option(value='Kruunupyy') Kruunupyy
+                    option(value='Kuhmo') Kuhmo
+                    option(value='Kuhmoinen') Kuhmoinen
+                    option(value='Kumlinge') Kumlinge
+                    option(value='Kuopio') Kuopio
+                    option(value='Kuortane') Kuortane
+                    option(value='Kurikka') Kurikka
+                    option(value='Kustavi') Kustavi
+                    option(value='Kuusamo') Kuusamo
+                    option(value='Kyyjärvi') Kyyjärvi
+                    option(value='Kärkölä') Kärkölä
+                    option(value='Kärsämäki') Kärsämäki
+                    option(value='Kökar') Kökar
+                    option(value='Lahti') Lahti
+                    option(value='Laihia') Laihia
+                    option(value='Laitila') Laitila
+                    option(value='Lapinjärvi') Lapinjärvi
+                    option(value='Lapinlahti') Lapinlahti
+                    option(value='Lappajärvi') Lappajärvi
+                    option(value='Lappeenranta') Lappeenranta
+                    option(value='Lapua') Lapua
+                    option(value='Laukaa') Laukaa
+                    option(value='Lemi') Lemi
+                    option(value='Lemland') Lemland
+                    option(value='Lempäälä') Lempäälä
+                    option(value='Leppävirta') Leppävirta
+                    option(value='Lestijärvi') Lestijärvi
+                    option(value='Lieksa') Lieksa
+                    option(value='Lieto') Lieto
+                    option(value='Liminka') Liminka
+                    option(value='Liperi') Liperi
+                    option(value='Lohja') Lohja
+                    option(value='Loimaa') Loimaa
+                    option(value='Loppi') Loppi
+                    option(value='Loviisa') Loviisa
+                    option(value='Luhanka') Luhanka
+                    option(value='Lumijoki') Lumijoki
+                    option(value='Lumparland') Lumparland
+                    option(value='Luoto') Luoto
+                    option(value='Luumäki') Luumäki
+                    option(value='Luvia') Luvia
+                    option(value='Maalahti') Maalahti
+                    option(value='Maarianhamina') Maarianhamina
+                    option(value='Marttila') Marttila
+                    option(value='Masku') Masku
+                    option(value='Merijärvi') Merijärvi
+                    option(value='Merikarvia') Merikarvia
+                    option(value='Miehikkälä') Miehikkälä
+                    option(value='Mikkeli') Mikkeli
+                    option(value='Muhos') Muhos
+                    option(value='Multia') Multia
+                    option(value='Muonio') Muonio
+                    option(value='Mustasaari') Mustasaari
+                    option(value='Muurame') Muurame
+                    option(value='Mynämäki') Mynämäki
+                    option(value='Myrskylä') Myrskylä
+                    option(value='Mäntsälä') Mäntsälä
+                    option(value='Mänttä-Vilppula') Mänttä-Vilppula
+                    option(value='Mäntyharju') Mäntyharju
+                    option(value='Naantali') Naantali
+                    option(value='Nakkila') Nakkila
+                    option(value='Nivala') Nivala
+                    option(value='Nokia') Nokia
+                    option(value='Nousiainen') Nousiainen
+                    option(value='Nurmes') Nurmes
+                    option(value='Nurmijärvi') Nurmijärvi
+                    option(value='Närpiö') Närpiö
+                    option(value='Orimattila') Orimattila
+                    option(value='Oripää') Oripää
+                    option(value='Orivesi') Orivesi
+                    option(value='Oulainen') Oulainen
+                    option(value='Oulu') Oulu
+                    option(value='Outokumpu') Outokumpu
+                    option(value='Padasjoki') Padasjoki
+                    option(value='Paimio') Paimio
+                    option(value='Paltamo') Paltamo
+                    option(value='Parainen') Parainen
+                    option(value='Parikkala') Parikkala
+                    option(value='Parkano') Parkano
+                    option(value='Pedersören kunta') Pedersören kunta
+                    option(value='Pelkosenniemi') Pelkosenniemi
+                    option(value='Pello') Pello
+                    option(value='Perho') Perho
+                    option(value='Pertunmaa') Pertunmaa
+                    option(value='Petäjävesi') Petäjävesi
+                    option(value='Pieksämäki') Pieksämäki
+                    option(value='Pielavesi') Pielavesi
+                    option(value='Pietarsaari') Pietarsaari
+                    option(value='Pihtipudas') Pihtipudas
+                    option(value='Pirkkala') Pirkkala
+                    option(value='Polvijärvi') Polvijärvi
+                    option(value='Pomarkku') Pomarkku
+                    option(value='Pori') Pori
+                    option(value='Pornainen') Pornainen
+                    option(value='Porvoo') Porvoo
+                    option(value='Posio') Posio
+                    option(value='Pudasjärvi') Pudasjärvi
+                    option(value='Pukkila') Pukkila
+                    option(value='Punkalaidun') Punkalaidun
+                    option(value='Puolanka') Puolanka
+                    option(value='Puumala') Puumala
+                    option(value='Pyhtää') Pyhtää
+                    option(value='Pyhäjoki') Pyhäjoki
+                    option(value='Pyhäjärvi') Pyhäjärvi
+                    option(value='Pyhäntä') Pyhäntä
+                    option(value='Pyhäranta') Pyhäranta
+                    option(value='Pälkäne') Pälkäne
+                    option(value='Pöytyä') Pöytyä
+                    option(value='Raahe') Raahe
+                    option(value='Raasepori') Raasepori
+                    option(value='Raisio') Raisio
+                    option(value='Rantasalmi') Rantasalmi
+                    option(value='Ranua') Ranua
+                    option(value='Rauma') Rauma
+                    option(value='Rautalampi') Rautalampi
+                    option(value='Rautavaara') Rautavaara
+                    option(value='Rautjärvi') Rautjärvi
+                    option(value='Reisjärvi') Reisjärvi
+                    option(value='Riihimäki') Riihimäki
+                    option(value='Ristijärvi') Ristijärvi
+                    option(value='Rovaniemi') Rovaniemi
+                    option(value='Ruokolahti') Ruokolahti
+                    option(value='Ruovesi') Ruovesi
+                    option(value='Rusko') Rusko
+                    option(value='Rääkkylä') Rääkkylä
+                    option(value='Saarijärvi') Saarijärvi
+                    option(value='Salla') Salla
+                    option(value='Salo') Salo
+                    option(value='Saltvik') Saltvik
+                    option(value='Sastamala') Sastamala
+                    option(value='Sauvo') Sauvo
+                    option(value='Savitaipale') Savitaipale
+                    option(value='Savonlinna') Savonlinna
+                    option(value='Savukoski') Savukoski
+                    option(value='Seinäjoki') Seinäjoki
+                    option(value='Sievi') Sievi
+                    option(value='Siikainen') Siikainen
+                    option(value='Siikajoki') Siikajoki
+                    option(value='Siikalatva') Siikalatva
+                    option(value='Siilinjärvi') Siilinjärvi
+                    option(value='Simo') Simo
+                    option(value='Sipoo') Sipoo
+                    option(value='Siuntio') Siuntio
+                    option(value='Sodankylä') Sodankylä
+                    option(value='Soini') Soini
+                    option(value='Somero') Somero
+                    option(value='Sonkajärvi') Sonkajärvi
+                    option(value='Sotkamo') Sotkamo
+                    option(value='Sottunga') Sottunga
+                    option(value='Sulkava') Sulkava
+                    option(value='Sund') Sund
+                    option(value='Suomussalmi') Suomussalmi
+                    option(value='Suonenjoki') Suonenjoki
+                    option(value='Sysmä') Sysmä
+                    option(value='Säkylä') Säkylä
+                    option(value='Taipalsaari') Taipalsaari
+                    option(value='Taivalkoski') Taivalkoski
+                    option(value='Taivassalo') Taivassalo
+                    option(value='Tammela') Tammela
+                    option(value='Tampere') Tampere
+                    option(value='Tervo') Tervo
+                    option(value='Tervola') Tervola
+                    option(value='Teuva') Teuva
+                    option(value='Tohmajärvi') Tohmajärvi
+                    option(value='Toholampi') Toholampi
+                    option(value='Toivakka') Toivakka
+                    option(value='Tornio') Tornio
+                    option(value='Turku') Turku
+                    option(value='Tuusniemi') Tuusniemi
+                    option(value='Tuusula') Tuusula
+                    option(value='Tyrnävä') Tyrnävä
+                    option(value='Ulvila') Ulvila
+                    option(value='Urjala') Urjala
+                    option(value='Utajärvi') Utajärvi
+                    option(value='Utsjoki') Utsjoki
+                    option(value='Uurainen') Uurainen
+                    option(value='Uusikaarlepyy') Uusikaarlepyy
+                    option(value='Uusikaupunki') Uusikaupunki
+                    option(value='Vaala') Vaala
+                    option(value='Vaasa') Vaasa
+                    option(value='Valkeakoski') Valkeakoski
+                    option(value='Valtimo') Valtimo
+                    option(value='Vantaa') Vantaa
+                    option(value='Varkaus') Varkaus
+                    option(value='Vehmaa') Vehmaa
+                    option(value='Vesanto') Vesanto
+                    option(value='Vesilahti') Vesilahti
+                    option(value='Veteli') Veteli
+                    option(value='Vieremä') Vieremä
+                    option(value='Vihti') Vihti
+                    option(value='Viitasaari') Viitasaari
+                    option(value='Vimpeli') Vimpeli
+                    option(value='Virolahti') Virolahti
+                    option(value='Virrat') Virrat
+                    option(value='Vårdö') Vårdö
+                    option(value='Vöyri') Vöyri
+                    option(value='Ylitornio') Ylitornio
+                    option(value='Ylivieska') Ylivieska
+                    option(value='Ylöjärvi') Ylöjärvi
+                    option(value='Ypäjä') Ypäjä
+                    option(value='Ähtäri') Ähtäri
+                    option(value='Äänekoski') Äänekoski
                 h4 #{ __('Coordinates')} (#{ __('leave empty for autocomplete')})
-                input.form-control(type="text", placeholder=__('Latitude'), name="latitude" value= latitude)
-                input.form-control(type="text", placeholder=__('Longitude'), name="longitude" value= longitude)
+                input.form-control(type='text', placeholder=__('Latitude'), name='latitude', value=latitude)
+                input.form-control(type='text', placeholder=__('Longitude'), name='longitude', value=longitude)
                 h4 #{ __('Contact information')}
-                input.form-control(type="tel", placeholder=__('Phone number'), name="phoneNumber" value= phoneNumber)
-                input.form-control(type="url", placeholder=__('Homepage'), name="homepage")
+                input.form-control(type='tel', placeholder=__('Phone number'), name='phoneNumber', value=phoneNumber)
+                input.form-control(type='url', placeholder=__('Homepage'), name='homepage')
                 h5 #{ __('Social media channels')}
                 div#some
                     div.some.input-group
-                        input.form-control.some(type="url", placeholder="http://www.facebook.com/example", optional="", name="some")
+                        input.form-control.some(type='url', placeholder='http://www.facebook.com/example', optional='', name='some')
                         span.input-group-btn
                             button.btn.btn-success.btn-add
                                 span.glyphicon.glyphicon-plus
                     if some != undefined
                         each someInput, i in some
                             div.some.input-group
-                                input.form-control.some(type="url", placeholder="http://www.facebook.com/example", optional="", name="some" value= some[i])
+                                input.form-control.some(type='url', placeholder='http://www.facebook.com/example', optional='', name='some', value=some[i])
                                 span.input-group-btn
                                     button.btn.btn-danger.btn-remove
                                         span.glyphicon.glyphicon-minus
                 h4 #{ __('Pictures')}
+                - let imagePattern = 'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\\b/([^()][-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.jpeg)'
                 div#pictures
                     div.picture.input-group
-                        input.form-control.picture(type="url", pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\\b/([^()][-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.jpeg)" placeholder="http://example.com/pic.jpg", optional="", name="picture")
+                        input.form-control.picture(type='url', pattern=imagePattern, placeholder='http://example.com/pic.jpg', optional='', name='picture')
                         span.input-group-btn
                             button.btn.btn-success.btn-add
                                 span.glyphicon.glyphicon-plus
                     if picture != undefined
                         each pictureInput, i in picture
                             div.picture.input-group
-                                input.form-control.picture(type="url", pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\\b/([^()][-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.jpeg)" placeholder="http://example.com/pic.jpg", optional="", name="picture" value= picture[i])
+                                input.form-control.picture(type='url', pattern=imagePattern, placeholder='http://example.com/pic.jpg', optional='', name='picture', value=picture[i])
                                 span.input-group-btn
                                     button.btn.btn-danger.btn-remove
                                         span.glyphicon.glyphicon-minus
                 h4 #{ __('Symbols')}
 
-                div.input-group(style="text-align:center; margin:0 auto; padding-bottom:10px;")
+                div.input-group(style='text-align:center; margin:0 auto; padding-bottom:10px;')
                     label.checkbox-inline
                         -if (symbols.includes('wheelchair'))
                             input(type='checkbox', name='symbols', value='wheelchair', checked='')
@@ -418,48 +416,48 @@ html(lang="en")
                             input(type='checkbox', name='symbols', value='wifi')
                         | #{ __('Wifi access')}
                 h4 #{ __('Description')}
-                textarea.form-control(style="resize:vertical", type="text", placeholder=__('Description of the destination'), name="info")=info
+                textarea.form-control(style='resize:vertical', type='text', placeholder=__('Description of the destination'), name='info')=info
+                - let startPattern = '([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}'
+                - let endPattern = '(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)'
                 h4 #{ __('Open hours')}
                 p 
                     b #{ __('Format')}: 
                     | 00:00 - 24:00
                 label #{ __('Monday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", name="monStart", value= monStart, optional="")
+                    input.form-control(type='text', placeholder='10:00', pattern=startPattern, optional='', name='monStart', value=monStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="monEnd", value= monEnd)
+                    input.form-control(type='text', placeholder='20:00', pattern=endPattern, optional='', name='monEnd', value=monEnd)
                 label #{ __('Tuesday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="tueStart" value= tueStart)
+                    input.form-control(type='text', placeholder='10:00', pattern=startPattern, optional='', name='tueStart', value=tueStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="tueEnd" value= tueEnd)
+                    input.form-control(type='text', placeholder='20:00', pattern=endPattern, optional='', name='tueEnd', value=tueEnd)
                 label #{ __('Wednesday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="wedStart" value= wedStart)
+                    input.form-control(type='text', placeholder='10:00', pattern=startPattern, optional='', name='wedStart', value=wedStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="wedEnd" value= wedEnd)
+                    input.form-control(type='text', placeholder='20:00', pattern=endPattern, optional='', name='wedEnd', value=wedEnd)
                 label #{ __('Thursday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="thuStart" value= thuStart)
+                    input.form-control(type='text', placeholder='10:00', pattern=startPattern, optional='', name='thuStart', value=thuStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="thuEnd" value= thuEnd)
+                    input.form-control(type='text', placeholder='20:00', pattern=endPattern, optional='', name='thuEnd', value=thuEnd)
                 label #{ __('Friday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="friStart" value= friStart)
+                    input.form-control(type='text', placeholder='10:00', pattern=startPattern, optional='', name='friStart' value=friStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="friEnd" value= friEnd)
+                    input.form-control(type='text', placeholder='20:00', pattern=endPattern, optional='', name='friEnd', value=friEnd)
                 label #{ __('Saturday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="satStart" value= satStart)
+                    input.form-control(type='text', placeholder='10:00', pattern=startPattern, optional='', name='satStart', value=satStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="satEnd" value= satEnd)
+                    input.form-control(type='text', placeholder='20:00', pattern=endPattern, optional='', name='satEnd', value=satEnd)
                 label #{ __('Sunday')}
                 div.input-group
-                    input.form-control(type="text", placeholder="10:00", pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}", optional="", name="sunStart" value= sunStart)
+                    input.form-control(type='text', placeholder='10:00', pattern=startPattern, optional='', name='sunStart', value=sunStart)
                     span.input-group-addon -
-                    input.form-control(type="text", placeholder="20:00", pattern="(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)", name="sunEnd" value= sunEnd)
+                    input.form-control(type='text', placeholder='20:00', pattern=endPattern, optional='', name='sunEnd', value=sunEnd)
                 br
-                button.form-control.btn.btn-success(type="submit") #{ __('Submit')}
-                br
-                br
-        script(src="/js/add.js")
+                button.form-control.btn.btn-success(type='submit') #{ __('Submit')}
+        script(src='/js/add.js')
