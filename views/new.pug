@@ -9,11 +9,11 @@ html
             form#formAddDestination(name='add', method='post', action='/v1/add')
                 input.form-control(type='hidden', name='id', value=id)
                 h4 * #{ __('General information')}
-                div#typeName(style='display:none')=type
-                div#cityName(style='display:none')=city
+                div#typeName(style='display:none', class=__('Type'))=type
+                div#cityName(style='display:none', class=__('City'))=city
                 input.form-control(required='', type='text', placeholder=__('Name'), name='name', value=nimi)
                 select.form-control#type(required='', name='type')
-                    option(selected='', disabled='', value='Type') #{ __('Type')}
+                    option(selected='', disabled='', value=__('Type')) #{ __('Type')}
                     option(value='Ruoka') #{ __('Food')}
                     option(service value='Palvelu') #{ __('Service')}
                     option(sight value='Nähtävyys') #{ __('Sight')}
@@ -21,7 +21,7 @@ html
                 input.form-control(required='', type='text', placeholder=__('Street address'), name='street', value=street)
                 input.form-control(style='display:inline; width:50%', required='', type='text', placeholder=__('Postal code'), name='postalCode', value=postalCode)
                 select#city.form-control(style='display:inline; width:50%', required='', name='city', value=city)
-                    option(selected='', disabled='', value='City') City
+                    option(selected='', disabled='', value=__('City')) #{ __('City')}
                     option(value='Akaa') Akaa
                     option(value='Alajärvi') Alajärvi
                     option(value='Alavieska') Alavieska

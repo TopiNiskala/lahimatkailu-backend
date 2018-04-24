@@ -1,17 +1,21 @@
 $(function() {
     var parent, item;
     var type = $('#typeName').text();
+    var typeTranslated = $('#typeName').attr('class');
+    
     if(type) {
         $('#type').val(type).change();
     } else {
-        $('#type').val('Tyyppi').change();
+        $('#type').val(typeTranslated).change();
     }
     
     var city = $('#cityName').text();
+    var cityTranslated = $('#cityName').attr('class');
+    
     if(city) {
         $('#city').val(city).change();
     } else {
-        $('#city').val('Paikkakunta').change();
+        $('#city').val(cityTranslated).change();
     }
    
     $(document).on('click', '.btn-add', function(e) {
