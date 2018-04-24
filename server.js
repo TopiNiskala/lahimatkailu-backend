@@ -43,10 +43,10 @@ app.use(morgan('combined'));
 app.use('/v1', router);
 
 // Serve javascript files from js subdirectory
-app.use("/js", express.static(__dirname + "/js"));
+app.use("/js", express.static(__dirname + "/assets/js"));
 
 // Serve images from img subdirectory
-app.use("/img", express.static(__dirname + "/img"));
+app.use("/img", express.static(__dirname + "/assets/img"));
 
 app.set('view engine', 'pug');
 // Launches server on port 3000
