@@ -56,8 +56,8 @@ html
                 tr
                     th(colspan=4) #{ __('Symbols')}
                 tr
-                    - let symbolStyleEnabled = 'background:#8cbc77; color:#fff; font-size:95%;'
-                    - let symbolStyleDisabled = 'background:#be5757; color:#fff; font-size:95%;'
+                    - var symbolStyleEnabled = 'background:#8cbc77; color:#fff; font-size:95%;'
+                    - var symbolStyleDisabled = 'background:#be5757; color:#fff; font-size:95%;'
                     - if (symbols.includes('wheelchair'))
                         td(style=symbolStyleEnabled) #{ __('Accessibility')}
                     - else

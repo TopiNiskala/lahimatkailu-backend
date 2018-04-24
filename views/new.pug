@@ -356,7 +356,7 @@ html
                                     button.btn.btn-danger.btn-remove
                                         span.glyphicon.glyphicon-minus
                 h4 #{ __('Pictures')}
-                - let imagePattern = 'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\\b/([^()][-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.jpeg)'
+                - var imagePattern = 'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\\b/([^()][-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png|.jpeg)'
                 div#pictures
                     div.picture.input-group
                         input.form-control.picture(type='url', pattern=imagePattern, placeholder='http://example.com/pic.jpg', optional='', name='picture')
@@ -417,8 +417,8 @@ html
                         | #{ __('Wifi access')}
                 h4 #{ __('Description')}
                 textarea.form-control(style='resize:vertical', type='text', placeholder=__('Description of the destination'), name='info')=info
-                - let startPattern = '([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}'
-                - let endPattern = '(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)'
+                - var startPattern = '([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}'
+                - var endPattern = '(([0-1]{1}[1-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1})|(00:[0-5]{1}[1-9]{1})|(00:[1-5]{1}[0-9]{1})|(24:00)'
                 h4 #{ __('Open hours')}
                 p 
                     b #{ __('Format')}: 
