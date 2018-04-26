@@ -78,9 +78,57 @@ router.get('/kohteet.json', (req, res, next) => {
  		)); 	
 });
 
+router.get('/iconList.json', (req, res, next) => {
+    res.json(
+        { symbols: [
+            "wheelchair",
+            "car",
+            "paw",
+            "clock-o",
+            "subway",
+            "hotel",
+            "wifi",
+            ],
+        }
+    );
+});
+
+router.get('/lang/:ln', (req, res) => {
+    let returnUrl;
+    
+    if(!req.query.return) {
+        returnUrl = "index";
+    } else {
+        returnUrl = req.query.return;
+    }
+    
+    if(returnUrl === "list") {
+        returnUrl = "../list";
+    } else if(returnUrl === "new") {
+        returnUrl = "../new";
+    } else if(/^view/.test(returnUrl) ){
+        returnUrl = "../" + returnUrl;
+    } else if(/^modify/.test(returnUrl) ){
+        returnUrl = "../" + returnUrl;
+    } else {
+        returnUrl= "../"
+    }
+    
+    res.cookie("locale", req.params.ln);
+    res.redirect(returnUrl);
+});
+
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
 router.get('/new', (req, res) => {
-    res.render('new', { title: 'Add a new destination', current: 'new' });
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    res.render('new', { title: req.i18n.__('Add a new destination'), current: 'new', symbols: [], nav: nav });
+});
+
+// Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
+router.get('/list', (req, res) => {
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    let locale = req.i18n.getLocale();
+    res.render('list', { title: req.i18n.__('List'), current: 'list', nav: nav, locale: locale });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.

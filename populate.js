@@ -1927,3 +1927,4 @@ kohteet.map(data => {
   // Saves destination to our database
   kohde.save();
 });
+

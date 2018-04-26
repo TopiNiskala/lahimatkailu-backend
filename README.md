@@ -26,3 +26,5 @@ npm start
 * Kohteen muokkaus: http://localhost:3000/v1/modify/[id]
 * Kohteiden JSON: http://localhost:3000/v1/kohteet.json
 * Kohteen poisto http://localhost:3000/v1/delete/[id]
+* Kirjautuminen http://localhost:3000/v1/login
+* Rekisteröinti http://localhost:3000/v1/register

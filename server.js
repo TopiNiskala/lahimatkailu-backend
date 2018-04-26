@@ -6,6 +6,7 @@ import router from './router';
 import passport from 'passport';
 import User from './models/user';
 import cookieParser from 'cookie-parser';
+import i18n from 'i18n-2';
 //import users from './controllers/users';
 //import session from 'express-session'
 //import LocalStrategy from 'passport-local';
@@ -23,6 +24,28 @@ app.use(session({
     saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+i18n.expressBind(app, {
+    locales: ['en', 'fi', 'sv', 'ru'],
+    cookieName: 'locale',
+    defaultLocale: 'en',
+    devMode: true
+});
+
+app.use(function(req, res, next) {
+    req.i18n.setLocaleFromCookie();
+    next();
+});
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false, limit: '15mb' }), function (error, req, res, next) {
+    if (error instanceof Error) {
+        return res.send('500', { error: error });
+    } else {
+        next();
+    }
+});
 //_______________________________________________
     //kovakoodattu testin ajaksi
 // users = [{"_id":111, "username":"moi", "password":"moi"}];
@@ -77,10 +100,13 @@ app.use(morgan('combined'));
 app.use('/v1', router);
 
 // Serve javascript files from js subdirectory
-app.use("/js", express.static(__dirname + "/js"));
+app.use("/js", express.static(__dirname + "assets/js"));
 
 // Serve images from img subdirectory
-app.use("/img", express.static(__dirname + "/img"));
+app.use("/img", express.static(__dirname + "assets/img"));
+
+// Serve css files from css subdirectory
+app.use("/css", express.static(__dirname + "/assets/css"));
 
 app.set('view engine', 'pug');
 // Launches server on port 3000
