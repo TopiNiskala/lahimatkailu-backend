@@ -22,27 +22,35 @@ let googleMapsClient = createClient({
 //Initialize router
 const router = Router();
 
+// route middleware to ensure user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+ 
+    res.sendStatus(401);
+};
+
 // Start page ------------------------------------------------
 
-router.get(['/', '/index'], (req, res) => {
+router.get('/index', isLoggedIn, (req, res) => {
     res.render('index', { title: 'Lähimatkailu', current: 'index' });
 });
 
 
-router.get("/login", function (req, res) {
+router.get(['/', '/login'], function (req, res) {
     res.render('login'); })
  
 router.post("/login", 
     passport.authenticate("local"),
     function (req, res) {
-        res.redirect("/v1/");
+        res.redirect("/v1/index");
 });
 
-router.get("/register", function (req, res){
+router.get("/register", isLoggedIn, function (req, res){
    User.register(new User({username: "username"}),"password" );
 });
 
-router.get("/logout", function(req, res){
+router.get("/logout", isLoggedIn, function(req, res){
    req.logout();
     res.redirect("/v1/login");
 });
@@ -79,17 +87,17 @@ router.get('/kohteet.json', (req, res, next) => {
 });
 
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('new', { title: 'Add a new destination', current: 'new' });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
-router.get('/list', (req, res) => {
+router.get('/list', isLoggedIn, (req, res) => {
     res.render('list', { title: 'List', current: 'list' });
 });
 
 //Delete
-router.delete('/delete/:id', (req, res) =>{
+router.delete('/delete/:id', isLoggedIn, (req, res) =>{
     Kohde.findOne({ _id: req.params.id }, (err, response) => {
         
         // Copy target to a backup collection
@@ -105,7 +113,7 @@ router.delete('/delete/:id', (req, res) =>{
     });   
 });
 
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', isLoggedIn, (req, res) => {
      let id = req.params.id;
     res.render('delete', { 
         id: id,
@@ -114,7 +122,7 @@ router.get('/delete/:id', (req, res) => {
 });     
    
 //MODIFY
-router.get('/modify/:id', (req, res) => {
+router.get('/modify/:id', isLoggedIn, (req, res) => {
     let id = req.params.id;
     
     Kohde.findById(id, (err, kohde) => {
@@ -170,7 +178,7 @@ router.get('/modify/:id', (req, res) => {
 });
 
 // View
-router.get('/view/:id', (req, res) => {
+router.get('/view/:id', isLoggedIn, (req, res) => {
     let id = req.params.id;
     
     Kohde.findById(id, (err, kohde) => {
@@ -222,7 +230,7 @@ router.get('/view/:id', (req, res) => {
 });
 
 //Posts filled form (new 'kohde') to database
-router.post('/add', (req, res) => {
+router.post('/add', isLoggedIn, (req, res) => {
 
     let type = req.body.type;
     let name = req.body.name;

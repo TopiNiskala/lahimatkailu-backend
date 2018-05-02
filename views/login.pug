@@ -1,0 +1,49 @@
+doctype html
+html(lang='en')
+  head
+    title Login page
+    script(type='text/javascript').
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet')
+    style.
+      body h1{
+      font-family: 'Source Sans Pro', sans-serif;
+      text-transform: capitalize;
+      }
+      form {
+      border: 3px solid #f1f1f1;
+      font-family: 'Source Sans Pro', sans-serif;
+      }
+      button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      }
+      input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      }
+      .container {
+      padding: 16px;
+      }
+  body
+    h1 Insert username and password!
+    
+    form(action='login', method='post')
+      div
+        label
+          | Username : 
+          input(type='text', name='username', placeholder='enter username')
+      div
+        label
+          | Password: 
+          input(type='password', name='password', placeholder='enter password')
+      div
+        button(type='submit') Login
