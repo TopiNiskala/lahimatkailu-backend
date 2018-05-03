@@ -32,7 +32,7 @@ function isLoggedIn(req, res, next) {
 
 // Start page ------------------------------------------------
 
-router.get(['/', '/index'], (req, res) => {
+router.get(['/', '/index'], isLoggedIn, (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
     res.render('index', { title: 'Lähimatkailu', current: 'index', nav: nav });
 });
@@ -47,7 +47,7 @@ router.post("/login",
         res.redirect("/v1/index");
 });
 
-router.get("/register", isLoggedIn, function (req, res){
+router.get("/register", function (req, res){
    User.register(new User({username: "username"}),"password" );
 });
 
@@ -139,6 +139,7 @@ router.get('/list', isLoggedIn, (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
     let locale = req.i18n.getLocale();
     res.render('list', { title: req.i18n.__('List'), current: 'list', nav: nav, locale: locale });
+});
 
 //Delete
 router.delete('/delete/:id', isLoggedIn, (req, res) =>{
@@ -424,7 +425,5 @@ router.post('/add', isLoggedIn, (req, res) => {
         });
     }
 });
-    
-    
 
 export default router;
