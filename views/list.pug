@@ -1,50 +1,41 @@
 doctype html
-html(lang="en")
+html
     include includes/head.pug
     body
         include includes/nav.pug
-
-        .modal#deleteModal(tabindex="-1" role="dialog")
-            .modal-dialog(role="document")
-                .modal-content
-                    .modal-header
-                        h5.modal-title Delete
-                            button.close(type="button" data-dismiss="modal" aria-label="Close")
-                                span(aria-hidden="true") ×
-                    .modal-body
-                        p Are you sure you want to delete
-                            span.destinationName
-                    .modal-footer
-                        button.btn.btn-danger.deleteConfirm(type="button") Delete
-                        button.btn.btn-secondary(type="button" data-dismiss="modal") Cancel
-
-        .container(style="margin-top:-15px; margin-bottom:50px")
-            h2= title
-            
+        include includes/deletedialog.pug
+        div#locale(style='display:none', name=locale)
+            p.sight
+                | #{ __('Sight')}
+            p.service
+                | #{ __('Service')}
+            p.food
+                | #{ __('Food')}
+        .container(style='margin-top:-15px; margin-bottom:50px')
+            h2 #{ __('List')}
             div.typeFilterContent
-                | Filter by type: 
-                label.checkbox-inline(for="all")
-                    a.all.btn.btn-primary.btn-sm(style="margin-left:-20px") All
-                    input#all.checkbox-inline.resetFilters(style="display:none;" checked="" onchange="resetFilters()", type="checkbox", name="type", value="Sight|Food|Service")
-                label.checkbox-inline(for="sight")
-                    a.btn.btn-sm(style="margin-left:-20px") Sight
-                    input#sight.checkbox-inline.filter(style="display:none" onchange="filterType()", type="checkbox", name="type", value="Sight")
-                label.checkbox-inline(for="food")
-                    a.btn.btn-sm(style="margin-left:-20px") Food
-                    input#food.checkbox-inline.filter(style="display:none" onchange="filterType()", type="checkbox", name="type", value="Food")
-                label.checkbox-inline(for="service") 
-                    a.btn.btn-sm(style="margin-left:-20px") Service
-                    input#service.checkbox-inline.filter(style="display:none" onchange="filterType()", type="checkbox", name="type", value="Service")
-
+                | #{ __('Filter by type:')} 
+                label.checkbox-inline(for='all')
+                    a.all.btn.btn-primary.btn-sm(style='margin-left:-20px') #{ __('All')}
+                    input#all.checkbox-inline.resetFilters(style='display:none;', checked='', onchange='resetFilters()', type='checkbox', name='type', value=__('Food') + '|' + __('Service') + '|' + __('Sight'))
+                label.checkbox-inline(for='sight')
+                    a.type.btn.btn-sm(style='margin-left:-20px') #{ __('Sight')}
+                    input#sight.checkbox-inline.filter(style='display:none', onchange='filterType(this)', type='checkbox', name='type', value=__('Sight'))
+                label.checkbox-inline(for='food')
+                    a.type.btn.btn-sm(style='margin-left:-20px') #{ __('Food')}
+                    input#food.checkbox-inline.filter(style='display:none', onchange='filterType(this)', type='checkbox', name='type', value=__('Food'))
+                label.checkbox-inline(for='service') 
+                    a.type.btn.btn-sm(style='margin-left:-20px') #{ __('Service')}
+                    input#service.checkbox-inline.filter(style='display:none', onchange='filterType(this)', type='checkbox', name='type', value=__('Service'))
             table.table.table-striped.table-bordered
                 thead
                     tr
                         th #
-                        th Name
-                        th Address
-                        th City
-                        th Type
-                        th Modify
-                        th Delete
-        script(src="/js/list.js")
-        script(src="/js/delete.js")
+                        th #{ __('Name')}
+                        th #{ __('Address')}
+                        th #{ __('City')}
+                        th #{ __('Type')}
+                        th #{ __('Modify')}
+                        th #{ __('Delete')}
+        script(src='/js/list.js')
+        script(src='/js/delete.js')

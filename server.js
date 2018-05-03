@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import router from './router';
@@ -13,10 +14,12 @@ var mongo = require('mongodb');
 var path = require('path');
 var session = require('express-session');
 var LocalStrategy   = require('passport-local').Strategy;
+import i18n from 'i18n-2';
 
 const app = express();
 
 app.use(cookieParser());
+
 app.use(session({
     secret: "tHiSiSasEcRetStr",
     resave: false,
@@ -38,6 +41,19 @@ passport.deserializeUser(User.deserializeUser());
 
 
 //app.use(bodyParser.urlencoded({ extended: false }));
+
+i18n.expressBind(app, {
+    locales: ['en', 'fi', 'sv', 'ru'],
+    cookieName: 'locale',
+    defaultLocale: 'en',
+    devMode: true
+});
+
+app.use(function(req, res, next) {
+    req.i18n.setLocaleFromCookie();
+    next();
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false,
 limit: '15mb' }), function (error, req, res, next) {
@@ -57,8 +73,7 @@ function isLoggedIn(req, res, next) {
 };
 //_________________________________________________
 //This file connects our server to mongoDB and uses the router we have created
-//mongoose.connect('mongodb://localhost/kohteet');
-mongoose.connect('mongodb://localhost/users');
+mongoose.connect('mongodb://localhost/kohteet');
 // Initialize http server
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -77,10 +92,14 @@ app.use(morgan('combined'));
 app.use('/v1', router);
 
 // Serve javascript files from js subdirectory
-app.use("/js", express.static(__dirname + "/js"));
+app.use("/js", express.static(__dirname + "/assets/js"));
 
 // Serve images from img subdirectory
-app.use("/img", express.static(__dirname + "/img"));
+app.use("/img", express.static(__dirname + "/assets/img"));
+
+// Serve css files from css subdirectory
+app.use("/css", express.static(__dirname + "/assets/css"));
+
 
 app.set('view engine', 'pug');
 // Launches server on port 3000

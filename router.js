@@ -32,8 +32,9 @@ function isLoggedIn(req, res, next) {
 
 // Start page ------------------------------------------------
 
-router.get('/index', isLoggedIn, (req, res) => {
-    res.render('index', { title: 'Lähimatkailu', current: 'index' });
+router.get(['/', '/index'], (req, res) => {
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    res.render('index', { title: 'Lähimatkailu', current: 'index', nav: nav });
 });
 
 
@@ -86,15 +87,58 @@ router.get('/kohteet.json', (req, res, next) => {
  		)); 	
 });
 
+router.get('/iconList.json', (req, res, next) => {
+    res.json(
+        { symbols: [
+            "wheelchair",
+            "car",
+            "paw",
+            "clock-o",
+            "subway",
+            "hotel",
+            "wifi",
+            ],
+        }
+    );
+});
+
+router.get('/lang/:ln', (req, res) => {
+    let returnUrl;
+    
+    if(!req.query.return) {
+        returnUrl = "index";
+    } else {
+        returnUrl = req.query.return;
+    }
+    
+    if(returnUrl === "list") {
+        returnUrl = "../list";
+    } else if(returnUrl === "new") {
+        returnUrl = "../new";
+    } else if(/^view/.test(returnUrl) ){
+        returnUrl = "../" + returnUrl;
+    } else if(/^modify/.test(returnUrl) ){
+        returnUrl = "../" + returnUrl;
+    } else {
+        returnUrl= "../"
+    }
+    
+    res.cookie("locale", req.params.ln);
+    res.redirect(returnUrl);
+});
+
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
+
 router.get('/new', isLoggedIn, (req, res) => {
-    res.render('new', { title: 'Add a new destination', current: 'new' });
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    res.render('new', { title: req.i18n.__('Add a new destination'), current: 'new', symbols: [], nav: nav });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
 router.get('/list', isLoggedIn, (req, res) => {
-    res.render('list', { title: 'List', current: 'list' });
-});
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+    let locale = req.i18n.getLocale();
+    res.render('list', { title: req.i18n.__('List'), current: 'list', nav: nav, locale: locale });
 
 //Delete
 router.delete('/delete/:id', isLoggedIn, (req, res) =>{
@@ -123,7 +167,9 @@ router.get('/delete/:id', isLoggedIn, (req, res) => {
    
 //MODIFY
 router.get('/modify/:id', isLoggedIn, (req, res) => {
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
     let id = req.params.id;
+    let current = "modify/" + id;
     
     Kohde.findById(id, (err, kohde) => {
         if (err || !kohde) {
@@ -142,7 +188,9 @@ router.get('/modify/:id', isLoggedIn, (req, res) => {
 
             
             res.render('new', { 
+                nav: nav,
                 id: id, 
+                current: current,
                 nimi: kohde.name, 
                 city: kohde.address.city, 
                 postalCode: kohde.address.postalCode, 
@@ -151,6 +199,9 @@ router.get('/modify/:id', isLoggedIn, (req, res) => {
                 picture: kohde.picture,
                 latitude: kohde.location.latitude,
                 longitude: kohde.location.longitude,
+                homepage: kohde.homepage,
+                some: kohde.some,
+                symbols: kohde.symbols,
                 info: kohde.info,
                 directions: kohde.directions,
                 monStart: kohde.openingHours.mon.start,
@@ -171,7 +222,7 @@ router.get('/modify/:id', isLoggedIn, (req, res) => {
                 food: food,
                 service: service,
                 sight: sight,
-                title: 'Modify destination'
+                title: req.i18n.__('Modify')
             });
         }
     });
@@ -179,7 +230,10 @@ router.get('/modify/:id', isLoggedIn, (req, res) => {
 
 // View
 router.get('/view/:id', isLoggedIn, (req, res) => {
+    const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
+
     let id = req.params.id;
+    let current = "view/" + id;
     
     Kohde.findById(id, (err, kohde) => {
         if (err || !kohde) {
@@ -197,7 +251,9 @@ router.get('/view/:id', isLoggedIn, (req, res) => {
             }
             
             res.render('view', { 
+                nav: nav,
                 id: id, 
+                current: current,
                 name: kohde.name, 
                 city: kohde.address.city, 
                 postalCode: kohde.address.postalCode, 
@@ -206,6 +262,9 @@ router.get('/view/:id', isLoggedIn, (req, res) => {
                 picture: kohde.picture,
                 latitude: kohde.location.latitude,
                 longitude: kohde.location.longitude,
+                homepage: kohde.homepage,
+                some: kohde.some,
+                symbols: kohde.symbols,
                 info: kohde.info,
                 directions: kohde.directions,
                 monStart: kohde.openingHours.mon.start,
@@ -243,6 +302,11 @@ router.post('/add', isLoggedIn, (req, res) => {
         picture = picture.filter(n => n);
     let latitude = req.body.latitude;
     let longitude = req.body.longitude;
+    let homepage = req.body.homepage;
+    let some = req.body.some;
+    if(typeof(some) !== "string")
+        some = some.filter(n => n);
+    let symbols = req.body.symbols;
     let info = req.body.info;
     let monStart = req.body.monStart;
     let monEnd = req.body.monEnd;
@@ -278,6 +342,8 @@ router.post('/add', isLoggedIn, (req, res) => {
             })
             .catch(err => {
                 console.log(err);
+                latitude = 1;
+                longitude = 1;
                 addData();
             })
     } else {
@@ -300,6 +366,9 @@ router.post('/add', isLoggedIn, (req, res) => {
                     "latitude": latitude,
                     "longitude": longitude
                 },
+                "homepage": homepage,
+                "some": some,
+                "symbols": symbols,
                 "info": info,
                 "openingHours": {
                     "mon": {
