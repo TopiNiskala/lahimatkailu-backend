@@ -4,15 +4,43 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import router from './router';
+import passport from 'passport';
+import User from './models/user';
+import cookieParser from 'cookie-parser';
+//import users from './controllers/users';
+//import session from 'express-session'
+//import LocalStrategy from 'passport-local';
+var mongo = require('mongodb');
 var path = require('path');
+var session = require('express-session');
+var LocalStrategy   = require('passport-local').Strategy;
 import i18n from 'i18n-2';
 
-//This file connects our server to mongoDB and uses the router we have created
-mongoose.connect('mongodb://localhost/kohteet');
-// Initialize http server
 const app = express();
 
 app.use(cookieParser());
+
+app.use(session({
+    secret: "tHiSiSasEcRetStr",
+    resave: false,
+    saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+//_______________________________________________
+    //kovakoodattu testin ajaksi
+// users = [{"_id":111, "username":"moi", "password":"moi"}];
+
+
+
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+
+//app.use(bodyParser.urlencoded({ extended: false }));
 
 i18n.expressBind(app, {
     locales: ['en', 'fi', 'sv', 'ru'],
@@ -26,15 +54,36 @@ app.use(function(req, res, next) {
     next();
 });
 
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false, limit: '15mb' }), function (error, req, res, next) {
+app.use(bodyParser.urlencoded({ extended:false,
+limit: '15mb' }), function (error, req, res, next) {
     if (error instanceof Error) {
         return res.send('500', { error: error });
     } else {
         next();
     }
 });
+ 
+// route middleware to ensure user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+ 
+    res.sendStatus(401);
+};
+//_________________________________________________
+//This file connects our server to mongoDB and uses the router we have created
+mongoose.connect('mongodb://localhost/kohteet');
+// Initialize http server
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('We are connected to MongoDB!'); 
+});
+
+//__________________________________________________
+
+
 
 // Logger outputting all requests in to the console
 app.use(morgan('combined'));

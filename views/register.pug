@@ -1,7 +1,5 @@
-doctype html
-html(lang='en')
-  head
-    title Login page
+ head
+    title Register page
     script(type='text/javascript').
     link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet')
     style.
@@ -34,16 +32,16 @@ html(lang='en')
       padding: 16px;
       }
   body
-    h1 Insert username and password!
+    h1 Register a new user!
     
-    form(action='login', method='post')
+    form(action='register', method='post')
       div
         label
           | Username : 
           input(type='text', name='username', placeholder='enter username')
       div
         label
-          | Password: 
-          input(type='password', name='password', placeholder='enter password')
-      div
-        button(type='submit') Login
+          | password :
+          input(type='text', name='password', placeholder='enter password')
+                div
+        button(type='submit') Register

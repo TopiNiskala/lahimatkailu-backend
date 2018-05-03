@@ -4,9 +4,11 @@ import index from './controllers/kohteet';
 import mongoose from 'mongoose';
 import Kohde from './models/kohde';
 import KohdeRemoved from './models/kohde_removed';
-
+import local from 'passport-local';
 import config from './config';
 // var config = require('./config');
+import passport from 'passport';
+import User from './models/user';
 
 import {createClient} from '@google/maps';
 
@@ -17,15 +19,16 @@ let googleMapsClient = createClient({
     Promise: Promise
 });
 
-// var googleMapsClient = require('@google/maps').createClient({
-//   key: config.googleMapsApiKey,
-//   Promise: Promise
-// });
-
-// mongoose.connect('mongodb://localhost/kohteet');
-
 //Initialize router
 const router = Router();
+
+// route middleware to ensure user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+ 
+    res.sendStatus(401);
+};
 
 // Start page ------------------------------------------------
 
@@ -33,7 +36,29 @@ router.get(['/', '/index'], (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
     res.render('index', { title: 'Lähimatkailu', current: 'index', nav: nav });
 });
-//-------------------------------------------------------------
+
+
+router.get(['/', '/login'], function (req, res) {
+    res.render('login'); })
+ 
+router.post("/login", 
+    passport.authenticate("local"),
+    function (req, res) {
+        res.redirect("/v1/index");
+});
+
+router.get("/register", isLoggedIn, function (req, res){
+   User.register(new User({username: "username"}),"password" );
+});
+
+router.get("/logout", isLoggedIn, function(req, res){
+   req.logout();
+    res.redirect("/v1/login");
+});
+
+
+
+
 
 // Handle /kohteet.json route with index action from kohteet controller
 //router.route('/kohteet.json').get(index);
@@ -103,20 +128,20 @@ router.get('/lang/:ln', (req, res) => {
 });
 
 /* Directs the user using /new to  file new.pug where you can add a new place in database.*/
-router.get('/new', (req, res) => {
+
+router.get('/new', isLoggedIn, (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
     res.render('new', { title: req.i18n.__('Add a new destination'), current: 'new', symbols: [], nav: nav });
 });
 
 // Directs the user using /list to  file list.pug Where you can see all places in db and choose if you want to modify or delete them.
-router.get('/list', (req, res) => {
+router.get('/list', isLoggedIn, (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
     let locale = req.i18n.getLocale();
     res.render('list', { title: req.i18n.__('List'), current: 'list', nav: nav, locale: locale });
-});
 
 //Delete
-router.delete('/delete/:id', (req, res) =>{
+router.delete('/delete/:id', isLoggedIn, (req, res) =>{
     Kohde.findOne({ _id: req.params.id }, (err, response) => {
         
         // Copy target to a backup collection
@@ -132,7 +157,7 @@ router.delete('/delete/:id', (req, res) =>{
     });   
 });
 
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', isLoggedIn, (req, res) => {
      let id = req.params.id;
     res.render('delete', { 
         id: id,
@@ -141,9 +166,8 @@ router.get('/delete/:id', (req, res) => {
 });     
    
 //MODIFY
-router.get('/modify/:id', (req, res) => {
+router.get('/modify/:id', isLoggedIn, (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
-
     let id = req.params.id;
     let current = "modify/" + id;
     
@@ -205,7 +229,7 @@ router.get('/modify/:id', (req, res) => {
 });
 
 // View
-router.get('/view/:id', (req, res) => {
+router.get('/view/:id', isLoggedIn, (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
 
     let id = req.params.id;
@@ -265,7 +289,7 @@ router.get('/view/:id', (req, res) => {
 });
 
 //Posts filled form (new 'kohde') to database
-router.post('/add', (req, res) => {
+router.post('/add', isLoggedIn, (req, res) => {
 
     let type = req.body.type;
     let name = req.body.name;
@@ -400,5 +424,7 @@ router.post('/add', (req, res) => {
         });
     }
 });
+    
+    
 
 export default router;
