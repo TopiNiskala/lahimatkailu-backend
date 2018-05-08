@@ -4,23 +4,47 @@ html(lang='en')
     title Login page
     script(type='text/javascript').
     link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro', rel='stylesheet')
+    link(href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet") 
     style.
-      body h1{
-      font-family: 'Source Sans Pro', sans-serif;
-      text-transform: capitalize;
+      form{
+        text-align:left;
       }
-      form {
-      border: 3px solid #f1f1f1;
+      h1 {
+        font-family: 'Merienda One', cursive;
+        color:#5c822c;
+        font-size:38px;
+      }
+      html {
+        height:100%;
+        padding:0;
+        margin:0;
+      }
+      .sivu {
       font-family: 'Source Sans Pro', sans-serif;
+      width:400px;
+      background-color:white;
+      margin:10% auto;
+      padding:20px;
+      text-align:center;
+      box-shadow: 0px 2px 15px rgba(0, 0, 0, .4);
+      border-radius: 5px;
+      }
+      body {
+        background-image: url("/img/mapsTaustakuva.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
       }
       button {
-      background-color: #4CAF50;
+      background-color: #73A335;
       color: white;
       padding: 14px 20px;
-      margin: 8px 0;
+      margin: 8px auto;
       border: none;
       cursor: pointer;
-      width: 100%;
+      width: 40%;
+      border-radius: 3px;
+
       }
       input[type=text], input[type=password] {
       width: 100%;
@@ -29,21 +53,16 @@ html(lang='en')
       display: inline-block;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      }
-      .container {
-      padding: 16px;
+      border-radius: 3px;
       }
   body
-    h1 Insert username and password!
-    
-    form(action='login', method='post')
-      div
-        label
-          | Username : 
-          input(type='text', name='username', placeholder='enter username')
-      div
-        label
-          | Password: 
-          input(type='password', name='password', placeholder='enter password')
-      div
-        button(type='submit') Login
+    div.sivu
+      img(src="/img/icon.png" right center)
+      h1 Lähimatkailu
+      form(action='login', method='post')
+        div
+            input(type='text', name='username', placeholder='Username')
+        div
+            input(type='password', name='password', placeholder='Password')
+        div(style="text-align:center;")
+          button(type='submit') Login
