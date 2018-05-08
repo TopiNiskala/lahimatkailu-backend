@@ -11,6 +11,10 @@ nav.navbar.navbar-default.navbar-static-top
                     li.nav-item
                         a.nav-link(href='/v1/' + path)=item
         ul.nav.navbar-nav.navbar-right
+            li.nav-item
+                a.nav-link(href='/v1/logout')
+                    span.glyphicon.glyphicon-log-out
+                    |  Log out
             li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown') 
                     img(src=__('picture')) 
