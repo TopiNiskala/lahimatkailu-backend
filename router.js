@@ -26,13 +26,12 @@ const router = Router();
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
- 
     res.sendStatus(401);
 };
 
 // Start page ------------------------------------------------
 
-router.get(['/', '/index'], isLoggedIn, (req, res) => {
+router.get('/index', isLoggedIn, (req, res) => {
     const nav = { list: req.i18n.__('List'), new: req.i18n.__('Add') };
     res.render('index', { title: 'Lähimatkailu', current: 'index', nav: nav });
 });
@@ -47,8 +46,8 @@ router.post("/login",
         res.redirect("/v1/index");
 });
 
-router.get("/register", function (req, res){
-   User.register(new User({username: "username"}),"password" );
+router.get("/register", isLoggedIn, function (req, res){
+   res.render('register', {});
 });
 
 router.get("/logout", isLoggedIn, function(req, res){
@@ -57,6 +56,18 @@ router.get("/logout", isLoggedIn, function(req, res){
 });
 
 
+//Router Post kesken
+router.post('/register', function(req, res) {
+    User.register(new User({ username : req.body.username }), req.body.password, function(err, account) {
+        if (err) {
+            return res.render('register', { user : user });
+        }
+
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/v1');
+        });
+    });
+});
 
 
 
